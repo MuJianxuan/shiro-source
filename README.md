@@ -1,32 +1,24 @@
-## 项目名称
-> 请介绍一下你的项目吧  
+[<img src="http://shiro.apache.org/assets/images/apache-shiro-logo.png" align="right" />](http://shiro.apache.org)
+
+[![Maven Central](https://img.shields.io/maven-central/v/org.apache.shiro/shiro-core.svg)]()
+[![Build Status](https://ci-builds.apache.org/job/Shiro/job/Shiro-jdk8/job/master/badge/icon)](https://ci-builds.apache.org/job/Shiro/job/Shiro-jdk8/job/master/)
+
+Apache Shiro
+============
+
+[Apache Shiro](http://shiro.apache.org) is a powerful and easy-to-use Java security framework that performs authentication, authorization, cryptography, and session management. With Shiro’s easy-to-understand API, you can quickly and easily secure any application – from the smallest mobile applications to the largest web and enterprise applications.
+
+Documentation and Examples
+--------------------------
+http://shiro.apache.org
+
+Tutorials
+---------
+* [10 Minute Tutorial](http://shiro.apache.org/10-minute-tutorial.html)
+* [Web Application](http://shiro.apache.org/webapp-tutorial.html) 
+
+License
+-------
+[Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0.txt)
 
 
-
-## 运行条件
-> 列出运行该项目所必须的条件和相关依赖  
-* 条件一
-* 条件二
-* 条件三
-
-
-
-## 运行说明
-> 说明如何运行和使用你的项目，建议给出具体的步骤说明
-* 操作一
-* 操作二
-* 操作三  
-
-
-
-## 测试说明
-> 如果有测试相关内容需要说明，请填写在这里  
-
-
-
-## 技术架构
-> 使用的技术框架或系统架构图等相关说明，请填写在这里  
-
-
-## 协作者
-> 高效的协作会激发无尽的创造力，将他们的名字记录在这里吧
