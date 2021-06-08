@@ -1,0 +1,4 @@
+org\apache\shiro\aspectj\SecuredDummyService.class
+org\apache\shiro\aspectj\RestrictedDummyService.class
+org\apache\shiro\aspectj\DummyService.class
+org\apache\shiro\aspectj\DummyServiceTest.class

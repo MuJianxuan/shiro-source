@@ -1,0 +1,2 @@
+org\apache\shiro\session\mgt\quartz\QuartzSessionValidationJob.class
+org\apache\shiro\session\mgt\quartz\QuartzSessionValidationScheduler.class

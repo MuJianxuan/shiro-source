@@ -1,0 +1,2 @@
+org\apache\shiro\aspectj\BeforeAdviceMethodInvocationAdapter.class
+org\apache\shiro\aspectj\AspectjAnnotationsAuthorizingMethodInterceptor.class

@@ -1,0 +1,8 @@
+org\apache\shiro\crypto\hash\HashRequestBuilderTest.class
+org\apache\shiro\crypto\hash\format\DefaultHashFormatFactoryTest.class
+org\apache\shiro\crypto\hash\format\ProvidedHashFormatTest.class
+org\apache\shiro\crypto\hash\format\HexFormatTest.class
+org\apache\shiro\crypto\hash\format\Base64FormatTest.class
+org\apache\shiro\crypto\hash\format\ToStringHashFormat.class
+org\apache\shiro\crypto\hash\format\Shiro1CryptFormatTest.class
+org\apache\shiro\crypto\hash\DefaultHashServiceTest.class

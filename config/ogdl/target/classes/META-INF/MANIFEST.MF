@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1623161038585
+Build-Jdk-Spec: 1.8
+Bundle-Description: Support for Shiro's Object Graph Definition Language
+  (mostly used in Ini configuration) where        declared name/value pa
+ irs are interpreted to create an object graph
+Bundle-DocURL: https://www.apache.org/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Shiro :: Configuration :: OGDL
+Bundle-SymbolicName: org.apache.shiro.config.ogdl
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.apache.shiro.config.ogdl;uses:="org.apache.commons.c
+ onfiguration2.interpol,org.apache.shiro.config,org.apache.shiro.event";
+ version="2.0.0.SNAPSHOT",org.apache.shiro.config.ogdl.event;uses:="org.
+ apache.shiro.event";version="2.0.0.SNAPSHOT"
+Implementation-Title: Apache Shiro :: Configuration :: OGDL
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Version: 2.0.0-SNAPSHOT
+Import-Package: org.apache.commons.beanutils;version="[1.9,2)",org.apach
+ e.commons.configuration2.interpol;resolution:=optional;version="[2.7,3)
+ ",org.apache.shiro.config;version="[2,3)",org.apache.shiro.config.ogdl.
+ event;version="[2,3)",org.apache.shiro.event;version="[2,3)",org.apache
+ .shiro.event.support;version="[2,3)",org.apache.shiro.lang.codec;versio
+ n="[2,3)",org.apache.shiro.lang.util;version="[2,3)",org.slf4j;version=
+ "[1.7,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Specification-Title: Apache Shiro :: Configuration :: OGDL
+Specification-Vendor: The Apache Software Foundation
+Specification-Version: 2.0
+Tool: Bnd-5.1.1.202006162103

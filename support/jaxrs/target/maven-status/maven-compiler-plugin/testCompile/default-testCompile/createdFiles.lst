@@ -1,0 +1,4 @@
+org\apache\shiro\web\jaxrs\ExceptionMapperTest.class
+org\apache\shiro\web\jaxrs\ShiroSecurityContextTest.class
+org\apache\shiro\web\jaxrs\ShiroSecurityContextTest$TestPrincipal.class
+org\apache\shiro\web\jaxrs\SubjectPrincipalRequestFilterTest.class

@@ -1,0 +1,9 @@
+org\apache\shiro\spring\boot\autoconfigure\web\application\ShiroWebAutoConfigurationTestApplication.class
+org\apache\shiro\spring\boot\autoconfigure\web\application\ShiroWebAutoConfigurationTestApplication$EventBusAwareObject.class
+org\apache\shiro\spring\boot\autoconfigure\web\application\ShiroWebAutoConfigurationTestApplication$SubscribedListener.class
+org\apache\shiro\spring\boot\autoconfigure\web\DisabledGlobalFiltersTest$Config.class
+org\apache\shiro\spring\boot\autoconfigure\web\ConfiguredGlobalFiltersTest$Config.class
+org\apache\shiro\spring\boot\autoconfigure\web\DisabledGlobalFiltersTest.class
+org\apache\shiro\spring\boot\autoconfigure\web\ConfiguredGlobalFiltersTest.class
+org\apache\shiro\spring\boot\autoconfigure\web\ShiroWebSpringAutoConfigurationTest.class
+org\apache\shiro\spring\boot\autoconfigure\web\WebSpringFactoriesTest.class

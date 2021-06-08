@@ -1,0 +1,107 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1623161042429
+Build-Jdk-Spec: 1.8
+Bundle-Description: Apache Shiro is a powerful and flexible open-source 
+ security framework that cleanly handles        authentication, authoriz
+ ation, enterprise session management, single sign-on and cryptography s
+ ervices.
+Bundle-DocURL: https://www.apache.org/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Shiro :: Core
+Bundle-SymbolicName: org.apache.shiro.core
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+DynamicImport-Package: org.apache.shiro.*
+Export-Package: org.apache.shiro;uses:="org.apache.shiro.lang,org.apache
+ .shiro.mgt,org.apache.shiro.subject";version="2.0.0.SNAPSHOT",org.apach
+ e.shiro.aop;uses:="org.apache.shiro.subject";version="2.0.0.SNAPSHOT",o
+ rg.apache.shiro.authc;uses:="org.apache.shiro.authz,org.apache.shiro.la
+ ng,org.apache.shiro.lang.util,org.apache.shiro.subject";version="2.0.0.
+ SNAPSHOT",org.apache.shiro.authc.credential;uses:="org.apache.shiro.aut
+ hc,org.apache.shiro.crypto.hash,org.apache.shiro.crypto.hash.format,org
+ .apache.shiro.lang.codec,org.apache.shiro.lang.util";version="2.0.0.SNA
+ PSHOT",org.apache.shiro.authc.pam;uses:="org.apache.shiro.authc,org.apa
+ che.shiro.realm,org.apache.shiro.subject";version="2.0.0.SNAPSHOT",org.
+ apache.shiro.authz;uses:="org.apache.shiro.authz.permission,org.apache.
+ shiro.lang,org.apache.shiro.realm,org.apache.shiro.subject";version="2.
+ 0.0.SNAPSHOT",org.apache.shiro.authz.annotation;version="2.0.0.SNAPSHOT
+ ",org.apache.shiro.authz.aop;uses:="org.apache.shiro.aop,org.apache.shi
+ ro.authz";version="2.0.0.SNAPSHOT",org.apache.shiro.authz.permission;us
+ es:="org.apache.shiro.authz,org.apache.shiro.lang";version="2.0.0.SNAPS
+ HOT",org.apache.shiro.concurrent;uses:="org.apache.shiro.subject";versi
+ on="2.0.0.SNAPSHOT",org.apache.shiro.dao;uses:="org.apache.shiro.lang";
+ version="2.0.0.SNAPSHOT",org.apache.shiro.env;uses:="org.apache.shiro.c
+ onfig,org.apache.shiro.lang,org.apache.shiro.lang.util,org.apache.shiro
+ .mgt";version="2.0.0.SNAPSHOT",org.apache.shiro.ini;uses:="org.apache.s
+ hiro.config,org.apache.shiro.config.ogdl,org.apache.shiro.mgt,org.apach
+ e.shiro.realm,org.apache.shiro.util";version="2.0.0.SNAPSHOT",org.apach
+ e.shiro.jndi;uses:="javax.naming,org.apache.shiro.lang.util";version="2
+ .0.0.SNAPSHOT",org.apache.shiro.ldap;uses:="org.apache.shiro.dao";versi
+ on="2.0.0.SNAPSHOT",org.apache.shiro.mgt;uses:="org.apache.shiro.authc,
+ org.apache.shiro.authz,org.apache.shiro.cache,org.apache.shiro.crypto.c
+ ipher,org.apache.shiro.event,org.apache.shiro.lang.io,org.apache.shiro.
+ lang.util,org.apache.shiro.realm,org.apache.shiro.session,org.apache.sh
+ iro.session.mgt,org.apache.shiro.subject";version="2.0.0.SNAPSHOT",org.
+ apache.shiro.realm;uses:="org.apache.shiro.authc,org.apache.shiro.authc
+ .credential,org.apache.shiro.authz,org.apache.shiro.authz.permission,or
+ g.apache.shiro.cache,org.apache.shiro.lang.util,org.apache.shiro.subjec
+ t";version="2.0.0.SNAPSHOT",org.apache.shiro.realm.activedirectory;uses
+ :="javax.naming,javax.naming.ldap,org.apache.shiro.authc,org.apache.shi
+ ro.authz,org.apache.shiro.realm.ldap,org.apache.shiro.subject";version=
+ "2.0.0.SNAPSHOT",org.apache.shiro.realm.jdbc;uses:="javax.sql,org.apach
+ e.shiro.authc,org.apache.shiro.authz,org.apache.shiro.realm,org.apache.
+ shiro.subject";version="2.0.0.SNAPSHOT",org.apache.shiro.realm.jndi;use
+ s:="org.apache.shiro.jndi,org.apache.shiro.realm";version="2.0.0.SNAPSH
+ OT",org.apache.shiro.realm.ldap;uses:="javax.naming,javax.naming.direct
+ ory,javax.naming.ldap,org.apache.shiro.authc,org.apache.shiro.authz,org
+ .apache.shiro.realm,org.apache.shiro.subject";version="2.0.0.SNAPSHOT",
+ org.apache.shiro.realm.text;uses:="org.apache.shiro.config,org.apache.s
+ hiro.lang.util,org.apache.shiro.realm";version="2.0.0.SNAPSHOT",org.apa
+ che.shiro.session;uses:="org.apache.shiro.lang";version="2.0.0.SNAPSHOT
+ ",org.apache.shiro.session.mgt;uses:="org.apache.shiro.authz,org.apache
+ .shiro.cache,org.apache.shiro.event,org.apache.shiro.lang.util,org.apac
+ he.shiro.session,org.apache.shiro.session.mgt.eis,org.apache.shiro.util
+ ";version="2.0.0.SNAPSHOT",org.apache.shiro.session.mgt.eis;uses:="org.
+ apache.shiro.cache,org.apache.shiro.session";version="2.0.0.SNAPSHOT",o
+ rg.apache.shiro.subject;uses:="org.apache.shiro.authc,org.apache.shiro.
+ authz,org.apache.shiro.lang,org.apache.shiro.mgt,org.apache.shiro.sessi
+ on";version="2.0.0.SNAPSHOT",org.apache.shiro.subject.support;uses:="or
+ g.apache.shiro.authc,org.apache.shiro.authz,org.apache.shiro.mgt,org.ap
+ ache.shiro.session,org.apache.shiro.session.mgt,org.apache.shiro.subjec
+ t,org.apache.shiro.util";version="2.0.0.SNAPSHOT",org.apache.shiro.util
+ ;uses:="org.apache.shiro.authz,org.apache.shiro.authz.permission,org.ap
+ ache.shiro.lang.util,org.apache.shiro.mgt,org.apache.shiro.subject";ver
+ sion="2.0.0.SNAPSHOT"
+Implementation-Title: Apache Shiro :: Core
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Version: 2.0.0-SNAPSHOT
+Import-Package: javax.naming,javax.naming.directory,javax.naming.ldap,ja
+ vax.sql,org.apache.shiro;version="[2.0,3)",org.apache.shiro.aop;version
+ ="[2.0,3)",org.apache.shiro.authc;version="[2.0,3)",org.apache.shiro.au
+ thc.credential;version="[2.0,3)",org.apache.shiro.authc.pam;version="[2
+ .0,3)",org.apache.shiro.authz;version="[2.0,3)",org.apache.shiro.authz.
+ annotation;version="[2.0,3)",org.apache.shiro.authz.permission;version=
+ "[2.0,3)",org.apache.shiro.cache;version="[2,3)",org.apache.shiro.confi
+ g;version="[2,3)",org.apache.shiro.config.ogdl;version="[2,3)",org.apac
+ he.shiro.crypto.cipher;version="[2,3)",org.apache.shiro.crypto.hash;ver
+ sion="[2,3)",org.apache.shiro.crypto.hash.format;version="[2,3)",org.ap
+ ache.shiro.dao;version="[2.0,3)",org.apache.shiro.event;version="[2,3)"
+ ,org.apache.shiro.event.support;version="[2,3)",org.apache.shiro.ini;ve
+ rsion="[2.0,3)",org.apache.shiro.jndi;version="[2.0,3)",org.apache.shir
+ o.lang;version="[2,3)",org.apache.shiro.lang.codec;version="[2,3)",org.
+ apache.shiro.lang.io;version="[2,3)",org.apache.shiro.lang.util;version
+ ="[2,3)",org.apache.shiro.ldap;version="[2.0,3)",org.apache.shiro.mgt;v
+ ersion="[2.0,3)",org.apache.shiro.realm;version="[2.0,3)",org.apache.sh
+ iro.realm.ldap;version="[2.0,3)",org.apache.shiro.realm.text;version="[
+ 2.0,3)",org.apache.shiro.session;version="[2.0,3)",org.apache.shiro.ses
+ sion.mgt;version="[2.0,3)",org.apache.shiro.session.mgt.eis;version="[2
+ .0,3)",org.apache.shiro.subject;version="[2.0,3)",org.apache.shiro.subj
+ ect.support;version="[2.0,3)",org.apache.shiro.util;version="[2.0,3)",o
+ rg.slf4j;version="[1.7,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Specification-Title: Apache Shiro :: Core
+Specification-Vendor: The Apache Software Foundation
+Specification-Version: 2.0
+Tool: Bnd-5.1.1.202006162103

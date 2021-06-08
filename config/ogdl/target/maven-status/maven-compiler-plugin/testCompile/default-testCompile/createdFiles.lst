@@ -1,0 +1,12 @@
+org\apache\shiro\config\ogdl\event\BeanEventTest$MyBeanEvent.class
+org\apache\shiro\config\ogdl\DefaultInterpolatorTest.class
+org\apache\shiro\config\ogdl\beans\InitCountBean.class
+org\apache\shiro\config\ogdl\SimpleBeanFactory.class
+org\apache\shiro\config\ogdl\SimpleBean.class
+org\apache\shiro\config\ogdl\CommonsInterpolatorTest.class
+org\apache\shiro\config\ogdl\event\BeanEventTest.class
+org\apache\shiro\config\ogdl\SimpleEnum.class
+org\apache\shiro\config\ogdl\InitializableBean.class
+org\apache\shiro\config\ogdl\RecordingBeanListener.class
+org\apache\shiro\config\ogdl\CompositeBean.class
+org\apache\shiro\config\ogdl\ReflectionBuilderTest.class

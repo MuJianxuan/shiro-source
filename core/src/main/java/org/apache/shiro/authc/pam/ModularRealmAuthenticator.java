@@ -325,11 +325,14 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
      * @param principals the application-specific Subject/user identifier.
      */
     public void onLogout(PrincipalCollection principals) {
+        // 通知 结束
         super.onLogout(principals);
+
         Collection<Realm> realms = getRealms();
         if (!CollectionUtils.isEmpty(realms)) {
             for (Realm realm : realms) {
                 if (realm instanceof LogoutAware) {
+                    // 登出
                     ((LogoutAware) realm).onLogout(principals);
                 }
             }

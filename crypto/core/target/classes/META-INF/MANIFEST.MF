@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1623161027655
+Build-Jdk-Spec: 1.8
+Bundle-Description: Apache Shiro is a powerful and flexible open-source 
+ security framework that cleanly handles        authentication, authoriz
+ ation, enterprise session management, single sign-on and cryptography s
+ ervices.
+Bundle-DocURL: https://www.apache.org/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Shiro :: Cryptography :: Core
+Bundle-SymbolicName: org.apache.shiro.crypto.core
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.apache.shiro.crypto;uses:="org.apache.shiro.lang,org
+ .apache.shiro.lang.util";version="2.0.0.SNAPSHOT"
+Implementation-Title: Apache Shiro :: Cryptography :: Core
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Version: 2.0.0-SNAPSHOT
+Import-Package: org.apache.shiro.lang;version="[2,3)",org.apache.shiro.l
+ ang.util;version="[2,3)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Specification-Title: Apache Shiro :: Cryptography :: Core
+Specification-Vendor: The Apache Software Foundation
+Specification-Version: 2.0
+Tool: Bnd-5.1.1.202006162103

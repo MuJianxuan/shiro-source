@@ -1,0 +1,13 @@
+org\apache\shiro\samples\spring\BootstrapDataPopulator.class
+org\apache\shiro\samples\spring\web\JnlpController.class
+org\apache\shiro\samples\spring\realm\SaltAwareJdbcRealm.class
+org\apache\shiro\samples\spring\config\RemotingServletConfig.class
+org\apache\shiro\samples\spring\web\LogoutController.class
+org\apache\shiro\samples\spring\config\ServletApplicationInitializer.class
+org\apache\shiro\samples\spring\web\LoginController.class
+org\apache\shiro\samples\spring\web\RootRedirectController.class
+org\apache\shiro\samples\spring\config\JspViewsConfig.class
+org\apache\shiro\samples\spring\SampleManager.class
+org\apache\shiro\samples\spring\DefaultSampleManager.class
+org\apache\shiro\samples\spring\web\IndexController.class
+org\apache\shiro\samples\spring\config\ApplicationConfig.class

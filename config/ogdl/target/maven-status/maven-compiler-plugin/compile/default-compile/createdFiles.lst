@@ -1,0 +1,17 @@
+org\apache\shiro\config\ogdl\ReflectionBuilder$1.class
+org\apache\shiro\config\ogdl\DefaultInterpolator.class
+org\apache\shiro\config\ogdl\ReflectionBuilder$InstantiationStatement.class
+org\apache\shiro\config\ogdl\Interpolator.class
+org\apache\shiro\config\ogdl\ReflectionBuilder$Statement.class
+org\apache\shiro\config\ogdl\event\BeanEvent.class
+org\apache\shiro\config\ogdl\event\DestroyedBeanEvent.class
+org\apache\shiro\config\ogdl\ReflectionBuilder$BeanConfiguration.class
+org\apache\shiro\config\ogdl\event\InstantiatedBeanEvent.class
+org\apache\shiro\config\ogdl\event\ConfiguredBeanEvent.class
+org\apache\shiro\config\ogdl\event\LoggingBeanEventListener.class
+org\apache\shiro\config\ogdl\UnresolveableReferenceException.class
+org\apache\shiro\config\ogdl\ReflectionBuilder.class
+org\apache\shiro\config\ogdl\ReflectionBuilder$BeanConfigurationProcessor.class
+org\apache\shiro\config\ogdl\CommonsInterpolator.class
+org\apache\shiro\config\ogdl\ReflectionBuilder$AssignmentStatement.class
+org\apache\shiro\config\ogdl\event\InitializedBeanEvent.class

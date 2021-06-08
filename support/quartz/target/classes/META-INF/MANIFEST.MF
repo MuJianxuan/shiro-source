@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1623161048567
+Build-Jdk-Spec: 1.8
+Bundle-Description: Apache Shiro is a powerful and flexible open-source 
+ security framework that cleanly handles        authentication, authoriz
+ ation, enterprise session management, single sign-on and cryptography s
+ ervices.
+Bundle-DocURL: https://www.apache.org/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Shiro :: Support :: Quartz
+Bundle-SymbolicName: org.apache.shiro.quartz
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.apache.shiro.session.mgt.quartz;uses:="org.apache.sh
+ iro.session.mgt,org.quartz";version="2.0.0.SNAPSHOT"
+Implementation-Title: Apache Shiro :: Support :: Quartz
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Version: 2.0.0-SNAPSHOT
+Import-Package: org.apache.shiro.session.mgt;version="[2,3)",org.quartz;
+ version="[1.7.2,3)",org.quartz.impl;version="[1.7.2,3)",org.slf4j;versi
+ on="[1.7,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Specification-Title: Apache Shiro :: Support :: Quartz
+Specification-Vendor: The Apache Software Foundation
+Specification-Version: 2.0
+Tool: Bnd-5.1.1.202006162103

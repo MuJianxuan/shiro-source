@@ -1,0 +1,4 @@
+org\apache\shiro\crypto\CryptoException.class
+org\apache\shiro\crypto\SecureRandomNumberGenerator.class
+org\apache\shiro\crypto\RandomNumberGenerator.class
+org\apache\shiro\crypto\UnknownAlgorithmException.class

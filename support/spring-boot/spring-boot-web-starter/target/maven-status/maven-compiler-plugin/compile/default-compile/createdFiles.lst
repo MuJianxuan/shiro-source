@@ -1,0 +1,4 @@
+org\apache\shiro\spring\config\web\autoconfigure\ShiroWebAutoConfiguration.class
+org\apache\shiro\spring\config\web\autoconfigure\ShiroWebMvcAutoConfiguration.class
+org\apache\shiro\spring\config\web\autoconfigure\ShiroWebFilterConfiguration.class
+META-INF\spring-configuration-metadata.json

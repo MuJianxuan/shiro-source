@@ -1,0 +1,3 @@
+org\apache\shiro\crypto\cipher\BlowfishCipherServiceTest.class
+org\apache\shiro\crypto\cipher\JcaCipherServiceTest.class
+org\apache\shiro\crypto\cipher\AesCipherServiceTest.class

@@ -1,0 +1,7 @@
+org\apache\shiro\web\jaxrs\ShiroSecurityContext.class
+org\apache\shiro\web\jaxrs\SubjectPrincipalRequestFilter.class
+org\apache\shiro\web\jaxrs\ShiroAnnotationFilterFeature.class
+org\apache\shiro\web\jaxrs\ExceptionMapper.class
+org\apache\shiro\web\jaxrs\AnnotationAuthorizationFilter.class
+org\apache\shiro\web\jaxrs\ShiroFeature.class
+org\apache\shiro\web\jaxrs\ShiroSecurityContext$ObjectPrincipal.class

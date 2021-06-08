@@ -49,10 +49,53 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *FactoryBean在基于 Spring 的 Web 应用程序中用于定义主 Shiro 过滤器。
+ * 用法
+ * 在web.xml声明一个 DelegatingFilterProxy，将过滤器名称与 bean id 匹配：
+ *    <filter>
+ *      <filter-name>shiroFilter</filter-name>
+ *      // Spring Web 模块的类 具体就需要了解Spring中是如何实现的
+ *      <filter-class>org.springframework.web.filter.DelegatingFilterProxy<filter-class>
+ *      <init-param>
+ *       <param-name>targetFilterLifecycle</param-name>
+ *        <param-value>true</param-value>
+ *      </init-param>
+ *    </filter>
  *
- * 然后，在启动时，通过这3个属性指定的任何值都将应用于所有已配置的过滤器实例，
- * 因此您不必在每个过滤器实例上单独指定它们。
- * 为了确保您自己的自定义过滤器可以从此便利中受益，您的过滤器实现应子类化前面提到的3种
+ * 然后，在定义 Web ApplicationContext 的 spring XML 文件中：
+ *    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+ *       <property name="securityManager" ref="securityManager"/>
+ *       <!-- other properties as necessary ... -->
+ *    </bean>
+ *
+ * 过滤器自动发现
+ *
+ *  ： 啥叫过滤器自动发现，先明确目的，我shiro设计的 过滤器模型，如何才能被调用到，接口访问的时候，怎么样才能让请求经过我的过滤器接口？
+ *
+ * 虽然有一个filters属性允许您在定义filter chains时将filter chains器 bean 分配给可用的过滤器“池”，但它是可选的。 提到 filterChain
+ *
+ * 此实现也是一个BeanPostProcessor ，它将获取在您的 Spring 应用程序上下文中独立定义的任何Filter bean。 发现后，它们将自动添加到以 bean ID 为键的map 。 然后可以在过滤器链定义中使用该 ID，例如：
+ *    <bean id="myCustomFilter" class="com.class.that.implements.javax.servlet.Filter"/>
+ *    ...
+ *    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+ *       ...
+ *       <property name="filterChainDefinitions">
+ *           <value>
+ *               /some/path/** = authc, myCustomFilter
+ *           </value>
+ *       </property>
+ *    </bean>
+ *
+ * 全球物业价值
+ * 大多数 Shiro servlet 过滤器实现都用于定义自定义过滤器chain definitions 。 大多数实现子类化 AccessControlFilter 、 AuthenticationFilter 、 AuthorizationFilter  类之一以简化事情，并且这 3 个类中的每一个都具有特定于应用程序的可配置属性。
+ *
+ * 会出现一个困境，例如，如果您想为任何过滤器设置应用程序的“loginUrl”，您不希望必须为定义的每个过滤器实例手动指定该值。
+ *
+ * 为防止配置重复，此实现提供了以下属性以允许您仅在一个位置设置相关值：
+ * setLoginUrl(String)
+ * setSuccessUrl(String)
+ * setUnauthorizedUrl(String)
+ * 然后在启动时，通过这 3 个属性指定的任何值都将应用于所有配置的过滤器实例，因此您不必在每个过滤器实例上单独指定它们。 为确保您自己的自定义过滤器受益于这种便利，您的过滤器实现应子类化前面提到的 3 种过滤器之一
  *
  * {@link org.springframework.beans.factory.FactoryBean FactoryBean} to be used in Spring-based web applications for
  * defining the master Shiro Filter.
@@ -491,6 +534,10 @@ public class ShiroFilterFactoryBean implements FactoryBean, BeanPostProcessor {
         return new SpringShiroFilter((WebSecurityManager) securityManager, chainResolver);
     }
 
+    /**
+     * 如有必要，申请登录网址
+     * @param filter
+     */
     private void applyLoginUrlIfNecessary(Filter filter) {
         String loginUrl = getLoginUrl();
         if (StringUtils.hasText(loginUrl) && (filter instanceof AccessControlFilter)) {
@@ -543,7 +590,9 @@ public class ShiroFilterFactoryBean implements FactoryBean, BeanPostProcessor {
      */
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 
-        //??? Filter 为什么会注入到Spring中
+        // Filter 为什么会注入到Spring中
+
+        // 因为我们需要配置这么一个Bean来使用！
         if (bean instanceof Filter) {
             log.debug("Found filter chain candidate filter '{}'", beanName);
             Filter filter = (Filter) bean;

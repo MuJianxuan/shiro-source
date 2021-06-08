@@ -164,6 +164,9 @@ public abstract class AbstractAuthenticator implements Authenticator, LogoutAwar
     }
 
     /**
+     *
+     * 此实现仅调用notifyLogout以允许任何注册的侦听器对注销做出反应。
+     *
      * This implementation merely calls
      * {@link #notifyLogout(org.apache.shiro.subject.PrincipalCollection) notifyLogout} to allow any registered listeners
      * to react to the logout.
@@ -171,6 +174,12 @@ public abstract class AbstractAuthenticator implements Authenticator, LogoutAwar
      * @param principals the identifying principals of the {@code Subject}/account logging out.
      */
     public void onLogout(PrincipalCollection principals) {
+
+        /**
+         * 为什么父类 只设计一个 通知方法 ？
+         *   子类覆盖 ，并调用 该方法 ！从而实现通用方法的抽象
+         */
+
         notifyLogout(principals);
     }
 

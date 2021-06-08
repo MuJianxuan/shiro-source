@@ -1,0 +1,5 @@
+org\apache\shiro\spring\boot\autoconfigure\application\ShiroAutoConfigurationTestApplication.class
+org\apache\shiro\spring\boot\autoconfigure\application\ShiroAutoConfigurationTestApplication$SubscribedListener.class
+org\apache\shiro\spring\boot\autoconfigure\ShiroSpringAutoConfigurationTest.class
+org\apache\shiro\spring\boot\autoconfigure\SpringFactoriesTest.class
+org\apache\shiro\spring\boot\autoconfigure\application\ShiroAutoConfigurationTestApplication$EventBusAwareObject.class

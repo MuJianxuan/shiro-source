@@ -85,6 +85,7 @@ public class SecureBankService implements BankService {
     * @see com.connectif.trilogy.root.security.BankService#createNewAccount(java.lang.String)
     */
 
+    @Override
     @RequiresPermissions("bankAccount:create")
     public long createNewAccount(String anOwnerName) {
         assertServiceState();

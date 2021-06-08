@@ -1,0 +1,2 @@
+org\apache\shiro\samples\guice\SampleShiroGuiceBootstrap.class
+org\apache\shiro\samples\guice\SampleShiroServletModule.class

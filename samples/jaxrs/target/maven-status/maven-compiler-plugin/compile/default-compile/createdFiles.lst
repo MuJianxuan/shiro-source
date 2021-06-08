@@ -1,0 +1,3 @@
+org\apache\shiro\samples\jaxrs\resources\SecureResource.class
+org\apache\shiro\samples\jaxrs\SampleApplication.class
+org\apache\shiro\samples\jaxrs\resources\HelloResource.class

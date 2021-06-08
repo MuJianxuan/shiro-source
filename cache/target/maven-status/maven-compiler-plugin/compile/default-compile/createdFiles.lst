@@ -1,0 +1,7 @@
+org\apache\shiro\cache\Cache.class
+org\apache\shiro\cache\CacheManagerAware.class
+org\apache\shiro\cache\AbstractCacheManager.class
+org\apache\shiro\cache\CacheManager.class
+org\apache\shiro\cache\CacheException.class
+org\apache\shiro\cache\MapCache.class
+org\apache\shiro\cache\MemoryConstrainedCacheManager.class

@@ -1,0 +1,5 @@
+org\apache\shiro\config\ConfigurationException.class
+org\apache\shiro\config\Ini.class
+org\apache\shiro\config\Ini$1.class
+org\apache\shiro\config\Ini$Section.class
+org\apache\shiro\config\ResourceConfigurable.class

@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1623161046741
+Build-Jdk-Spec: 1.8
+Bundle-Description: Apache Shiro is a powerful and flexible open-source 
+ security framework that cleanly handles        authentication, authoriz
+ ation, enterprise session management, single sign-on and cryptography s
+ ervices.
+Bundle-DocURL: https://www.apache.org/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Shiro :: Support :: EHCache
+Bundle-SymbolicName: org.apache.shiro.ehcache
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.apache.shiro.cache.ehcache;uses:="net.sf.ehcache,org
+ .apache.shiro.cache,org.apache.shiro.lang.util";version="2.0.0.SNAPSHOT
+ "
+Implementation-Title: Apache Shiro :: Support :: EHCache
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Version: 2.0.0-SNAPSHOT
+Import-Package: net.sf.ehcache;version="[2.5,3)",org.apache.shiro.cache;
+ version="[2,3)",org.apache.shiro.lang.io;version="[2.0,3)",org.apache.s
+ hiro.lang.util;version="[2.0,3)",org.slf4j;version="[1.7,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Specification-Title: Apache Shiro :: Support :: EHCache
+Specification-Vendor: The Apache Software Foundation
+Specification-Version: 2.0
+Tool: Bnd-5.1.1.202006162103

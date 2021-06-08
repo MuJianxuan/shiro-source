@@ -1,0 +1,82 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1623161045740
+Build-Jdk-Spec: 1.8
+Bundle-Description: Apache Shiro is a powerful and flexible open-source 
+ security framework that cleanly handles        authentication, authoriz
+ ation, enterprise session management, single sign-on and cryptography s
+ ervices.
+Bundle-DocURL: https://www.apache.org/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Shiro :: Web
+Bundle-SymbolicName: org.apache.shiro.web
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.apache.shiro.web.config;uses:="javax.servlet,org.apa
+ che.shiro.config,org.apache.shiro.ini,org.apache.shiro.mgt,org.apache.s
+ hiro.web.filter.mgt";version="2.0.0.SNAPSHOT",org.apache.shiro.web.env;
+ uses:="javax.servlet,org.apache.shiro.config,org.apache.shiro.env,org.a
+ pache.shiro.lang.util,org.apache.shiro.mgt,org.apache.shiro.web.config,
+ org.apache.shiro.web.filter.mgt,org.apache.shiro.web.mgt";version="2.0.
+ 0.SNAPSHOT",org.apache.shiro.web.filter;uses:="javax.servlet,org.apache
+ .shiro.subject,org.apache.shiro.util,org.apache.shiro.web.servlet";vers
+ ion="2.0.0.SNAPSHOT",org.apache.shiro.web.filter.authc;uses:="javax.ser
+ vlet,org.apache.shiro.authc,org.apache.shiro.subject,org.apache.shiro.w
+ eb.filter,org.apache.shiro.web.servlet";version="2.0.0.SNAPSHOT",org.ap
+ ache.shiro.web.filter.authz;uses:="javax.servlet,javax.servlet.http,org
+ .apache.shiro.web.filter";version="2.0.0.SNAPSHOT",org.apache.shiro.web
+ .filter.mgt;uses:="javax.servlet,org.apache.shiro.config,org.apache.shi
+ ro.util";version="2.0.0.SNAPSHOT",org.apache.shiro.web.filter.session;u
+ ses:="javax.servlet,org.apache.shiro.web.filter";version="2.0.0.SNAPSHO
+ T",org.apache.shiro.web.mgt;uses:="javax.servlet,org.apache.shiro.mgt,o
+ rg.apache.shiro.realm,org.apache.shiro.session,org.apache.shiro.session
+ .mgt,org.apache.shiro.subject,org.apache.shiro.web.servlet";version="2.
+ 0.0.SNAPSHOT",org.apache.shiro.web.servlet;uses:="javax.servlet,javax.s
+ ervlet.http,org.apache.shiro.config,org.apache.shiro.lang.util,org.apac
+ he.shiro.session,org.apache.shiro.subject,org.apache.shiro.web.filter.m
+ gt,org.apache.shiro.web.mgt,org.apache.shiro.web.subject";version="2.0.
+ 0.SNAPSHOT",org.apache.shiro.web.session;uses:="javax.servlet.http,org.
+ apache.shiro.session";version="2.0.0.SNAPSHOT",org.apache.shiro.web.ses
+ sion.mgt;uses:="javax.servlet,javax.servlet.http,org.apache.shiro.authz
+ ,org.apache.shiro.session,org.apache.shiro.session.mgt,org.apache.shiro
+ .web.servlet,org.apache.shiro.web.util";version="2.0.0.SNAPSHOT",org.ap
+ ache.shiro.web.subject;uses:="javax.servlet,org.apache.shiro.mgt,org.ap
+ ache.shiro.subject,org.apache.shiro.web.util";version="2.0.0.SNAPSHOT",
+ org.apache.shiro.web.subject.support;uses:="javax.servlet,org.apache.sh
+ iro.mgt,org.apache.shiro.session,org.apache.shiro.session.mgt,org.apach
+ e.shiro.subject,org.apache.shiro.subject.support,org.apache.shiro.web.s
+ ubject";version="2.0.0.SNAPSHOT",org.apache.shiro.web.tags;uses:="javax
+ .servlet.jsp,javax.servlet.jsp.tagext,org.apache.shiro.subject";version
+ ="2.0.0.SNAPSHOT",org.apache.shiro.web.util;uses:="javax.servlet,javax.
+ servlet.http,org.apache.shiro.web.env";version="2.0.0.SNAPSHOT"
+Implementation-Title: Apache Shiro :: Web
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Version: 2.0.0-SNAPSHOT
+Import-Package: javax.servlet;version="[3.1,4)",javax.servlet.http;versi
+ on="[3.1,4)",javax.servlet.jsp;resolution:=optional,javax.servlet.jsp.t
+ agext;resolution:=optional,org.apache.shiro;version="[2,3)",org.apache.
+ shiro.authc;version="[2,3)",org.apache.shiro.authz;version="[2,3)",org.
+ apache.shiro.config;version="[2,3)",org.apache.shiro.config.ogdl;versio
+ n="[2,3)",org.apache.shiro.env;version="[2,3)",org.apache.shiro.ini;ver
+ sion="[2,3)",org.apache.shiro.lang.codec;version="[2,3)",org.apache.shi
+ ro.lang.io;version="[2,3)",org.apache.shiro.lang.util;version="[2,3)",o
+ rg.apache.shiro.mgt;version="[2,3)",org.apache.shiro.realm;version="[2,
+ 3)",org.apache.shiro.session;version="[2,3)",org.apache.shiro.session.m
+ gt;version="[2,3)",org.apache.shiro.subject;version="[2,3)",org.apache.
+ shiro.subject.support;version="[2,3)",org.apache.shiro.util;version="[2
+ ,3)",org.apache.shiro.web.config;version="[2,3)",org.apache.shiro.web.e
+ nv;version="[2,3)",org.apache.shiro.web.filter;version="[2,3)",org.apac
+ he.shiro.web.filter.authc;version="[2,3)",org.apache.shiro.web.filter.a
+ uthz;version="[2,3)",org.apache.shiro.web.filter.mgt;version="[2,3)",or
+ g.apache.shiro.web.filter.session;version="[2,3)",org.apache.shiro.web.
+ mgt;version="[2,3)",org.apache.shiro.web.servlet;version="[2,3)",org.ap
+ ache.shiro.web.session;version="[2,3)",org.apache.shiro.web.session.mgt
+ ;version="[2,3)",org.apache.shiro.web.subject;version="[2,3)",org.apach
+ e.shiro.web.subject.support;version="[2,3)",org.apache.shiro.web.util;v
+ ersion="[2,3)",org.owasp.encoder,org.slf4j;version="[1.7,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Specification-Title: Apache Shiro :: Web
+Specification-Vendor: The Apache Software Foundation
+Specification-Version: 2.0
+Tool: Bnd-5.1.1.202006162103

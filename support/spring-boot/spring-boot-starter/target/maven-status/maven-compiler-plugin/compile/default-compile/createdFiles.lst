@@ -1,0 +1,6 @@
+org\apache\shiro\spring\boot\autoconfigure\ShiroBeanAutoConfiguration.class
+org\apache\shiro\spring\boot\autoconfigure\exception\NoRealmBeanConfiguredException.class
+org\apache\shiro\spring\boot\autoconfigure\ShiroAnnotationProcessorAutoConfiguration.class
+org\apache\shiro\spring\boot\autoconfigure\ShiroNoRealmConfiguredFailureAnalyzer.class
+META-INF\spring-configuration-metadata.json
+org\apache\shiro\spring\boot\autoconfigure\ShiroAutoConfiguration.class

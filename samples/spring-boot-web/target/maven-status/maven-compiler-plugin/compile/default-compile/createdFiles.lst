@@ -1,0 +1,5 @@
+org\apache\shiro\samples\HelloController.class
+org\apache\shiro\samples\AccountInfoController.class
+org\apache\shiro\samples\WebApp.class
+org\apache\shiro\samples\LoginController.class
+org\apache\shiro\samples\RestrictedErrorController.class

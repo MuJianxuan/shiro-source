@@ -1,0 +1,87 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1623161050752
+Build-Jdk-Spec: 1.8
+Bundle-Description: Apache Shiro is a powerful and flexible open-source 
+ security framework that cleanly handles        authentication, authoriz
+ ation, enterprise session management, single sign-on and cryptography s
+ ervices.
+Bundle-DocURL: https://www.apache.org/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Shiro :: Support :: Spring
+Bundle-SymbolicName: org.apache.shiro.spring
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.apache.shiro.spring;uses:="org.apache.shiro.event,or
+ g.springframework.beans,org.springframework.beans.factory.config,org.sp
+ ringframework.core";version="2.0.0.SNAPSHOT",org.apache.shiro.spring.ao
+ p;uses:="org.apache.shiro.aop";version="2.0.0.SNAPSHOT",org.apache.shir
+ o.spring.config;uses:="org.apache.shiro.authc,org.apache.shiro.authc.pa
+ m,org.apache.shiro.authz,org.apache.shiro.authz.permission,org.apache.s
+ hiro.cache,org.apache.shiro.event,org.apache.shiro.mgt,org.apache.shiro
+ .realm,org.apache.shiro.session.mgt,org.apache.shiro.session.mgt.eis,or
+ g.apache.shiro.spring,org.apache.shiro.spring.security.interceptor,org.
+ springframework.aop.framework.autoproxy,org.springframework.beans.facto
+ ry.annotation,org.springframework.context.annotation";version="2.0.0.SN
+ APSHOT",org.apache.shiro.spring.remoting;uses:="org.aopalliance.interce
+ pt,org.apache.shiro.mgt,org.springframework.remoting.support";version="
+ 2.0.0.SNAPSHOT",org.apache.shiro.spring.security.interceptor;uses:="org
+ .aopalliance.intercept,org.apache.shiro.aop,org.apache.shiro.authz.aop,
+ org.apache.shiro.mgt,org.springframework.aop.support";version="2.0.0.SN
+ APSHOT",org.apache.shiro.spring.web;uses:="javax.servlet,javax.servlet.
+ http,org.apache.shiro.mgt,org.apache.shiro.web.filter.mgt,org.apache.sh
+ iro.web.servlet,org.springframework.beans,org.springframework.beans.fac
+ tory,org.springframework.beans.factory.config,org.springframework.web.u
+ til";version="2.0.0.SNAPSHOT",org.apache.shiro.spring.web.config;uses:=
+ "javax.servlet,org.apache.shiro.authc,org.apache.shiro.authc.pam,org.ap
+ ache.shiro.authz,org.apache.shiro.mgt,org.apache.shiro.realm,org.apache
+ .shiro.session.mgt,org.apache.shiro.session.mgt.eis,org.apache.shiro.sp
+ ring.config,org.apache.shiro.spring.web,org.apache.shiro.web.servlet,or
+ g.springframework.beans.factory.annotation,org.springframework.context.
+ annotation,org.springframework.web.servlet.mvc.method.annotation";versi
+ on="2.0.0.SNAPSHOT"
+Implementation-Title: Apache Shiro :: Support :: Spring
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Version: 2.0.0-SNAPSHOT
+Import-Package: javax.servlet;version="[3.1,4)",javax.servlet.http;versi
+ on="[3.1,4)",org.aopalliance.aop;version="[1.0.0,2.0.0)",org.aopallianc
+ e.intercept;version="[1.0.0,2.0.0)",org.apache.shiro;version="[2,3)",or
+ g.apache.shiro.aop;version="[2,3)",org.apache.shiro.authc;version="[2,3
+ )",org.apache.shiro.authc.pam;version="[2,3)",org.apache.shiro.authz;ve
+ rsion="[2,3)",org.apache.shiro.authz.annotation;version="[2,3)",org.apa
+ che.shiro.authz.aop;version="[2,3)",org.apache.shiro.authz.permission;v
+ ersion="[2,3)",org.apache.shiro.cache;version="[2,3)",org.apache.shiro.
+ config;version="[2,3)",org.apache.shiro.event;version="[2,3)",org.apach
+ e.shiro.event.support;version="[2,3)",org.apache.shiro.lang.util;versio
+ n="[2,3)",org.apache.shiro.mgt;version="[2,3)",org.apache.shiro.realm;v
+ ersion="[2,3)",org.apache.shiro.realm.text;version="[2,3)",org.apache.s
+ hiro.session;version="[2,3)",org.apache.shiro.session.mgt;version="[2,3
+ )",org.apache.shiro.session.mgt.eis;version="[2,3)",org.apache.shiro.sp
+ ring;version="[2,3)",org.apache.shiro.spring.aop;version="[2,3)",org.ap
+ ache.shiro.spring.config;version="[2,3)",org.apache.shiro.spring.securi
+ ty.interceptor;version="[2,3)",org.apache.shiro.spring.web;version="[2,
+ 3)",org.apache.shiro.subject;version="[2,3)",org.apache.shiro.util;vers
+ ion="[2,3)",org.apache.shiro.web.filter;version="[2,3)",org.apache.shir
+ o.web.filter.authc;version="[2,3)",org.apache.shiro.web.filter.authz;ve
+ rsion="[2,3)",org.apache.shiro.web.filter.mgt;version="[2,3)",org.apach
+ e.shiro.web.mgt;version="[2,3)",org.apache.shiro.web.servlet;version="[
+ 2,3)",org.apache.shiro.web.session.mgt;version="[2,3)",org.apache.shiro
+ .web.util;version="[2,3)",org.slf4j;version="[1.7,2)",org.springframewo
+ rk.aop.framework.autoproxy;version="[4.0.0,6.0.0)",org.springframework.
+ aop.support;version="[4.0.0,6.0.0)",org.springframework.beans;version="
+ [4.0.0,6.0.0)",org.springframework.beans.factory;version="[4.0.0,6.0.0)
+ ",org.springframework.beans.factory.annotation;version="[4.0.0,6.0.0)",
+ org.springframework.beans.factory.config;version="[4.0.0,6.0.0)",org.sp
+ ringframework.context.annotation;version="[4.0.0,6.0.0)",org.springfram
+ ework.core;version="[4.0.0,6.0.0)",org.springframework.core.annotation;
+ version="[4.0.0,6.0.0)",org.springframework.remoting.support;version="[
+ 4.0.0,6.0.0)",org.springframework.util;version="[4.0.0,6.0.0)",org.spri
+ ngframework.web.servlet.mvc.method.annotation;resolution:=optional;vers
+ ion="[4.0.0,6.0.0)",org.springframework.web.util;resolution:=optional;v
+ ersion="[4.0.0,6.0.0)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Specification-Title: Apache Shiro :: Support :: Spring
+Specification-Vendor: The Apache Software Foundation
+Specification-Version: 2.0
+Tool: Bnd-5.1.1.202006162103

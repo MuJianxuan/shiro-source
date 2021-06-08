@@ -1,0 +1,62 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1623161052224
+Build-Jdk-Spec: 1.8
+Bundle-Description: Apache Shiro is a powerful and flexible open-source 
+ security framework that cleanly handles        authentication, authoriz
+ ation, enterprise session management, single sign-on and cryptography s
+ ervices.
+Bundle-DocURL: https://www.apache.org/
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0.txt
+Bundle-ManifestVersion: 2
+Bundle-Name: Apache Shiro :: Support :: Guice
+Bundle-SymbolicName: org.apache.shiro.guice
+Bundle-Vendor: The Apache Software Foundation
+Bundle-Version: 2.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.apache.shiro.guice;uses:="com.google.inject,com.goog
+ le.inject.binder,org.apache.shiro.env,org.apache.shiro.event,org.apache
+ .shiro.lang.util,org.apache.shiro.mgt,org.apache.shiro.realm,org.apache
+ .shiro.session.mgt";version="2.0.0.SNAPSHOT",org.apache.shiro.guice.aop
+ ;uses:="com.google.inject,org.apache.shiro.aop";version="2.0.0.SNAPSHOT
+ ",org.apache.shiro.guice.web;uses:="com.google.inject,com.google.inject
+ .binder,com.google.inject.servlet,javax.servlet,org.apache.shiro.env,or
+ g.apache.shiro.guice,org.apache.shiro.mgt,org.apache.shiro.session.mgt,
+ org.apache.shiro.web.env,org.apache.shiro.web.filter,org.apache.shiro.w
+ eb.filter.authc,org.apache.shiro.web.filter.authz,org.apache.shiro.web.
+ filter.session,org.apache.shiro.web.mgt,org.apache.shiro.web.servlet";v
+ ersion="2.0.0.SNAPSHOT"
+Implementation-Title: Apache Shiro :: Support :: Guice
+Implementation-Vendor: The Apache Software Foundation
+Implementation-Version: 2.0.0-SNAPSHOT
+Import-Package: com.google.inject;version="1.3",com.google.inject.binder
+ ;version="1.3",com.google.inject.matcher;version="1.3",com.google.injec
+ t.multibindings;version="1.3",com.google.inject.name;version="1.3",com.
+ google.inject.servlet;resolution:=optional;version="1.3",com.google.inj
+ ect.spi;version="1.3",com.google.inject.util;version="1.3",javax.annota
+ tion;version="[1.3,2)",javax.inject,javax.servlet;version="[3.1,4)",jav
+ ax.servlet.http;version="[3.1,4)",org.aopalliance.intercept;version="[1
+ .0.0,2.0.0)",org.apache.commons.beanutils;version="[1.9,2)",org.apache.
+ shiro;version="[2,3)",org.apache.shiro.aop;version="[2,3)",org.apache.s
+ hiro.authz.aop;version="[2,3)",org.apache.shiro.config;version="[2,3)",
+ org.apache.shiro.env;version="[2,3)",org.apache.shiro.event;version="[2
+ ,3)",org.apache.shiro.event.support;version="[2,3)",org.apache.shiro.gu
+ ice;version="[2,3)",org.apache.shiro.lang.util;version="[2,3)",org.apac
+ he.shiro.mgt;version="[2,3)",org.apache.shiro.realm;version="[2,3)",org
+ .apache.shiro.session;version="[2,3)",org.apache.shiro.session.mgt;vers
+ ion="[2,3)",org.apache.shiro.subject;version="[2,3)",org.apache.shiro.u
+ til;version="[2,3)",org.apache.shiro.web.env;resolution:=optional;versi
+ on="[2,3)",org.apache.shiro.web.filter;resolution:=optional;version="[2
+ ,3)",org.apache.shiro.web.filter.authc;resolution:=optional;version="[2
+ ,3)",org.apache.shiro.web.filter.authz;resolution:=optional;version="[2
+ ,3)",org.apache.shiro.web.filter.mgt;resolution:=optional;version="[2,3
+ )",org.apache.shiro.web.filter.session;resolution:=optional;version="[2
+ ,3)",org.apache.shiro.web.mgt;resolution:=optional;version="[2,3)",org.
+ apache.shiro.web.servlet;resolution:=optional;version="[2,3)",org.apach
+ e.shiro.web.session.mgt;resolution:=optional;version="[2,3)",org.apache
+ .shiro.web.util;resolution:=optional;version="[2,3)",org.slf4j;version=
+ "[1.7,2)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Specification-Title: Apache Shiro :: Support :: Guice
+Specification-Vendor: The Apache Software Foundation
+Specification-Version: 2.0
+Tool: Bnd-5.1.1.202006162103
