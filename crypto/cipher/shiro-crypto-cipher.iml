@@ -10,7 +10,7 @@
           <property key="Export-Package" value="org.apache.shiro.crypto.cipher.*;version=2.0.0-SNAPSHOT" />
           <property key="Import-Package" value="org.apache.shiro.crypto*;version=&quot;[2, 3)&quot;,org.apache.shiro.lang*;version=&quot;[2, 3)&quot;,*" />
           <property key="Bundle-Name" value="Apache Shiro :: Cryptography :: Ciphers" />
-          <property key="Include-Resource" value="META-INF/NOTICE=$MODULE_DIR$/src/main/resources/META-INF/NOTICE" />
+          <property key="Include-Resource" value="META-INF/NOTICE=E:/AProject/Github/shiro/crypto/cipher/src/main/resources/META-INF/NOTICE" />
         </additionalProperties>
         <additionalJARContents />
       </configuration>

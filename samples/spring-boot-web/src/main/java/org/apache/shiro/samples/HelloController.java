@@ -25,6 +25,7 @@ import org.apache.shiro.util.CollectionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -57,5 +58,12 @@ public class HelloController {
 
         return "hello";
     }
+
+    @ResponseBody
+    @RequestMapping("/hello")
+    public String hello(){
+        return "hello word！";
+    }
+
 
 }

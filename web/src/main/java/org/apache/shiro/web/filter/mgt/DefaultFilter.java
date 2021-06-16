@@ -40,9 +40,13 @@ import java.util.Map;
  */
 public enum DefaultFilter {
 
+    // 放行
     anon(AnonymousFilter.class),
+    // 认证
     authc(FormAuthenticationFilter.class),
+    // 基础认证
     authcBasic(BasicHttpAuthenticationFilter.class),
+    // 头认证
     authcBearer(BearerHttpAuthenticationFilter.class),
     ip(IpFilter.class),
     // 登出

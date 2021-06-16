@@ -11,7 +11,7 @@
           <property key="Import-Package" value="org.apache.shiro.lang*;version=&quot;[2, 3)&quot;,org.apache.shiro.cache*;version=&quot;[2, 3)&quot;,org.apache.shiro.config*;version=&quot;[2, 3)&quot;,org.apache.shiro.crypto*;version=&quot;[2, 3)&quot;,org.apache.shiro.event*;version=&quot;[2, 3)&quot;,org.apache.commons.beanutils*;resolution:=optional,org.apache.commons.configuration2*;resolution:=optional,*" />
           <property key="DynamicImport-Package" value="org.apache.shiro.*" />
           <property key="Bundle-Name" value="Apache Shiro :: Core" />
-          <property key="Include-Resource" value="META-INF/NOTICE=$MODULE_DIR$/src/main/resources/META-INF/NOTICE" />
+          <property key="Include-Resource" value="META-INF/NOTICE=E:/AProject/Github/shiro/core/src/main/resources/META-INF/NOTICE" />
         </additionalProperties>
         <additionalJARContents />
       </configuration>

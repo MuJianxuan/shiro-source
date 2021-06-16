@@ -10,7 +10,7 @@
           <property key="Export-Package" value="org.apache.shiro.cache.ehcache*;version=2.0.0-SNAPSHOT" />
           <property key="Import-Package" value="org.apache.shiro.cache*;version=&quot;[2, 3)&quot;,net.sf.ehcache*;version=&quot;[2.5, 3)&quot;,*" />
           <property key="Bundle-Name" value="Apache Shiro :: Support :: EHCache" />
-          <property key="Include-Resource" value="META-INF/NOTICE=$MODULE_DIR$/src/main/resources/META-INF/NOTICE,org/apache/shiro/cache/ehcache/ehcache.xml=$MODULE_DIR$/src/main/resources/org/apache/shiro/cache/ehcache/ehcache.xml" />
+          <property key="Include-Resource" value="META-INF/NOTICE=E:/AProject/Github/shiro/support/ehcache/src/main/resources/META-INF/NOTICE,org/apache/shiro/cache/ehcache/ehcache.xml=E:/AProject/Github/shiro/support/ehcache/src/main/resources/org/apache/shiro/cache/ehcache/ehcache.xml" />
         </additionalProperties>
         <additionalJARContents />
       </configuration>

@@ -106,9 +106,12 @@ public class PathMatchingFilterChainResolver implements FilterChainResolver {
             return null;
         }
 
+        // 请求地址
         final String requestURI = getPathWithinApplication(request);
+        // 请求 URI 无尾随斜线
         final String requestURINoTrailingSlash = removeTrailingSlash(requestURI);
 
+        //此实现中的“链名称”实际上是用户定义的路径模式。我们只是将它们用作 FilterChainManager 要求的链名称
         //the 'chain names' in this implementation are actually path patterns defined by the user.  We just use them
         //as the chain name for the FilterChainManager's requirements
         for (String pathPattern : filterChainManager.getChainNames()) {
@@ -118,6 +121,7 @@ public class PathMatchingFilterChainResolver implements FilterChainResolver {
                     log.trace("Matched path pattern [{}] for requestURI [{}].  " +
                             "Utilizing corresponding filter chain...", pathPattern, Encode.forHtml(requestURI));
                 }
+                // 执行 代理
                 return filterChainManager.proxy(originalChain, pathPattern);
             } else {
 

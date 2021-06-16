@@ -30,6 +30,7 @@ import javax.servlet.Filter;
 public interface PathConfigProcessor {
 
     /**
+     * 处理给定path唯一的指定config ，并返回应为该路径/配置组合执行的过滤器。
      * Processes the specified {@code config}, unique to the given {@code path}, and returns the Filter that should
      * execute for that path/config combination.
      *

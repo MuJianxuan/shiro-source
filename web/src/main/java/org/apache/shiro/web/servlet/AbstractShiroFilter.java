@@ -461,6 +461,7 @@ public abstract class AbstractShiroFilter extends OncePerRequestFilter {
             return origChain;
         }
 
+        // 解析过滤器链  很重要 ！
         FilterChain resolved = resolver.getChain(request, response, origChain);
         if (resolved != null) {
             log.trace("Resolved a configured FilterChain for the current request.");

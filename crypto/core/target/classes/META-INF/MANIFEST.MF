@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1623161027655
+Bnd-LastModified: 1623808755414
 Build-Jdk-Spec: 1.8
 Bundle-Description: Apache Shiro is a powerful and flexible open-source 
  security framework that cleanly handles        authentication, authoriz

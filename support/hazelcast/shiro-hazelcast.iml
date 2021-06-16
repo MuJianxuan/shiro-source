@@ -10,7 +10,7 @@
           <property key="Export-Package" value="org.apache.shiro.hazelcast*;version=2.0.0-SNAPSHOT" />
           <property key="Import-Package" value="org.apache.shiro.cache*;version=&quot;[2, 3)&quot;,com.hazelcast*;version=&quot;[3, 4)&quot;,*" />
           <property key="Bundle-Name" value="Apache Shiro :: Support :: Hazelcast" />
-          <property key="Include-Resource" value="META-INF/NOTICE=$MODULE_DIR$/src/main/resources/META-INF/NOTICE" />
+          <property key="Include-Resource" value="META-INF/NOTICE=E:/AProject/Github/shiro/support/hazelcast/src/main/resources/META-INF/NOTICE" />
         </additionalProperties>
         <additionalJARContents />
       </configuration>

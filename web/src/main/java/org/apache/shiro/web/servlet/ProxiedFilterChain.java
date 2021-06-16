@@ -26,6 +26,10 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ *
+ * 代理过滤器链是一个FilterChain实例，它代理原始FilterChain以及可能需要在最终包装的原始链之前执行的其他Filter的List 。
+ * 它允许在继续原始（代理） FilterChain实例之前执行过滤器列表
+ *
  * A proxied filter chain is a {@link FilterChain} instance that proxies an original {@link FilterChain} as well
  * as a {@link List List} of other {@link Filter Filter}s that might need to execute prior to the final wrapped
  * original chain.  It allows a list of filters to execute before continuing the original (proxied)

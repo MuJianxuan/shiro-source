@@ -138,6 +138,16 @@ public class DefaultFilterChainManager implements FilterChainManager {
         }
     }
 
+    /**
+     * 创建 链
+     * @param chainName       the name to associate with the chain, conventionally a URL path pattern.
+     *                        与链相关联的名称，通常是 URL 路径模式。
+     *
+     * @param chainDefinition the string-formatted chain definition used to construct an actual
+     *                        {@link NamedFilterList} chain instance.
+     *                        用于构造实际 {@link NamedFilterList} 链实例的字符串格式链定义。
+     *
+     */
     public void createChain(String chainName, String chainDefinition) {
         if (!StringUtils.hasText(chainName)) {
             throw new NullPointerException("chainName cannot be null or empty.");
@@ -296,9 +306,10 @@ public class DefaultFilterChainManager implements FilterChainManager {
                     "filter with that name/path has first been registered with the addFilter method(s).");
         }
 
-        //应用链配置
+        //应用链配置   主要的目的是 处理 Path 路径匹配过滤器的注入问题
         applyChainConfig(chainName, filter, chainSpecificFilterConfig);
 
+        //确保连锁
         NamedFilterList chain = ensureChain(chainName);
         // 添加到集合？
         chain.add(filter);
@@ -325,6 +336,7 @@ public class DefaultFilterChainManager implements FilterChainManager {
                     "with config [" + chainSpecificFilterConfig + "]");
         }
         if (filter instanceof PathConfigProcessor) {
+            // 返回 一个 路径匹配过滤器
             ((PathConfigProcessor) filter).processPathConfig(chainName, chainSpecificFilterConfig);
         } else {
             if (StringUtils.hasText(chainSpecificFilterConfig)) {
@@ -367,6 +379,7 @@ public class DefaultFilterChainManager implements FilterChainManager {
             String msg = "There is no configured chain under the name/key [" + chainName + "].";
             throw new IllegalArgumentException(msg);
         }
+        // 返回一个 过滤器链
         return configured.proxy(original);
     }
 

@@ -10,7 +10,7 @@
           <property key="Export-Package" value="org.apache.shiro.web*;version=2.0.0-SNAPSHOT" />
           <property key="Import-Package" value="org.apache.shiro*;version=&quot;[2, 3)&quot;,javax.servlet.jsp*;resolution:=optional,*" />
           <property key="Bundle-Name" value="Apache Shiro :: Web" />
-          <property key="Include-Resource" value="META-INF/NOTICE=$MODULE_DIR$/src/main/resources/META-INF/NOTICE,META-INF/shiro.tld=$MODULE_DIR$/src/main/resources/META-INF/shiro.tld" />
+          <property key="Include-Resource" value="META-INF/NOTICE=E:/AProject/Github/shiro/web/src/main/resources/META-INF/NOTICE,META-INF/shiro.tld=E:/AProject/Github/shiro/web/src/main/resources/META-INF/shiro.tld" />
         </additionalProperties>
         <additionalJARContents />
       </configuration>
