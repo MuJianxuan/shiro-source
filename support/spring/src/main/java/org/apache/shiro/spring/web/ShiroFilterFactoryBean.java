@@ -173,6 +173,7 @@ public class ShiroFilterFactoryBean implements FactoryBean, BeanPostProcessor {
 
     /**
      * 存放 过滤器对象
+     *   存入 触发时机： Spring的过滤器Bean 前置处理 postIn xxx
      */
     private Map<String, Filter> filters;
 
@@ -434,12 +435,17 @@ public class ShiroFilterFactoryBean implements FactoryBean, BeanPostProcessor {
         return true;
     }
 
+    /**
+     * 创建 过滤器链管理器
+     * @return
+     */
     protected FilterChainManager createFilterChainManager() {
 
         DefaultFilterChainManager manager = new DefaultFilterChainManager();
         Map<String, Filter> defaultFilters = manager.getFilters();
         //apply global settings if necessary:
         for (Filter filter : defaultFilters.values()) {
+            // 为每个过滤器设置 登录地址、等数据
             applyGlobalPropertiesIfNecessary(filter);
         }
 
@@ -453,6 +459,11 @@ public class ShiroFilterFactoryBean implements FactoryBean, BeanPostProcessor {
                 if (filter instanceof Nameable) {
                     ((Nameable) filter).setName(name);
                 }
+
+                /**
+                 * 'init' 参数为 false，因为应初始化 Spring 配置的过滤器
+                 *    不在Spring日期的过滤器不该执行 init方法
+                 */
                 //'init' argument is false, since Spring-configured filters should be initialized
                 //in Spring (i.e. 'init-method=blah') or implement InitializingBean:
                 manager.addFilter(name, filter, false);
@@ -462,18 +473,35 @@ public class ShiroFilterFactoryBean implements FactoryBean, BeanPostProcessor {
         // set the global filters
         manager.setGlobalFilters(this.globalFilters);
 
+        //建立链条：
         //build up the chains:
+
+        /**
+         * 很重要 :
+         *   1、这个 FilterChainDefinitionMap是定义 登录和放行的拦截配置的很重要！
+         *
+         *    /**  ->  authc 都要认证
+         *    /login  -> aono 放行
+         */
+
         Map<String, String> chains = getFilterChainDefinitionMap();
         if (!CollectionUtils.isEmpty(chains)) {
+            /**
+             * 链路处理
+             */
             for (Map.Entry<String, String> entry : chains.entrySet()) {
+                //  url 配置 路径
                 String url = entry.getKey();
                 String chainDefinition = entry.getValue();
                 manager.createChain(url, chainDefinition);
             }
         }
 
+        /**
+         * 创建默认链，以匹配路径匹配会遗漏的任何内容
+         */
         // create the default chain, to match anything the path matching would have missed
-        manager.createDefaultChain("/**"); // TODO this assumes ANT path matching, which might be OK here
+        manager.createDefaultChain("/**"); // TODO this assumes ANT path matching, which might be OK here 这假设 ANT 路径匹配，这里可能没问题
 
         return manager;
     }
@@ -519,6 +547,9 @@ public class ShiroFilterFactoryBean implements FactoryBean, BeanPostProcessor {
             throw new BeanInitializationException(msg);
         }
 
+        /**
+         * 链管理器
+         */
         FilterChainManager manager = createFilterChainManager();
 
         //Expose the constructed FilterChainManager by first wrapping it in a
@@ -527,6 +558,8 @@ public class ShiroFilterFactoryBean implements FactoryBean, BeanPostProcessor {
         PathMatchingFilterChainResolver chainResolver = new PathMatchingFilterChainResolver();
         chainResolver.setFilterChainManager(manager);
 
+
+        // 最终返回一个SpringShiroFilter 过滤器 那么其实最后还是会经过  postPostProcessBefore
         //Now create a concrete ShiroFilter instance and apply the acquired SecurityManager and built
         //FilterChainResolver.  It doesn't matter that the instance is an anonymous inner class
         //here - we're just using it because it is a concrete AbstractShiroFilter instance that accepts
@@ -597,6 +630,10 @@ public class ShiroFilterFactoryBean implements FactoryBean, BeanPostProcessor {
             log.debug("Found filter chain candidate filter '{}'", beanName);
             Filter filter = (Filter) bean;
             applyGlobalPropertiesIfNecessary(filter);
+
+            /**
+             * 保存 过滤器名称
+             */
             getFilters().put(beanName, filter);
         } else {
             log.trace("Ignoring non-Filter bean '{}'", beanName);

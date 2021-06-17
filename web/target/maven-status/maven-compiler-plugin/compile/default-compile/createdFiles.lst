@@ -26,7 +26,6 @@ org\apache\shiro\web\tags\GuestTag.class
 org\apache\shiro\web\tags\AuthenticatedTag.class
 org\apache\shiro\web\tags\RoleTag.class
 org\apache\shiro\web\servlet\ShiroHttpSession$2.class
-org\apache\shiro\web\servlet\AbstractShiroFilter$1.class
 org\apache\shiro\web\util\WebUtils.class
 org\apache\shiro\web\env\WebEnvironment.class
 org\apache\shiro\web\servlet\ShiroHttpSession.class

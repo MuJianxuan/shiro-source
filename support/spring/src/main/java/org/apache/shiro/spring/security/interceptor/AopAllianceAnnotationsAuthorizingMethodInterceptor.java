@@ -43,11 +43,9 @@ public class AopAllianceAnnotationsAuthorizingMethodInterceptor
     public AopAllianceAnnotationsAuthorizingMethodInterceptor() {
 
 
-        List<AuthorizingAnnotationMethodInterceptor> interceptors =
-                new ArrayList<AuthorizingAnnotationMethodInterceptor>(5);
+        List<AuthorizingAnnotationMethodInterceptor> interceptors = new ArrayList<AuthorizingAnnotationMethodInterceptor>(5);
 
-        // Shiro 包含 过滤器认证授权和AOP授权？
-
+        // Shiro 包含 过滤器授权和AOP授权？
 
         //初始化很多拦截器
         //use a Spring-specific Annotation resolver - Spring's AnnotationUtils is nicer than the
@@ -64,6 +62,7 @@ public class AopAllianceAnnotationsAuthorizingMethodInterceptor
         setMethodInterceptors(interceptors);
     }
     /**
+     * 创建一个包装org.aopalliance.intercept.MethodInvocation实例的MethodInvocation ，在AOP 联盟 环境（Spring 等）中启用 Shiro Annotations。
      * Creates a {@link MethodInvocation MethodInvocation} that wraps an
      * {@link org.aopalliance.intercept.MethodInvocation org.aopalliance.intercept.MethodInvocation} instance,
      * enabling Shiro Annotations in <a href="http://aopalliance.sourceforge.net/">AOP Alliance</a> environments
@@ -112,7 +111,7 @@ public class AopAllianceAnnotationsAuthorizingMethodInterceptor
         return mi.proceed();
     }
 
-    /**
+    /**创建一个 Shiro MethodInvocation实例，然后立即调用super.invoke 。
      * Creates a Shiro {@link MethodInvocation MethodInvocation} instance and then immediately calls
      * {@link org.apache.shiro.authz.aop.AuthorizingMethodInterceptor#invoke super.invoke}.
      *

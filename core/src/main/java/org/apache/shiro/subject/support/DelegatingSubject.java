@@ -428,8 +428,10 @@ public class DelegatingSubject implements Subject {
         }
     }
 
+    @Override
     public void execute(Runnable runnable) {
         Runnable associated = associateWith(runnable);
+        // 同步执行
         associated.run();
     }
 

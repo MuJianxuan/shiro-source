@@ -106,6 +106,10 @@ public class PathMatchingFilterChainResolver implements FilterChainResolver {
             return null;
         }
 
+        /**
+         * 需要解析出 请求地址以获取  需要拦截的过滤链， 假设我要放行多个路劲，是不是我需要 初始化多个 过滤链？ 可以用别名？
+         */
+
         // 请求地址
         final String requestURI = getPathWithinApplication(request);
         // 请求 URI 无尾随斜线
@@ -136,6 +140,14 @@ public class PathMatchingFilterChainResolver implements FilterChainResolver {
                         log.trace("Matched path pattern [{}] for requestURI [{}].  " +
                                   "Utilizing corresponding filter chain...", pathPattern, Encode.forHtml(requestURINoTrailingSlash));
                     }
+                    /**
+                     * 执行目的： 将Web框架的原逻辑实现，转交给 shiro封装的逻辑实现，也就是代理掉，这样就可以修改调度逻辑了
+                     *
+                     *   将 requestURINoTrailingSlash  传入自定义实现的 过滤器链器中，并将 Web框架处理到的 当前url需要过滤的过滤器也一并传入，实现当前逻辑的实现。
+                     *   这里需要猜想一个问题，为什么  如何代理掉 原过滤链实现？ 这个被代理的链是一个完整的？还是剩下的链？
+                     *      我分析，这里应该是一个剩下的链，我无法保证我能在最初就执行，但我能保证，
+                     *      当你的过滤器执行到是我的过滤器的时候，你剩下的执行链被我代理掉，将要执行我的逻辑，哪怕你的链已经执行完了
+                     */
                     return filterChainManager.proxy(originalChain, requestURINoTrailingSlash);
                 }
             }

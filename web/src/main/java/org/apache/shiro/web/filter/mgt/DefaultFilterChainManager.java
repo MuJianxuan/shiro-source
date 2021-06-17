@@ -57,12 +57,22 @@ public class DefaultFilterChainManager implements FilterChainManager {
 
     private FilterConfig filterConfig;
 
-    //可用于创建链的过滤器池
+    /**
+     * 可用于创建链的过滤器池
+     */
     private Map<String, Filter> filters; //pool of filters available for creating chains
 
 
+    /**
+     * 全局过滤链
+     */
     private List<String> globalFilterNames; // list of filters to prepend to every chain
 
+    /**
+     *  链名称 ->  链值
+     *     /**   ->  new NameFilterList();
+     *     /login  -> xxxx();
+     */
     private Map<String, NamedFilterList> filterChains; //key: chain name, value: chain
 
     public DefaultFilterChainManager() {
@@ -162,7 +172,10 @@ public class DefaultFilterChainManager implements FilterChainManager {
 
         // first add each of global filters
         if (!CollectionUtils.isEmpty(globalFilterNames)) {
-            globalFilterNames.forEach(filterName -> addToChain(chainName, filterName));
+            /**
+             * 配置的 url都需要 配置全局的过滤器
+             */
+            globalFilterNames.forEach( filterName -> addToChain(chainName, filterName));
         }
 
         //parse the value by tokenizing it to get the resulting filter-specific config entries
@@ -174,14 +187,15 @@ public class DefaultFilterChainManager implements FilterChainManager {
         // the resulting token array would equal
         //
         //     { "authc", "roles[admin,user]", "perms[file:edit]" }
-        //
-        String[] filterTokens = splitChainDefinition(chainDefinition);
+        //  看上面的例子  主要是针对 权限处理的
+        String[] filterTokens = splitChainDefinition( chainDefinition);
 
         //each token is specific to each filter.
         //strip the name and extract any filter-specific config between brackets [ ]
         for (String token : filterTokens) {
             String[] nameConfigPair = toNameConfigPair(token);
 
+            //现在我们有了过滤器名称、路径和（可能为空）特定于路径的配置。让我们应用它们：
             //now we have the filter name, path and (possibly null) path-specific config.  Let's apply them:
             addToChain(chainName, nameConfigPair[0], nameConfigPair[1]);
         }
@@ -210,6 +224,14 @@ public class DefaultFilterChainManager implements FilterChainManager {
     }
 
     /**
+     * 基于给定的过滤器链定义标记（例如“foo”或“foo[bar, baz]”），这将返回标记作为名称/值对，必要时删除任何括号。 例子：
+     * 输入
+     * 结果
+     * foo
+     * 返回 [0] == foo 返回 [1] == null
+     * foo[bar, baz]
+     * 返回 [0] == foo 返回[1] == bar, baz
+     *
      * Based on the given filter chain definition token (e.g. 'foo' or 'foo[bar, baz]'), this will return the token
      * as a name/value pair, removing any brackets as necessary.  Examples:
      * <table>
@@ -309,9 +331,9 @@ public class DefaultFilterChainManager implements FilterChainManager {
         //应用链配置   主要的目的是 处理 Path 路径匹配过滤器的注入问题
         applyChainConfig(chainName, filter, chainSpecificFilterConfig);
 
-        //确保连锁
+        //确保连锁   chain 在初始化的时候就已存入 链容器 因此 获取链的引用就即可
         NamedFilterList chain = ensureChain(chainName);
-        // 添加到集合？
+        //
         chain.add(filter);
     }
 
@@ -351,10 +373,17 @@ public class DefaultFilterChainManager implements FilterChainManager {
         }
     }
 
+    /**
+     *
+     * @param chainName
+     * @return
+     */
     protected NamedFilterList ensureChain(String chainName) {
         NamedFilterList chain = getChain(chainName);
         if (chain == null) {
             chain = new SimpleNamedFilterList(chainName);
+
+            // 在初始化成之后便会存入 链容器
             this.filterChains.put(chainName, chain);
         }
         return chain;

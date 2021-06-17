@@ -11,6 +11,8 @@ From: 'an unknown organization'
     License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
   - tomcat-embed-websocket (https://tomcat.apache.org/) org.apache.tomcat.embed:tomcat-embed-websocket:jar:9.0.37
     License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Bouncy Castle Provider (http://www.bouncycastle.org/java.html) org.bouncycastle:bcprov-jdk15on:jar:1.68
+    License: Bouncy Castle Licence  (http://www.bouncycastle.org/licence.html)
   - SnakeYAML (http://www.snakeyaml.org) org.yaml:snakeyaml:bundle:1.26
     License: Apache License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
 
@@ -124,6 +126,10 @@ From: 'The Apache Software Foundation' (https://www.apache.org/)
   - Apache Shiro :: Support :: Spring Boot Web (https://shiro.apache.org/shiro-support/shiro-spring-boot/shiro-spring-boot-web-starter/) org.apache.shiro:shiro-spring-boot-web-starter:jar:2.0.0-SNAPSHOT
     License: Apache License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
   - Apache Shiro :: Web (https://shiro.apache.org/shiro-web/) org.apache.shiro:shiro-web:bundle:2.0.0-SNAPSHOT
+    License: Apache License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache Shiro :: Cryptography :: Support :: Argon2 (https://shiro.apache.org/shiro-crypto/shiro-crypto-support/shiro-hashes-argon2/) org.apache.shiro.crypto:shiro-hashes-argon2:bundle:2.0.0-SNAPSHOT
+    License: Apache License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache Shiro :: Cryptography :: Support :: BCrypt (https://shiro.apache.org/shiro-crypto/shiro-crypto-support/shiro-hashes-bcrypt/) org.apache.shiro.crypto:shiro-hashes-bcrypt:bundle:2.0.0-SNAPSHOT
     License: Apache License, Version 2.0  (https://www.apache.org/licenses/LICENSE-2.0.txt)
 
 From: 'The ATTOPARSER team' (http://www.attoparser.org)

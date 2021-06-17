@@ -120,6 +120,20 @@ public interface Session {
     String getHost();
 
     /**
+     * 调用此方法时，将此会话的lastAccessTime显式更新为当前时间。 此方法可用于确保会话不会超时。
+     *
+     * 大多数程序员不会直接使用此方法，而是会由于传入的Web请求或远程过程调用/方法调用而依赖上次访问时间来自动更新。
+     *
+     * 但是，此方法在支持富客户端应用程序（例如Java Web Start应用程序，Java或Flash applet等）时特别有用。
+     * 尽管很少见，但在富客户端环境中，用户可能会与客户端应用程序不断进行交互无需调用服务器端方法调用。
+     * 如果这种情况发生的时间足够长，则用户的服务器端会话可能会超时。 同样，这种情况很少见，因为大多数富客户端经常需要服务器端方法调用。
+     *
+     * 但是，在此示例中，由于用户正在“使用”该应用程序，只是不与服务器进行通信，因此该用户的会话可能仍被认为是有效的。
+     * 但是因为没有服务器端方法调用被调用，所以服务器无法知道用户是否处于空闲状态，因此必须假定用户保持会话完整性。
+     * 富客户端应用程序代码可以在这段时间内调用touch()方法，以确保下次调用服务器端方法时，调用不会引发ExpiredSessionException 。
+     * 简而言之，可以定期使用它来确保会话不会超时。
+     *
+     * 富客户端“维护”发生的频率完全取决于应用程序，并且取决于变量，例如会话超时配置，客户端应用程序的使用特性，网络利用率和应用程序服务器性能。
      * Explicitly updates the {@link #getLastAccessTime() lastAccessTime} of this session to the current time when
      * this method is invoked.  This method can be used to ensure a session does not time out.
      * <p/>

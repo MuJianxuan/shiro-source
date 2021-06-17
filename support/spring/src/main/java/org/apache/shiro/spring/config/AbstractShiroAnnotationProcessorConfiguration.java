@@ -28,6 +28,10 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
  */
 public class AbstractShiroAnnotationProcessorConfiguration {
 
+    /**
+     *  AuthorizationAttributeSourceAdvisor 的触发需要该 Bean
+     * @return
+     */
     protected DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
         return new DefaultAdvisorAutoProxyCreator();
     }

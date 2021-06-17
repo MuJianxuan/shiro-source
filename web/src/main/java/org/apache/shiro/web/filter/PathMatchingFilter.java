@@ -73,6 +73,8 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
     protected Map<String, Object> appliedPaths = new LinkedHashMap<String, Object>();
 
     /**
+     * 拆分可能在config参数中找到的任何逗号分隔值，并在appliedPaths内部映射上设置生成的String[]数组。
+     *
      * Splits any comma-delmited values that might be found in the <code>config</code> argument and sets the resulting
      * <code>String[]</code> array on the <code>appliedPaths</code> internal Map.
      * <p/>
@@ -228,6 +230,7 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
     }
 
     /**
+     * 从 preHandle 实现中抽象出逻辑的简单方法 - 它变得有点不守规矩。
      * Simple method to abstract out logic from the preHandle implementation - it was getting a bit unruly.
      *
      * @since 1.2

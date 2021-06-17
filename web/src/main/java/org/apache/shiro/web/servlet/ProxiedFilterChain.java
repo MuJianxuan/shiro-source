@@ -43,10 +43,23 @@ public class ProxiedFilterChain implements FilterChain {
 
     private static final Logger log = LoggerFactory.getLogger(ProxiedFilterChain.class);
 
+    /**
+     * Web 服务基础的过滤链
+     */
     private FilterChain orig;
+
+    /**
+     * Shiro框架 实现的 并初始化 的过滤器集合
+     */
     private List<Filter> filters;
     private int index = 0;
 
+    /**
+     *  初始化：
+     *
+     * @param orig
+     * @param filters
+     */
     public ProxiedFilterChain(FilterChain orig, List<Filter> filters) {
         if (orig == null) {
             throw new NullPointerException("original FilterChain cannot be null.");

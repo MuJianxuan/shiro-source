@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1623808774989
+Bnd-LastModified: 1623914173795
 Build-Jdk-Spec: 1.8
 Bundle-Description: Support for Shiro's Object Graph Definition Language
   (mostly used in Ini configuration) where        declared name/value pa

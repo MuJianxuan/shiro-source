@@ -32,6 +32,15 @@ import java.lang.reflect.Method;
 /**
  * TODO - complete JavaDoc
  *
+ *  StaticMethodMatcherPointcutAdvisor
+ *
+ *  StaticMethodMatcherPointcutAdvisor代表一个静态方法匹配切面，它通过StaticMethodMatcherPointcut来定义切点，
+ *  并通过类过滤和方法名来匹配所定义的切点.
+ *
+ *  Advisor的便捷基类，它们也是静态切入点。 如果建议和子类是可序列化的；
+ *
+ *  创建一个新的 StaticMethodMatcherPointcutAdvisor，期待 bean 风格的配置
+ *
  * @since 0.1
  */
 @SuppressWarnings({"unchecked"})
@@ -40,7 +49,7 @@ public class AuthorizationAttributeSourceAdvisor extends StaticMethodMatcherPoin
     private static final Logger log = LoggerFactory.getLogger(AuthorizationAttributeSourceAdvisor.class);
 
     /**
-     * 注解类信息
+     * 注解类信息  集合
      */
     private static final Class<? extends Annotation>[] AUTHZ_ANNOTATION_CLASSES =
             new Class[] {
@@ -58,7 +67,9 @@ public class AuthorizationAttributeSourceAdvisor extends StaticMethodMatcherPoin
     public AuthorizationAttributeSourceAdvisor() {
 
         // 这个构造器添加了 所有 拦截器处理 ！
-        setAdvice( new AopAllianceAnnotationsAuthorizingMethodInterceptor());
+
+        // 设置 Advice
+        super.setAdvice( new AopAllianceAnnotationsAuthorizingMethodInterceptor());
     }
 
     public SecurityManager getSecurityManager() {
@@ -70,6 +81,8 @@ public class AuthorizationAttributeSourceAdvisor extends StaticMethodMatcherPoin
     }
 
     /**
+     * 匹配方法！
+     *
      * Returns <tt>true</tt> if the method or the class has any Shiro annotations, false otherwise.
      * The annotations inspected are:
      * <ul>
@@ -94,14 +107,12 @@ public class AuthorizationAttributeSourceAdvisor extends StaticMethodMatcherPoin
 
         //The 'method' parameter could be from an interface that doesn't have the annotation.
         //Check to see if the implementation has it.
-        if ( targetClass != null) {
-            try {
-                m = targetClass.getMethod(m.getName(), m.getParameterTypes());
-                return isAuthzAnnotationPresent(m) || isAuthzAnnotationPresent(targetClass);
-            } catch (NoSuchMethodException ignored) {
-                //default return value is false.  If we can't find the method, then obviously
-                //there is no annotation, so just use the default return value.
-            }
+        try {
+            m = targetClass.getMethod(m.getName(), m.getParameterTypes());
+            return isAuthzAnnotationPresent(m) || isAuthzAnnotationPresent(targetClass);
+        } catch (NoSuchMethodException ignored) {
+            //default return value is false.  If we can't find the method, then obviously
+            //there is no annotation, so just use the default return value.
         }
 
         return false;

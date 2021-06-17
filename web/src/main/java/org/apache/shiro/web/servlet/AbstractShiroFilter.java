@@ -397,22 +397,32 @@ public abstract class AbstractShiroFilter extends OncePerRequestFilter {
      */
     protected void doFilterInternal(ServletRequest servletRequest, ServletResponse servletResponse, final FilterChain chain)
             throws ServletException, IOException {
-
+        // 异常管理
         Throwable t = null;
 
+        /**
+         *  线程池 的线程执行？
+         */
         try {
             final ServletRequest request = prepareServletRequest(servletRequest, servletResponse, chain);
             final ServletResponse response = prepareServletResponse(request, servletResponse, chain);
 
+            /**
+             * 创建一个 访问主体
+             *    管理  请求和返回
+             */
             final Subject subject = createSubject(request, response);
 
-            //noinspection unchecked
-            subject.execute(new Callable() {
-                public Object call() throws Exception {
-                    updateSessionLastAccessTime(request, response);
-                    executeChain(request, response, chain);
-                    return null;
-                }
+            /**
+             * 此执行是同步的 未使用线程池来执行，相当于执行方法罢了，此外还处理了线程的数据封装
+             */
+            //noinspection unchecked  未检查
+            subject.execute( (Callable) () -> {
+                updateSessionLastAccessTime(request, response);
+
+                // 执行过滤链
+                executeChain(request, response, chain);
+                return null;
             });
         } catch (ExecutionException ex) {
             t = ex.getCause();
@@ -455,6 +465,9 @@ public abstract class AbstractShiroFilter extends OncePerRequestFilter {
 
         FilterChain chain = origChain;
 
+        /**
+         * 过滤器链解析
+         */
         FilterChainResolver resolver = getFilterChainResolver();
         if (resolver == null) {
             log.debug("No FilterChainResolver configured.  Returning original FilterChain.");

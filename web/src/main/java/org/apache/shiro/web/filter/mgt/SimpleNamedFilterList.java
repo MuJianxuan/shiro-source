@@ -81,6 +81,12 @@ public class SimpleNamedFilterList implements NamedFilterList {
         return name;
     }
 
+    /**
+     * 代理 原生的过滤器链  并 实现shiro需要执行的逻辑 ：
+     *   大概思想是 若配置，则优先保证shiro的过滤器先执行。
+     * @param orig
+     * @return
+     */
     public FilterChain proxy(FilterChain orig) {
         return new ProxiedFilterChain(orig, this);
     }
