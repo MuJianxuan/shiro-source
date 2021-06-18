@@ -114,6 +114,7 @@ public abstract class AccessControlFilter extends PathMatchingFilter {
      * @return the Subject associated with the request.
      */
     protected Subject getSubject(ServletRequest request, ServletResponse response) {
+        //？ 便于扩展？ 可能
         return SecurityUtils.getSubject();
     }
 

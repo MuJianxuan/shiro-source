@@ -535,6 +535,7 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
             return;
         }
 
+        // 获取可用的身份验证缓存
         Cache<Object, AuthenticationInfo> cache = getAvailableAuthenticationCache();
         if (cache != null) {
             Object key = getAuthenticationCacheKey(token);

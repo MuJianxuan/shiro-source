@@ -202,6 +202,7 @@ public class UsernamePasswordToken implements HostAuthenticationToken, RememberM
 
         this.username = username;
         this.password = password;
+        // 记住我实现！
         this.rememberMe = rememberMe;
         this.host = host;
     }

@@ -53,6 +53,7 @@ public class DefaultSubjectFactory implements SubjectFactory {
 
         PrincipalCollection principals = context.resolvePrincipals();
 
+        // 认证状态
         boolean authenticated = context.resolveAuthenticated();
 
         String host = context.resolveHost();

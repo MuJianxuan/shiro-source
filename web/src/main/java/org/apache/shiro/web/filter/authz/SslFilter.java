@@ -126,6 +126,7 @@ public class SslFilter extends PortFilter {
     }
     
     /**
+     * HTTP 严格传输安全 (HSTS) 的帮助程序类
      * Helper class for HTTP Strict Transport Security (HSTS)
      */
     public class HSTS {

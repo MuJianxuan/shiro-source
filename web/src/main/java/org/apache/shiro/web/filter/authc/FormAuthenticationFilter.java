@@ -154,15 +154,18 @@ public class FormAuthenticationFilter extends AuthenticatingFilter {
                 if (log.isTraceEnabled()) {
                     log.trace("Login submission detected.  Attempting to execute login.");
                 }
+                // jsp 的登录的执行
                 return executeLogin(request, response);
-            } else {
+            }
+            else {
                 if (log.isTraceEnabled()) {
                     log.trace("Login page view.");
                 }
                 //allow them to see the login page ;)
                 return true;
             }
-        } else {
+        }
+        else {
             if (log.isTraceEnabled()) {
                 log.trace("Attempting to access a path which requires authentication.  Forwarding to the " +
                         "Authentication url [" + getLoginUrl() + "]");

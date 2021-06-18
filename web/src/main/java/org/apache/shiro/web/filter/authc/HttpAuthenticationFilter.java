@@ -236,6 +236,8 @@ abstract class HttpAuthenticationFilter extends AuthenticatingFilter {
     }
 
     /**
+     * 处理未经身份验证的请求。 它处理两阶段请求/挑战身份验证协议。
+     *
      * Processes unauthenticated requests. It handles the two-stage request/challenge authentication protocol.
      *
      * @param request  incoming ServletRequest
@@ -243,7 +245,9 @@ abstract class HttpAuthenticationFilter extends AuthenticatingFilter {
      * @return true if the request should be processed; false if the request should not continue to be processed
      */
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
-        boolean loggedIn = false; //false by default or we wouldn't be in this method
+        // 默认情况下为 false 否则我们不会使用此方法
+        // false by default or we wouldn't be in this method
+        boolean loggedIn = false;
         if (isLoginAttempt(request, response)) {
             // 尝试执行登录
             loggedIn = executeLogin(request, response);

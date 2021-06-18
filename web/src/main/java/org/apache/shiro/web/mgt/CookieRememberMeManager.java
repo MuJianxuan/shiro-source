@@ -131,6 +131,16 @@ public class CookieRememberMeManager extends AbstractRememberMeManager {
     }
 
     /**
+     *
+     * Base64 编码指定的序列化字节数组并将该 base64 编码的字符串设置为 cookie 值。
+     * subject实例应该是一个带有 HTTP 请求/响应对的WebSubject实例，因此可以在传出响应上设置 HTTP cookie。
+     * 如果它不是WebSubject或WebSubject没有 HTTP 请求/响应对，则此实现不执行任何操作
+     *
+     *  那么问题来了？ 存是存在cookie的，那么访问的时候怎么处理呢？
+     *
+     *   实现。
+     *     是不是登录的访问到，则直接跳转到  登录后访问的页面，重定向！
+     *
      * Base64-encodes the specified serialized byte array and sets that base64-encoded String as the cookie value.
      * <p/>
      * The {@code subject} instance is expected to be a {@link WebSubject} instance with an HTTP Request/Response pair
@@ -176,6 +186,14 @@ public class CookieRememberMeManager extends AbstractRememberMeManager {
 
 
     /**
+     * 获得记住的序列化身份
+     *
+     * 获得记忆的序列化身份返回一个先前序列化的身份字节数组，如果无法获取字节数组，则返回null 。
+     * 此实现检索 HTTP cookie，对 cookie 值进行 Base64 解码，并返回结果字节数组。
+     *
+     * SubjectContext实例应该是一个带有 HTTP 请求/响应对的WebSubjectContext实例，因此可以从传入的请求中检索 HTTP cookie。
+     * 如果它不是WebSubjectContext或WebSubjectContext没有 HTTP 请求/响应对，则此实现返回null 。
+     *
      * Returns a previously serialized identity byte array or {@code null} if the byte array could not be acquired.
      * This implementation retrieves an HTTP cookie, Base64-decodes the cookie value, and returns the resulting byte
      * array.

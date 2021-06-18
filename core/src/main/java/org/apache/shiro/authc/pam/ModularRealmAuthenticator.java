@@ -176,13 +176,16 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
     |               M E T H O D S               |
 
     /**
+     * 由内部 {@link doAuthenticate} 实现使用，以确保已设置 {@code realms} 属性。默认实现确保该属性不为 null 且不为空。
      * Used by the internal {@link #doAuthenticate} implementation to ensure that the {@code realms} property
+     *
      * has been set.  The default implementation ensures the property is not null and not empty.
      *
      * @throws IllegalStateException if the {@code realms} property is configured incorrectly.
      */
 
     protected void assertRealmsConfigured() throws IllegalStateException {
+        // 前置校验
         Collection<Realm> realms = getRealms();
         if (CollectionUtils.isEmpty(realms)) {
             String msg = "Configuration error:  No realms have been configured!  One or more realms must be " +
@@ -251,6 +254,7 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
                 break;
             }
 
+            // 是否支持该  Token认证
             if (realm.supports(token)) {
 
                 log.trace("Attempting to authenticate token [{}] using realm [{}]", token, realm);
@@ -305,8 +309,8 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
     protected AuthenticationInfo doAuthenticate(AuthenticationToken authenticationToken) throws AuthenticationException {
         assertRealmsConfigured();
         Collection<Realm> realms = getRealms();
+        // 只有一个则无策略
         if (realms.size() == 1) {
-            //
             return doSingleRealmAuthentication(realms.iterator().next(), authenticationToken);
         } else {
             return doMultiRealmAuthentication(realms, authenticationToken);

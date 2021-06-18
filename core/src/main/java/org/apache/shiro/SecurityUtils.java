@@ -72,12 +72,13 @@ public abstract class SecurityUtils {
      *                               - a Subject should <em>always</em> be available to the caller.
      */
     public static Subject getSubject() {
-        Subject subject = ThreadContext.getSubject();
+        Subject subject = ThreadContext.getSubject(); // 不等于null
         if (subject == null) {
             // 创建一个新的主题
             subject = (new Subject.Builder()).buildSubject();
 
             // 创建的与线程绑定！
+            // 移除时机呢？
             ThreadContext.bind(subject);
         }
         return subject;

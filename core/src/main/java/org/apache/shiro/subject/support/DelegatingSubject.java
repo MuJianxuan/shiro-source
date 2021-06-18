@@ -277,11 +277,22 @@ public class DelegatingSubject implements Subject {
         securityManager.checkRoles(getPrincipals(), roles);
     }
 
+    /**
+     * 调用时机：
+     *     过滤器校验 ? Form 表单提交校验
+     *
+     *     手动触发调用 subject.login()
+     *
+     * @param token the token encapsulating the subject's principals and credentials to be passed to the
+     *              Authentication subsystem for verification.
+     * @throws AuthenticationException
+     */
     public void login(AuthenticationToken token) throws AuthenticationException {
         //清除内部运行身份
         clearRunAsIdentitiesInternal();
 
         // 委托给 SecurityManager 进行登录   那么我有个疑问 何时初始化的 securityManager呢？
+        // 交给 安全管理器进行登录
         Subject subject = securityManager.login(this, token);
         // 成功 返回 Subject
 
@@ -313,13 +324,21 @@ public class DelegatingSubject implements Subject {
         }
         Session session = subject.getSession(false);
         if (session != null) {
+            // 装饰 session
             this.session = decorate(session);
         } else {
             this.session = null;
         }
     }
 
+    /**
+     * 是否认证 ？
+     *  : 认证值和 存在 认证信息
+     * @return
+     */
     public boolean isAuthenticated() {
+
+
         return authenticated && hasPrincipals();
     }
 

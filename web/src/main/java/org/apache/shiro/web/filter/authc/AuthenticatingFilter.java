@@ -60,10 +60,11 @@ public abstract class AuthenticatingFilter extends AuthenticationFilter {
             throw new IllegalStateException(msg);
         }
         try {
-            // 获取当前请求关联的主题对象
+            // 获取当前请求关联的主题对象 不存在则创建！
             Subject subject = getSubject(request, response);
-            // 执行登录
+            // 执行登录  主体对象？
             subject.login(token);
+            // 重定向到登录成功地址
             return onLoginSuccess(token, subject, request, response);
         } catch (AuthenticationException e) {
             return onLoginFailure(token, e, request, response);
@@ -91,6 +92,15 @@ public abstract class AuthenticatingFilter extends AuthenticationFilter {
         return new UsernamePasswordToken(username, password, rememberMe, host);
     }
 
+    /**
+     * 登录成功
+     * @param token
+     * @param subject
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject,
                                      ServletRequest request, ServletResponse response) throws Exception {
         return true;
@@ -140,6 +150,7 @@ public abstract class AuthenticatingFilter extends AuthenticationFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
+        // 是允许访问得的
         return super.isAccessAllowed(request, response, mappedValue) ||
                 (!isLoginRequest(request, response) && isPermissive(mappedValue));
     }

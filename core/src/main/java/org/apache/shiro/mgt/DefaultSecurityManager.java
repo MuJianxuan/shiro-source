@@ -281,6 +281,12 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     }
 
     /**
+     * 留意这里返回的是一个 已验证帐户身份
+     *
+     * 首先验证AuthenticationToken参数，如果成功，则构造一个表示已验证帐户身份的Subject实例。
+     *
+     * 一旦构造完成， Subject实例就会bound到应用程序以供后续访问，然后返回给调用者。
+     *
      * First authenticates the {@code AuthenticationToken} argument, and if successful, constructs a
      * {@code Subject} instance representing the authenticated account's identity.
      * <p/>
@@ -297,6 +303,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
             info = authenticate(token);
         } catch (AuthenticationException ae) {
             try {
+                // 失败！
                 onFailedLogin(token, ae, subject);
             } catch (Exception e) {
                 if (log.isInfoEnabled()) {
@@ -307,8 +314,8 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
             throw ae; //propagate
         }
 
-        // 创建   主题 信息 ?
-
+        // 创建当前主题信息的时候，会尝试获取当前 请求中的cookie是否存在 remember me记录的值
+        // 如果存在 则会返回一个  存有  已验证的账户身份
         Subject loggedIn = createSubject(token, info, subject);
 
         onSuccessfulLogin(token, info, loggedIn);
@@ -317,6 +324,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     }
 
     protected void onSuccessfulLogin(AuthenticationToken token, AuthenticationInfo info, Subject subject) {
+        // 记住我成功登录
         rememberMeSuccessfulLogin(token, info, subject);
     }
 
@@ -328,7 +336,15 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         rememberMeLogout(subject);
     }
 
+    /**
+     * 拷贝一波
+     * @param subjectContext
+     * @return
+     */
     protected SubjectContext copy(SubjectContext subjectContext) {
+        /**
+         * 默认的主体上下文
+         */
         return new DefaultSubjectContext(subjectContext);
     }
 
@@ -366,6 +382,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         //create a copy so we don't modify the argument's backing map:
         SubjectContext context = copy(subjectContext);
 
+        //确保上下文有一个 SecurityManager 实例，如果没有，添加一个：
         //ensure that the context has a SecurityManager instance, and if not, add one:
         context = ensureSecurityManager(context);
 
@@ -374,6 +391,8 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         //process is often environment specific - better to shield the SF from these details:
         context = resolveSession(context);
 
+        //类似地，SubjectFactory 不应该需要任何 RememberMe 的概念——如果可能的话，
+        // 在移交给 SubjectFactory 之前先在这里翻译它：
         //Similarly, the SubjectFactory should not require any concept of RememberMe - translate that here first
         //if possible before handing off to the SubjectFactory:
         context = resolvePrincipals(context);
@@ -530,6 +549,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         if (isEmpty(principals)) {
             log.trace("No identity (PrincipalCollection) found in the context.  Looking for a remembered identity.");
 
+            // 获取 记住我的身份信息  在 主体上下文中获取
             principals = getRememberedIdentity(context);
 
             if (!isEmpty(principals)) {
@@ -638,6 +658,11 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         delete(subject);
     }
 
+    /**
+     * 获取身份信息
+     * @param subjectContext
+     * @return
+     */
     protected PrincipalCollection getRememberedIdentity(SubjectContext subjectContext) {
         RememberMeManager rmm = getRememberMeManager();
         if (rmm != null) {

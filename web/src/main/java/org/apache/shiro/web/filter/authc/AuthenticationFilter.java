@@ -73,6 +73,7 @@ public abstract class AuthenticationFilter extends AccessControlFilter {
 
 
     /**
+     *  该方法若 为 true 则不会访问  onAccessDenied 访问拒绝方法
      * Determines whether the current subject is authenticated.
      * <p/>
      * The default implementation {@link #getSubject(javax.servlet.ServletRequest, javax.servlet.ServletResponse) acquires}
@@ -84,6 +85,8 @@ public abstract class AuthenticationFilter extends AccessControlFilter {
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
         // 根据 Subject 来判断  如果 为空 则 不可
         Subject subject = getSubject(request, response);
+
+        // 基本返回 false
         return subject.isAuthenticated() && subject.getPrincipal() != null;
     }
 

@@ -303,7 +303,7 @@ public abstract class AbstractRememberMeManager implements RememberMeManager {
      * @return true if remember me services should be performed as a result of the successful authentication attempt.
      */
     protected boolean isRememberMe(AuthenticationToken token) {
-        return token != null && (token instanceof RememberMeAuthenticationToken) &&
+        return (token instanceof RememberMeAuthenticationToken) &&
                 ((RememberMeAuthenticationToken) token).isRememberMe();
     }
 
@@ -319,11 +319,13 @@ public abstract class AbstractRememberMeManager implements RememberMeManager {
      * @param info    the authentication info resulting from the successful authentication attempt.
      */
     public void onSuccessfulLogin(Subject subject, AuthenticationToken token, AuthenticationInfo info) {
+        //忘记身份  始终清除任何以前的身份：
         //always clear any previous identity:
         forgetIdentity(subject);
 
         //now save the new identity:
         if (isRememberMe(token)) {
+            // 核心实现
             rememberIdentity(subject, token, info);
         } else {
             if (log.isDebugEnabled()) {
@@ -347,6 +349,7 @@ public abstract class AbstractRememberMeManager implements RememberMeManager {
      * @param authcInfo the authentication info resulting from the successful authentication attempt.
      */
     public void rememberIdentity(Subject subject, AuthenticationToken token, AuthenticationInfo authcInfo) {
+        // 获取 身份 去记住！
         PrincipalCollection principals = getIdentityToRemember(subject, authcInfo);
         rememberIdentity(subject, principals);
     }
@@ -360,6 +363,7 @@ public abstract class AbstractRememberMeManager implements RememberMeManager {
      * @return the {@code PrincipalCollection} to remember.
      */
     protected PrincipalCollection getIdentityToRemember(Subject subject, AuthenticationInfo info) {
+        // 获取唯一的ID
         return info.getPrincipals();
     }
 
@@ -406,6 +410,14 @@ public abstract class AbstractRememberMeManager implements RememberMeManager {
     protected abstract void rememberSerializedIdentity(Subject subject, byte[] serialized);
 
     /**
+     *
+     * 通过首先acquiring记住的序列化字节数组来实现接口方法。
+     * 然后它converts它们并返回重新构成的PrincipalCollection 。
+     * 如果无法获得记住的主体，则返回null 。
+     *
+     * 如果抛出任何异常，则onRememberedPrincipalFailure(RuntimeException, SubjectContext)方法
+     * 以允许任何必要的后处理（例如立即删除任何先前记住的值以确保安全）。
+     *
      * Implements the interface method by first {@link #getRememberedSerializedIdentity(SubjectContext) acquiring}
      * the remembered serialized byte array.  Then it {@link #convertBytesToPrincipals(byte[], SubjectContext) converts}
      * them and returns the re-constituted {@link PrincipalCollection}.  If no remembered principals could be
@@ -493,6 +505,8 @@ public abstract class AbstractRememberMeManager implements RememberMeManager {
                     "The remembered identity will be forgotten and not used for this request.";
             log.warn(message);
         }
+
+        // 忘记身份
         forgetIdentity(context);
         //propagate - security manager implementation will handle and warn appropriately
         throw e;

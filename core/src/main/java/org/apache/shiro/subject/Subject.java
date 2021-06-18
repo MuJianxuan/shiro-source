@@ -676,7 +676,9 @@ public interface Subject {
             }
 
             this.securityManager = securityManager;
-            // 初始化主题上下文
+
+            // 为什么会有值呢？
+            // 初始化主题上下文  这个很重要，存放着  Cookie 记住我的 记录值
             this.subjectContext = newSubjectContextInstance();
 
             if (this.subjectContext == null) {
@@ -885,7 +887,8 @@ public interface Subject {
          */
         public Subject buildSubject() {
 
-            //最终是通过 安全管理器来创建 主题的
+            //最终是通过 安全管理器来创建 主题的   ？
+            // this.subjectContext 这个值不是 相当于为空吗
             return this.securityManager.createSubject(this.subjectContext);
         }
     }
