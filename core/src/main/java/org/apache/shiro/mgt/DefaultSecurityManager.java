@@ -180,25 +180,33 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
      *
      * @param token    the {@code AuthenticationToken} submitted for the successful authentication.
      * @param info     the {@code AuthenticationInfo} of a newly authenticated user.
-     * @param existing the existing {@code Subject} instance that initiated the authentication attempt
+     * @param existing the existing {@code Subject} instance that initiated the authentication attempt  现存的
      * @return the {@code Subject} instance that represents the context and session data for the newly
      *         authenticated subject.
      */
     protected Subject createSubject(AuthenticationToken token, AuthenticationInfo info, Subject existing) {
         // 创建容器
+        // 创建 Subject 的上下文
         SubjectContext context = createSubjectContext();
-        //
+        // 设置认证成功
         context.setAuthenticated(true);
-        //
+        // 传入需要认证的信息
         context.setAuthenticationToken(token);
-        //
+        // Realm 领域 返回的认证信息
         context.setAuthenticationInfo(info);
-        //
+        // 设置 安全管理器
         context.setSecurityManager(this);
-        //
+        //  存在？
         if (existing != null) {
+
+            /**
+             * 怎么理解？ 我们的 用户登录是调用
+             */
+            // 设置 当前需要处理 Subject
             context.setSubject(existing);
         }
+
+        // 核心创建
         return createSubject(context);
     }
 
@@ -403,6 +411,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         //if possible before handing off to the SubjectFactory:
         context = resolvePrincipals(context);
 
+        // 执行创建
         Subject subject = doCreateSubject(context);
 
         //save this subject for future reference if necessary:

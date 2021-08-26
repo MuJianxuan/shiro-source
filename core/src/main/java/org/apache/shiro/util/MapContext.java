@@ -67,6 +67,7 @@ public class MapContext implements Map<String, Object>, Serializable {
         E found = null;
         Object o = backingMap.get(key);
         if (o != null) {
+            // 是可分配的
             if (!type.isAssignableFrom(o.getClass())) {
                 String msg = "Invalid object found in SubjectContext Map under key [" + key + "].  Expected type " +
                         "was [" + type.getName() + "], but the object under that key is of type " +

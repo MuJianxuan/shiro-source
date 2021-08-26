@@ -685,6 +685,8 @@ public interface Subject {
                 throw new IllegalStateException("Subject instance returned from 'newSubjectContextInstance' " +
                         "cannot be null.");
             }
+
+            //  把当前的 安全管理器 设置
             this.subjectContext.setSecurityManager(securityManager);
         }
 

@@ -55,7 +55,7 @@ public class DefaultSubjectFactory implements SubjectFactory {
         // 获取 安全管理器
         SecurityManager securityManager = context.resolveSecurityManager();
 
-        // session 对象
+        // session 对象  session 和 Subject 什么时候挂靠的
         Session session = context.resolveSession();
         //
         boolean sessionCreationEnabled = context.isSessionCreationEnabled();

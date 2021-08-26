@@ -72,14 +72,16 @@ public abstract class SecurityUtils {
      *                               - a Subject should <em>always</em> be available to the caller.
      */
     public static Subject getSubject() {
-        Subject subject = ThreadContext.getSubject(); // 不等于null
+        // // 不等于null
+        // SecurityUtils.getSubject() 调用时 此返回 为空
+        Subject subject = ThreadContext.getSubject();
         if (subject == null) {
             // 创建一个新的主题
             subject = (new Subject.Builder()).buildSubject();
 
             // 创建的与线程绑定！
-            // 移除时机呢？
-            ThreadContext.bind(subject);
+            // 移除时机呢？  绑定咯
+            ThreadContext.bind( subject);
         }
         return subject;
     }
@@ -174,14 +176,18 @@ public abstract class SecurityUtils {
         // 先从线程中获取
         SecurityManager securityManager = ThreadContext.getSecurityManager();
         if (securityManager == null) {
+            // SecurityUtils.getSubject()调用时 肯定 不能获取到 ；因此  会走这个 赋值
             securityManager = SecurityUtils.securityManager;
         }
+
+        // 校验
         if (securityManager == null) {
             String msg = "No SecurityManager accessible to the calling code, either bound to the " +
                     ThreadContext.class.getName() + " or as a vm static singleton.  This is an invalid application " +
                     "configuration.";
             throw new UnavailableSecurityManagerException(msg);
         }
+
         return securityManager;
     }
 }
