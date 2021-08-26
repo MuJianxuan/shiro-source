@@ -19,7 +19,7 @@
 package org.apache.shiro.cache;
 
 /**
- * 缓存管理器设置
+ * 缓存管理器设置接口
  *
  * Interface implemented by components that utilize a CacheManager and wish that CacheManager to be supplied if
  * one is available.

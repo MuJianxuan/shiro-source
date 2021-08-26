@@ -19,6 +19,8 @@
 package org.apache.shiro.config.ogdl;
 
 /**
+ * 本字符串插值接口。 通常，实现将使用 Maven/Ant 之类的符号：${key}，但这取决于实现。
+ *
  * Basic String interpolation interface.  Typically implementations will use the Maven/Ant like notation: ${key}, but
  * This is up to the implementation.
  *

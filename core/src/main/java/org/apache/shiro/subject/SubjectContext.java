@@ -193,6 +193,8 @@ public interface SubjectContext extends Map<String, Object> {
     void setAuthenticated(boolean authc);
 
     /**
+     * 如果应该允许构造的Subject创建会话，则返回true否则返回false 。 Shiro 的配置默认为true因为大多数应用程序在 Sessions 中找到了价值。
+     *
      * Returns {@code true} if the constructed {@code Subject} should be allowed to create a session, {@code false}
      * otherwise.  Shiro's configuration defaults to {@code true} as most applications find value in Sessions.
      *
@@ -203,6 +205,7 @@ public interface SubjectContext extends Map<String, Object> {
     boolean isSessionCreationEnabled();
 
     /**
+     * 设置是否应该允许构造的Subject实例创建会话，否则为false 。
      * Sets whether or not the constructed {@code Subject} instance should be allowed to create a session,
      * {@code false} otherwise.
      *

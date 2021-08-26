@@ -102,13 +102,17 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
 
     public SecurityManager resolveSecurityManager() {
         SecurityManager securityManager = getSecurityManager();
+
+        //  未获取
         if (securityManager == null) {
             if (log.isDebugEnabled()) {
                 log.debug("No SecurityManager available in subject context map.  " +
                         "Falling back to SecurityUtils.getSecurityManager() lookup.");
             }
             try {
+                // 获取 安全管理器
                 securityManager = SecurityUtils.getSecurityManager();
+
             } catch (UnavailableSecurityManagerException e) {
                 if (log.isDebugEnabled()) {
                     log.debug("No SecurityManager available via SecurityUtils.  Heuristics exhausted.", e);

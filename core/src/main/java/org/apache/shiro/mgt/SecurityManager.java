@@ -89,7 +89,7 @@ public interface SecurityManager extends Authenticator, Authorizer, SessionManag
 
     /**
      * 需要留意参数 入参和出参   Subject 认证令牌 是如何的一个 逻辑
-     * @param subject
+     * @param subject  这个 subject 还是一个 没有认证的 Subject
      * @param authenticationToken
      * @return
      * @throws AuthenticationException

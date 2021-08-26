@@ -126,6 +126,8 @@ public abstract class AbstractAuthenticator implements Authenticator, LogoutAwar
      * @param info  the returned {@code AuthenticationInfo} resulting from the successful authentication.
      */
     protected void notifySuccess(AuthenticationToken token, AuthenticationInfo info) {
+
+        // 通知  认证监听者  认证 成功！
         for (AuthenticationListener listener : this.listeners) {
             listener.onSuccess(token, info);
         }
@@ -217,6 +219,9 @@ public abstract class AbstractAuthenticator implements Authenticator, LogoutAwar
      *    定义认证的流程 处理
      *       传参 ： 认证令牌
      *
+     *
+     *    定义 认证流程
+     *
      * @param token
      * @return
      * @throws AuthenticationException
@@ -272,6 +277,7 @@ public abstract class AbstractAuthenticator implements Authenticator, LogoutAwar
 
         log.debug("Authentication successful for token [{}].  Returned account [{}]", token, info);
 
+        // 关注一下处理什么
         notifySuccess(token, info);
 
         return info;

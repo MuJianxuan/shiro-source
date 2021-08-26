@@ -28,7 +28,8 @@ import java.util.Collection;
 
 /**
  *
- *  第一个成功 策略
+ *  第一个成功的策略
+ *     第一个成功即成功 ，否则认证失败
  *
  * {@link AuthenticationStrategy} implementation that only accepts the account data from
  * the first successfully consulted Realm and ignores all subsequent realms.  This is slightly

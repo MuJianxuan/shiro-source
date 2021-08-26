@@ -19,6 +19,13 @@
 package org.apache.shiro.cache;
 
 /**
+ * 缓存管理者
+ *
+ * Shiro 本身并没有实现完整的缓存机制，因为这超出了安全框架的核心能力。
+ * 相反，该接口在底层缓存框架的主要管理器组件
+ * （例如 JCache、Ehcache、JCS、OSCache、JBossCache、TerraCotta、Coherence、GigaSpaces 等）
+ * 之上提供了一个抽象（包装器）API，允许 Shiro 用户配置他们选择的任何缓存机制。
+ *
  * A CacheManager provides and maintains the lifecycles of {@link Cache Cache} instances.
  *
  * <p>Shiro doesn't implement a full Cache mechanism itself, since that is outside the core competency of a

@@ -24,8 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- *
- *
+ *  内存缓存设计
  *
  * A <code>MapCache</code> is a {@link Cache Cache} implementation that uses a backing {@link Map} instance to store
  * and retrieve cached data.
@@ -35,11 +34,13 @@ import java.util.Set;
 public class MapCache<K, V> implements Cache<K, V> {
 
     /**
+     * 实例支持
      * Backing instance.
      */
     private final Map<K, V> map;
 
     /**
+     * 缓存名称
      * The name of this cache.
      */
     private final String name;
@@ -51,6 +52,8 @@ public class MapCache<K, V> implements Cache<K, V> {
         if (backingMap == null) {
             throw new IllegalArgumentException("Backing map cannot be null.");
         }
+
+
         this.name = name;
         this.map = backingMap;
     }

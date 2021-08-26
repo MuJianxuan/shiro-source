@@ -185,7 +185,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
      *         authenticated subject.
      */
     protected Subject createSubject(AuthenticationToken token, AuthenticationInfo info, Subject existing) {
-        //
+        // 创建容器
         SubjectContext context = createSubjectContext();
         //
         context.setAuthenticated(true);
@@ -300,8 +300,11 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     public Subject login(Subject subject, AuthenticationToken token) throws AuthenticationException {
         AuthenticationInfo info;
         try {
+            // 先认证 token
             info = authenticate(token);
-        } catch (AuthenticationException ae) {
+        }
+        // 这些都是不重要的
+        catch (AuthenticationException ae) {
             try {
                 // 失败！
                 onFailedLogin(token, ae, subject);
@@ -316,8 +319,11 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
 
         // 创建当前主题信息的时候，会尝试获取当前 请求中的cookie是否存在 remember me记录的值
         // 如果存在 则会返回一个  存有  已验证的账户身份
+        // 8-26 对当前未认证的subject 绑定认证关系
+        // 需要弄明白的是  subject 为什么要对
         Subject loggedIn = createSubject(token, info, subject);
 
+        // 成功登录
         onSuccessfulLogin(token, info, loggedIn);
 
         return loggedIn;

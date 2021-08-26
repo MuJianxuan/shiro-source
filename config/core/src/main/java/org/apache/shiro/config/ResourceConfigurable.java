@@ -19,6 +19,7 @@
 package org.apache.shiro.config;
 
 /**
+ * 由可通过资源位置（路径）配置的组件实现的接口
  * Interface implemented by components that can be configured by resource locations (paths).
  *
  * @since 1.2

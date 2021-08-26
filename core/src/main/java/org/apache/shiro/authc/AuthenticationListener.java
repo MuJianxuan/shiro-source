@@ -24,6 +24,9 @@ import org.apache.shiro.subject.PrincipalCollection;
  *
  * AuthenticationListener在Subject对系统进行AuthenticationListener侦听通知
  *
+ *    看看子类都有什么 功能
+ *
+ *
  * An {@code AuthenticationListener} listens for notifications while {@code Subject}s authenticate with the system.
  *
  * @since 0.9

@@ -47,6 +47,9 @@ public abstract class AbstractCacheManager implements CacheManager, Destroyable 
 
     /**
      * Default no-arg constructor that instantiates an internal name-to-cache {@code ConcurrentMap}.
+     *
+     * ConcurrentHashMap 使用 CAS+Synchronize来保证数据的并发安全
+     *    优化方案是 使用 无锁并发框架
      */
     public AbstractCacheManager() {
         this.caches = new ConcurrentHashMap<String, Cache>();

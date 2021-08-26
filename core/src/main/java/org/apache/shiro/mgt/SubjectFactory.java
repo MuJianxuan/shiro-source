@@ -35,6 +35,10 @@ import java.util.Map;
 public interface SubjectFactory {
 
     /**
+     * 创建一个反映指定上下文数据状态的新主题实例。 数据可以是构建Subject实例所需的任何内容，其内容可能因环境而异。
+     *
+     * Shiro 核心支持的任何数据都可以通过SubjectContext的get*或resolve*方法之一访问。 所有其他数据都可用作 Map#attribute 。
+     *
      * Creates a new Subject instance reflecting the state of the specified contextual data.  The data would be
      * anything required to required to construct a {@code Subject} instance and its contents can vary based on
      * environment.

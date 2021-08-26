@@ -21,6 +21,9 @@ package org.apache.shiro.cache;
 import org.apache.shiro.lang.util.SoftHashMap;
 
 /**
+ *
+ * 简单的内存缓存管理器
+ *
  * Simple memory-only based {@link CacheManager CacheManager} implementation usable in production
  * environments.  It will not cause memory leaks as it produces {@link Cache Cache}s backed by
  * {@link SoftHashMap SoftHashMap}s which auto-size themselves based on the runtime environment's memory

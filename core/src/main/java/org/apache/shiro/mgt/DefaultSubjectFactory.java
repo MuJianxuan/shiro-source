@@ -42,6 +42,15 @@ public class DefaultSubjectFactory implements SubjectFactory {
     public DefaultSubjectFactory() {
     }
 
+    /**
+     *  默认的创建 Subject
+     *    创建时机：  账户认证成功  则需要创建  AuthenticationInfo 当前账户的
+     *
+     *    实现要使用的上下文数据来构造适当的 {@code Subject} 实例。
+     * @param context the contextual data to be used by the implementation to construct an appropriate {@code Subject}
+     *                instance.
+     * @return
+     */
     public Subject createSubject(SubjectContext context) {
         // 获取 安全管理器
         SecurityManager securityManager = context.resolveSecurityManager();

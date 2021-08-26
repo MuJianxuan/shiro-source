@@ -78,6 +78,11 @@ public class SubjectThreadState implements ThreadState {
     }
 
     /**
+     * 将Subject和SecurityManager绑定到ThreadContext以便以后任何SecurityUtils.可以检索它们SecurityUtils. 在线程执行期间可能发生的getSubject()调用。
+     * 在绑定之前， ThreadContext的现有resources被保留，以便稍后可以通过restore调用恢复它们。
+     *
+     * 这样是否会加重我们的线程的重量，似乎不会， 拿的只是连接
+     *
      * Binds a {@link Subject} and {@link org.apache.shiro.mgt.SecurityManager SecurityManager} to the
      * {@link ThreadContext} so they can be retrieved later by any
      * {@code SecurityUtils.}{@link org.apache.shiro.SecurityUtils#getSubject() getSubject()} calls that might occur
@@ -95,8 +100,9 @@ public class SubjectThreadState implements ThreadState {
         this.originalResources = ThreadContext.getResources();
         ThreadContext.remove();
 
-        ThreadContext.bind(this.subject);
+        ThreadContext.bind( this.subject);
         if (securityManager != null) {
+            // 把安全管理器绑定到当前线程，为什么呢？
             ThreadContext.bind(securityManager);
         }
     }

@@ -31,6 +31,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
+ *
+ * 这个类可以accept一个手动配置的net.sf.ehcache.CacheManager实例，
+ * 或者可以指定一个ehcache.xml路径位置来代替并构造一个。
+ * 如果两者都没有指定，默认情况下将使用 Shiro 的故障安全ehcache.xml文件。
+ *
  * Shiro {@code CacheManager} implementation utilizing the Ehcache framework for all cache functionality.
  * <p/>
  * This class can {@link #setCacheManager(net.sf.ehcache.CacheManager) accept} a manually configured

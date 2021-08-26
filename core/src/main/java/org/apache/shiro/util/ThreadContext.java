@@ -57,7 +57,13 @@ public abstract class ThreadContext {
      */
     private static final Logger log = LoggerFactory.getLogger(ThreadContext.class);
 
+    /**
+     *  安全管理器的 Key
+     */
     public static final String SECURITY_MANAGER_KEY = ThreadContext.class.getName() + "_SECURITY_MANAGER_KEY";
+    /**
+     * Subject 的 key
+     */
     public static final String SUBJECT_KEY = ThreadContext.class.getName() + "_SUBJECT_KEY";
 
     /**
@@ -67,7 +73,9 @@ public abstract class ThreadContext {
      * ： 资源存的是啥呢？
      *
      *    存放当前线程绑定的 数据：
-     *     1、 subject 对象
+     *     1、 存储 subject 对象
+     *     2、 为什么要 一个线程获取自己的 SecurityManager 呢？
+     *     3、
      */
     private static final ThreadLocal<Map<Object, Object>> resources = new InheritableThreadLocalMap<Map<Object, Object>>();
 
@@ -78,6 +86,10 @@ public abstract class ThreadContext {
     }
 
     /**
+     *  获取资源
+     *
+     *     同理，这里只能访问当前线程的资源
+     *
      * Returns the ThreadLocal Map. This Map is used internally to bind objects
      * to the current thread by storing each object under a unique key.
      *
@@ -241,6 +253,8 @@ public abstract class ThreadContext {
 
 
     /**
+     * 需要留意触发时机
+     *
      * Convenience method that simplifies binding the application's SecurityManager instance to the ThreadContext.
      * <p/>
      * <p>The method's existence is to help reduce casting in code and to simplify remembering of

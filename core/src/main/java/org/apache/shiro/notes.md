@@ -67,6 +67,13 @@
 	}
 
 
+### shiro  流程分析：
+
+#### 1、账户认证
+> Subject.login( token) ， 本质是交给 SecurityManager.login( subject,token);   
+> 
+
+
 
 
 

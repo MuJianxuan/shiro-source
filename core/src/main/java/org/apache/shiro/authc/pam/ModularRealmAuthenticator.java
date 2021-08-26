@@ -138,6 +138,9 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
     }
 
     /**
+     *   获取 最重要的是关注 来源
+     *
+     *
      * Returns the realm(s) used by this {@code Authenticator} during an authentication attempt.
      *
      * @return the realm(s) used by this {@code Authenticator} during an authentication attempt.
@@ -195,6 +198,8 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
     }
 
     /**
+     * 通过与单个配置的领域交互来执行身份验证尝试，这比执行多领域逻辑要简单得多。
+     *
      * Performs the authentication attempt by interacting with the single configured realm, which is significantly
      * simpler than performing multi-realm logic.
      *
@@ -214,6 +219,8 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
         // 模块认证
         AuthenticationInfo info = realm.getAuthenticationInfo(token);
         if (info == null) {
+
+            // 了然   账号为空 返回 不知道账户异常
             String msg = "Realm [" + realm + "] was unable to find account data for the " +
                     "submitted AuthenticationToken [" + token + "].";
             throw new UnknownAccountException(msg);
@@ -235,7 +242,7 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
      */
     protected AuthenticationInfo doMultiRealmAuthentication(Collection<Realm> realms, AuthenticationToken token) {
 
-        //策略
+        // 认证策略
         AuthenticationStrategy strategy = getAuthenticationStrategy();
 
         AuthenticationInfo aggregate = strategy.beforeAllAttempts(realms, token);
@@ -244,6 +251,7 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
             log.trace("Iterating through {} realms for PAM authentication", realms.size());
         }
 
+        // 循环认证   依据 策略
         for (Realm realm : realms) {
 
             try {
@@ -255,9 +263,15 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
             }
 
             // 是否支持该  Token认证
-            if (realm.supports(token)) {
 
-                log.trace("Attempting to authenticate token [{}] using realm [{}]", token, realm);
+            /**
+             *  一个 Realm  至少要 控制两个方法的返回   supports  和  getAuthenticationInfo
+             */
+            if (realm.supports( token)) {
+
+                if (log.isTraceEnabled()) {
+                    log.trace("Attempting to authenticate token [{}] using realm [{}]", token, realm);
+                }
 
                 AuthenticationInfo info = null;
                 Throwable t = null;
@@ -274,7 +288,9 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
                 aggregate = strategy.afterAttempt(realm, token, info, aggregate, t);
 
             } else {
-                log.debug("Realm [{}] does not support token {}.  Skipping realm.", realm, token);
+                if( log.isDebugEnabled()){
+                    log.debug("Realm [{}] does not support token {}.  Skipping realm.", realm, token);
+                }
             }
         }
 
@@ -308,6 +324,13 @@ public class ModularRealmAuthenticator extends AbstractAuthenticator {
      */
     protected AuthenticationInfo doAuthenticate(AuthenticationToken authenticationToken) throws AuthenticationException {
         assertRealmsConfigured();
+
+        // 匹配的 Realms 来认证
+
+        // 领域认证   怎么说呢？ 就好比  我是 你这里的人，那么你的身份当然由我来确认
+
+        // 因此需要区分 当前这个人  属于 哪个领域  ，此外 这个token 不一定表示人  即 authenticationToken
+
         Collection<Realm> realms = getRealms();
         // 只有一个则无策略
         if (realms.size() == 1) {

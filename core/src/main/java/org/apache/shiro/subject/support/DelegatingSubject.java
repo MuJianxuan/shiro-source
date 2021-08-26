@@ -93,6 +93,10 @@ public class DelegatingSubject implements Subject {
     protected PrincipalCollection principals;
     protected boolean authenticated;
     protected String host;
+
+    /**
+     *  这个session 表达的含义
+     */
     protected Session session;
     /**
      * @since 1.2
@@ -292,7 +296,7 @@ public class DelegatingSubject implements Subject {
         clearRunAsIdentitiesInternal();
 
         // 委托给 SecurityManager 进行登录   那么我有个疑问 何时初始化的 securityManager呢？
-        // 交给 安全管理器进行登录
+        // 交给 安全管理1器进行登录
         Subject subject = securityManager.login(this, token);
         // 成功 返回 Subject
 

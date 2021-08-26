@@ -119,6 +119,9 @@ public abstract class AuthenticatingSecurityManager extends RealmSecurityManager
      * Delegates to the wrapped {@link org.apache.shiro.authc.Authenticator Authenticator} for authentication.
      */
     public AuthenticationInfo authenticate(AuthenticationToken token) throws AuthenticationException {
+
+
+        // 委托给  认证人去 认证
         return this.authenticator.authenticate(token);
     }
 
