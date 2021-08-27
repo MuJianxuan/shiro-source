@@ -21,6 +21,9 @@ package org.apache.shiro.mgt;
 import org.apache.shiro.subject.Subject;
 
 /**
+ *  Subject 有哪几个是需要认证和授权的时候用到，
+ *      1、账户信息是否认证；
+ *      2、账户绑定的权限集合；
  *
  *  主题  数据操作接口  Dao
  *
@@ -41,8 +44,7 @@ import org.apache.shiro.subject.Subject;
 public interface SubjectDAO {
 
     /**
-     *
-     *   保存并返回
+     * 保存并返回
      *
      * 保存并返回保留指定主题的状态，以供以后访问。 如果不存在任何持久状态，则在可能的情况下（例如创建操作）将其持久化。
      * 如果指定的Subject存在现有状态，则此方法更新现有状态以反映当前状态（即更新操作）。

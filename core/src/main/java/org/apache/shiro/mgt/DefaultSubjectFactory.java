@@ -57,14 +57,16 @@ public class DefaultSubjectFactory implements SubjectFactory {
 
         // session 对象  session 和 Subject 什么时候挂靠的
         Session session = context.resolveSession();
-        //
+        //是否启用会话创建
         boolean sessionCreationEnabled = context.isSessionCreationEnabled();
 
+        // 认证信息转换  AuthenticationInfo
         PrincipalCollection principals = context.resolvePrincipals();
 
-        // 认证状态
+        // 认证状态  认证成功 or 失败  默认认证成功 即已设置认证成功
         boolean authenticated = context.resolveAuthenticated();
 
+        // host
         String host = context.resolveHost();
 
         //   创建一个 委托主题

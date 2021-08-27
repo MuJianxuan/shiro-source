@@ -178,7 +178,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     /**
      * Creates a {@code Subject} instance for the user represented by the given method arguments.
      *
-     * @param token    the {@code AuthenticationToken} submitted for the successful authentication.
+     * @param token    the {@code AuthenticationToken} submitted for the successful authentication.  用户认证传入的Token数据
      * @param info     the {@code AuthenticationInfo} of a newly authenticated user.
      * @param existing the existing {@code Subject} instance that initiated the authentication attempt  现存的
      * @return the {@code Subject} instance that represents the context and session data for the newly
@@ -189,9 +189,9 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         // 创建 Subject 的上下文
         SubjectContext context = createSubjectContext();
         // 设置认证成功
-        context.setAuthenticated(true);
+        context.setAuthenticated(  true);
         // 传入需要认证的信息
-        context.setAuthenticationToken(token);
+        context.setAuthenticationToken(  token);
         // Realm 领域 返回的认证信息
         context.setAuthenticationInfo(info);
         // 设置 安全管理器
@@ -239,6 +239,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         if (rmm != null) {
             try {
                 rmm.onSuccessfulLogin(subject, token, info);
+
             } catch (Exception e) {
                 if (log.isWarnEnabled()) {
                     String msg = "Delegate RememberMeManager instance of type [" + rmm.getClass().getName() +
@@ -247,7 +248,9 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
                     log.warn(msg, e);
                 }
             }
-        } else {
+        }
+        // 不重要
+        else {
             if (log.isTraceEnabled()) {
                 log.trace("This " + getClass().getName() + " instance does not have a " +
                         "[" + RememberMeManager.class.getName() + "] instance configured.  RememberMe services " +
@@ -411,13 +414,14 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         //if possible before handing off to the SubjectFactory:
         context = resolvePrincipals(context);
 
-        // 执行创建
+        // 执行创建  根据上下文创建 Subject （是否认证的 Subject） 怎么和这个 Session 关联起来呢？  session 关联 subject ，通过Cookie >>>指向 Session 实现
         Subject subject = doCreateSubject(context);
 
         //save this subject for future reference if necessary:
         //(this is needed here in case rememberMe principals were resolved and they need to be stored in the
         //session, so we don't constantly rehydrate the rememberMe PrincipalCollection on every operation).
         //Added in 1.2:
+        // 存储 Subject
         save(subject);
 
         return subject;

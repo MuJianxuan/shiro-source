@@ -114,6 +114,15 @@ public class DelegatingSubject implements Subject {
         this(principals, authenticated, host, session, true, securityManager);
     }
 
+    /**
+     * 委托的目的
+     * @param principals
+     * @param authenticated
+     * @param host
+     * @param session
+     * @param sessionCreationEnabled
+     * @param securityManager
+     */
     //since 1.2
     public DelegatingSubject(PrincipalCollection principals, boolean authenticated, String host,
                              Session session, boolean sessionCreationEnabled, SecurityManager securityManager) {
@@ -131,7 +140,7 @@ public class DelegatingSubject implements Subject {
     }
 
     /**
-     * 创建
+     * 装饰 Session
      * @param session
      * @return
      */
@@ -557,6 +566,7 @@ public class DelegatingSubject implements Subject {
         if (stack == null) {
             stack = new CopyOnWriteArrayList<PrincipalCollection>();
         }
+        // 存了个身份标识
         stack.add(0, principals);
         Session session = getSession();
         session.setAttribute(RUN_AS_PRINCIPALS_SESSION_KEY, stack);

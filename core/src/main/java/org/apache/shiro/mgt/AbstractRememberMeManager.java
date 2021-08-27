@@ -327,7 +327,8 @@ public abstract class AbstractRememberMeManager implements RememberMeManager {
         if (isRememberMe(token)) {
             // 核心实现
             rememberIdentity(subject, token, info);
-        } else {
+        }
+        else {
             if (log.isDebugEnabled()) {
                 log.debug("AuthenticationToken did not indicate RememberMe is requested.  " +
                         "RememberMe functionality will not be executed for corresponding account.");

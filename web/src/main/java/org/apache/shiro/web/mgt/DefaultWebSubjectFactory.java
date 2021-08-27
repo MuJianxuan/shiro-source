@@ -75,7 +75,10 @@ public class DefaultWebSubjectFactory extends DefaultSubjectFactory {
         PrincipalCollection principals = wsc.resolvePrincipals();
         boolean authenticated = wsc.resolveAuthenticated();
         String host = wsc.resolveHost();
+
+        // 获取请求
         ServletRequest request = wsc.resolveServletRequest();
+        // 获取响应
         ServletResponse response = wsc.resolveServletResponse();
 
         /**

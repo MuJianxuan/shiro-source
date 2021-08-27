@@ -108,7 +108,7 @@ public class DefaultSubjectDAO implements SubjectDAO {
      */
     protected boolean isSessionStorageEnabled(Subject subject) {
         // 调用对象来检查  Subject 是否 启用了会话存储
-        return getSessionStorageEvaluator().isSessionStorageEnabled(subject);
+        return this.getSessionStorageEvaluator().isSessionStorageEnabled(subject);
     }
 
     /**
@@ -146,7 +146,8 @@ public class DefaultSubjectDAO implements SubjectDAO {
      * @return the same {@code Subject} passed in (a new Subject instance is not created).
      */
     public Subject save(Subject subject) {
-        if (isSessionStorageEnabled(subject)) {
+        // 启用了会话存储
+        if ( isSessionStorageEnabled(subject)) {
             saveToSession(subject);
         } else {
             log.trace("Session storage of subject state for Subject [{}] has been disabled: identity and " +
@@ -167,7 +168,11 @@ public class DefaultSubjectDAO implements SubjectDAO {
     protected void saveToSession(Subject subject) {
         //执行合并逻辑，仅在主题的会话与当前状态不匹配时才更新：
         //performs merge logic, only updating the Subject's session if it does not match the current state:
+
+        // 认证信息  会不会包含 权限信息呢？ 对不对？
         mergePrincipals(subject);
+
+        // 认证状态
         mergeAuthenticationState(subject);
     }
 
@@ -232,6 +237,8 @@ public class DefaultSubjectDAO implements SubjectDAO {
     }
 
     /**
+     *
+     * 合并身份验证状态
      * Merges the Subject's current authentication state with whatever may be in
      * any available session.  Only updates the Subject's session if the session does not match the current
      * authentication state.

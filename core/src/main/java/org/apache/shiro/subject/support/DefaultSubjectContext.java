@@ -63,6 +63,9 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
 
     private static final String SESSION = DefaultSubjectContext.class.getName() + ".SESSION";
 
+    /**
+     *  认证 Key
+     */
     private static final String AUTHENTICATED = DefaultSubjectContext.class.getName() + ".AUTHENTICATED";
 
     private static final String HOST = DefaultSubjectContext.class.getName() + ".HOST";
@@ -75,6 +78,7 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
     public static final String PRINCIPALS_SESSION_KEY = DefaultSubjectContext.class.getName() + "_PRINCIPALS_SESSION_KEY";
 
     /**
+     * 用于存储用户是否通过身份验证的会话密钥
      * The session key that is used to store whether or not the user is authenticated.
      */
     public static final String AUTHENTICATED_SESSION_KEY = DefaultSubjectContext.class.getName() + "_AUTHENTICATED_SESSION_KEY";
@@ -152,6 +156,10 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
         }
     }
 
+    /**
+     * 标识信息
+     * @return
+     */
     public PrincipalCollection resolvePrincipals() {
         PrincipalCollection principals = getPrincipals();
 
@@ -225,13 +233,17 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
         if (authc == null) {
             //see if there is an AuthenticationInfo object.  If so, the very presence of one indicates a successful
             //authentication attempt:
+            // 获取认证信息
             AuthenticationInfo info = getAuthenticationInfo();
             authc = info != null;
         }
-        if (!authc) {
+        // 认证失败
+        if (! authc) {
             //fall back to a session check:
             Session session = resolveSession();
+            // session 不为空
             if (session != null) {
+                //
                 Boolean sessionAuthc = (Boolean) session.getAttribute(AUTHENTICATED_SESSION_KEY);
                 authc = sessionAuthc != null && sessionAuthc;
             }
@@ -248,6 +260,11 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
         nullSafePut(AUTHENTICATION_INFO, info);
     }
 
+    /**
+     * AuthenticationToken 是我们交给框架认证的信息
+     *    而 AuthenticationInfo 是认证的数据 信息 是交给领域返回的认证信息
+     * @return
+     */
     public AuthenticationToken getAuthenticationToken() {
         return getTypedValue(AUTHENTICATION_TOKEN, AuthenticationToken.class);
     }
