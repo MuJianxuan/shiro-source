@@ -30,6 +30,7 @@ import org.apache.shiro.session.mgt.SessionManager;
 public interface WebSessionManager extends SessionManager {
 
     /**
+     * 是 Servlet 容器会话
      * Returns {@code true} if session management and storage is managed by the underlying Servlet container or
      * {@code false} if managed by Shiro directly (called 'native' sessions).
      * <p/>

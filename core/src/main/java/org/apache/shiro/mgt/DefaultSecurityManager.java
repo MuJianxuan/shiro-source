@@ -349,7 +349,13 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         rememberMeFailedLogin(token, ae, subject);
     }
 
+    /**
+     *
+     * @param subject
+     */
     protected void beforeLogout(Subject subject) {
+
+        // 记住我信息清除
         rememberMeLogout(subject);
     }
 
@@ -622,6 +628,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
             throw new IllegalArgumentException("Subject method argument cannot be null.");
         }
 
+        // 登出之前操作
         beforeLogout(subject);
 
         PrincipalCollection principals = subject.getPrincipals();
@@ -630,13 +637,17 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
                 log.debug("Logging out subject with primary principal {}", principals.getPrimaryPrincipal());
             }
             Authenticator authc = getAuthenticator();
+            //
             if (authc instanceof LogoutAware) {
                 ((LogoutAware) authc).onLogout(principals);
             }
         }
 
         try {
+            // 删除 Subject
             delete(subject);
+
+            // 不重要
         } catch (Exception e) {
             if (log.isDebugEnabled()) {
                 String msg = "Unable to cleanly unbind Subject.  Ignoring (logging out).";

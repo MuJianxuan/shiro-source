@@ -25,6 +25,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
+ * 上下文 没什么好说的，帮助构建 Subject的
+ *
  * A {@code WebSubjectContext} is a {@link SubjectContext} that additionally provides for type-safe
  * methods to set and retrieve a {@link ServletRequest} and {@link ServletResponse}.
  *

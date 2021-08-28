@@ -21,6 +21,7 @@ package org.apache.shiro.authc;
 import org.apache.shiro.subject.PrincipalCollection;
 
 /**
+ *  登出意识到
  *
  *  SPI接口，允许注销先前已验证的使用者/用户的过程中执行清除逻辑。
  * 由于它是SPI接口，因此实际上是供SPI实现者使用的，例如那些实现Realms的实现者。
@@ -38,6 +39,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 public interface LogoutAware {
 
     /**
+     *
      * Callback triggered when a <code>Subject</code> logs out of the system.
      *
      * @param principals the identifying principals of the Subject logging out.

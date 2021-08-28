@@ -171,6 +171,7 @@ public class CookieRememberMeManager extends AbstractRememberMeManager {
 
         Cookie template = getCookie(); //the class attribute is really a template for the outgoing cookies
         Cookie cookie = new SimpleCookie(template);
+        // 存另一个值
         cookie.setValue(base64);
         cookie.saveTo(request, response);
     }
@@ -292,6 +293,7 @@ public class CookieRememberMeManager extends AbstractRememberMeManager {
      * @param subject the subject instance for which identity data should be forgotten from the underlying persistence
      */
     protected void forgetIdentity(Subject subject) {
+
         if (WebUtils.isHttp(subject)) {
             HttpServletRequest request = WebUtils.getHttpRequest(subject);
             HttpServletResponse response = WebUtils.getHttpResponse(subject);
@@ -323,6 +325,7 @@ public class CookieRememberMeManager extends AbstractRememberMeManager {
      * @param response the outgoing HTTP servlet response
      */
     private void forgetIdentity(HttpServletRequest request, HttpServletResponse response) {
+        // 删除信息
         getCookie().removeFrom(request, response);
     }
 }

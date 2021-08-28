@@ -22,7 +22,6 @@ import javax.servlet.ServletContext;
 
 /**
  * 需要访问Web应用程序的ServletContext所有组件的基本实现
- *
  * 顶级Servlet上下文支持
  *
  * Base implementation for any components that need to access the web application's {@link ServletContext ServletContext}.

@@ -97,6 +97,8 @@ public interface SecurityManager extends Authenticator, Authorizer, SessionManag
     Subject login(Subject subject, AuthenticationToken authenticationToken) throws AuthenticationException;
 
     /**
+     * 登出
+     *
      * Logs out the specified Subject from the system.
      * <p/>
      * Note that most application developers should not call this method unless they have a good reason for doing

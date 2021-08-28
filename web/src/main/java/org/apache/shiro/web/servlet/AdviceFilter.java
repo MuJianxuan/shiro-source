@@ -28,7 +28,6 @@ import javax.servlet.ServletResponse;
 import java.io.IOException;
 
 /**
- *
  *  定义了 执行模板  包含前置处理 后置处理 围绕 doInterxxxx 核心方法！
  *
  * 一个Servlet过滤器，它通过preHandle ， postHandle和afterCompletion挂钩为ServletRequest启用AOP风格的“围绕”建议
@@ -138,7 +137,6 @@ public abstract class AdviceFilter extends OncePerRequestFilter {
         Exception exception = null;
 
         // 定义模板
-
         try {
 
             // 前置处理
@@ -147,12 +145,15 @@ public abstract class AdviceFilter extends OncePerRequestFilter {
                 log.trace("Invoked preHandle method.  Continuing chain?: [" + continueChain + "]");
             }
 
-            // 工具结果是否可继续执行
+            // 根据结果 是否可继续执行
             if ( continueChain) {
+
+                // 执行其他链
                 executeChain(request, response, chain);
             }
 
-            // 后置处理  默认会执行 但是 如果 continueChain 抛异常了呢？
+            // 后置处理
+            //默认会执行 但是 如果 preHandle 抛异常了，则被处理
             postHandle(request, response);
 
             if (log.isTraceEnabled()) {
@@ -161,7 +162,9 @@ public abstract class AdviceFilter extends OncePerRequestFilter {
 
         } catch (Exception e) {
             exception = e;
-        } finally {
+        }
+        finally {
+            //  清理
             cleanup(request, response, exception);
         }
     }

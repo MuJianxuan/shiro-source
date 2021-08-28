@@ -45,8 +45,9 @@ public interface Authenticator {
 
     /**
      *
-     *  根据提交的AuthenticationToken对用户进行AuthenticationToken 。
+     * 使用场景是手动认证  在 Subject.login时触发
      *
+     *  根据提交的AuthenticationToken对用户进行AuthenticationToken 。
      *
      *  如果认证成功，则返回一个AuthenticationInfo实例，该实例表示与Shiro相关的用户帐户数据。
      *  通常，此返回的对象又用于构造一个Subject ，该Subject表示帐户的更完整的特定于安全性的“视图”，该视图也允许访问Session 。
@@ -59,7 +60,7 @@ public interface Authenticator {
      * a {@code Session}.
      *
      * @param authenticationToken any representation of a user's principals and credentials submitted during an
-     *                            authentication attempt.
+     *                            authentication attempt.   交给Shiro认证的Token
      * @return the AuthenticationInfo representing the authenticating user's account data.
      * @throws AuthenticationException if there is any problem during the authentication process.
      *                                 See the specific exceptions listed below to as examples of what could happen

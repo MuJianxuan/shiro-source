@@ -215,10 +215,14 @@ public class DefaultSubjectDAO implements SubjectDAO {
         if (session == null) {
             if (!isEmpty(currentPrincipals)) {
                 session = subject.getSession();
+                // 存在 session 中
                 session.setAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY, currentPrincipals);
             }
-            // otherwise no session and no principals - nothing to save
-        } else {
+
+        }
+        // 否则没有会话和委托人 - 没有什么可保存的
+        // otherwise no session and no principals - nothing to save
+        else {
             PrincipalCollection existingPrincipals =
                     (PrincipalCollection) session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
 

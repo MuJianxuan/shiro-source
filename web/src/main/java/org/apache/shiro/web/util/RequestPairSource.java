@@ -19,6 +19,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
+ * RequestPairSource是一个组件，可以提供与当前正在执行的请求相关联的ServletRequest和ServletResponse对。 这用于框架开发支持，最终用户很少使用。
+ *
  * A {@code RequestPairSource} is a component that can supply a {@link ServletRequest ServletRequest} and
  * {@link ServletResponse ServletResponse} pair associated with a currently executing request.  This is used for
  * framework development support and is rarely used by end-users.

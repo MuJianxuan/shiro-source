@@ -36,6 +36,8 @@ import javax.servlet.FilterConfig;
 public abstract class NameableFilter extends AbstractFilter implements Nameable {
 
     /**
+     *
+     *
      * 此过滤器的名称，在应用程序中是唯一的
      * The name of this filter, unique within an application.
      */
@@ -57,6 +59,7 @@ public abstract class NameableFilter extends AbstractFilter implements Nameable 
         if (this.name == null) {
             FilterConfig config = getFilterConfig();
             if (config != null) {
+                // 从配置中获取
                 this.name = config.getFilterName();
             }
         }

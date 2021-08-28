@@ -35,7 +35,6 @@ import java.util.Map;
 import static org.apache.shiro.lang.util.StringUtils.split;
 
 /**
- *
  * 过滤器的基类，将仅处理指定的路径并允许所有其他路径通过
  *
  * <p>Base class for Filters that will process only specified paths and allow all others to pass through.</p>
@@ -57,7 +56,6 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
     protected PatternMatcher pathMatcher = new AntPathMatcher();
 
     /**
-     *
      * 配置路径条目的集合，其中键是此过滤器应处理的路径，值是该过滤器特定于该特定路径的配置元素（可能为null）。
      *
      * 换句话说，键是此筛选器将处理的路径（URL）。
@@ -103,6 +101,8 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
     }
 
     /**
+     * 根据指定的request返回应用程序中的上下文路径。
+     *
      * Returns the context path within the application based on the specified <code>request</code>.
      * <p/>
      * This implementation merely delegates to
@@ -139,28 +139,33 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
      *         <code>false</code> otherwise.
      */
     protected boolean pathsMatch(String path, ServletRequest request) {
-        String requestURI = getPathWithinApplication(request);
+        String requestUri = getPathWithinApplication(request);
 
-        log.trace("Attempting to match pattern '{}' with current requestURI '{}'...", path, Encode.forHtml(requestURI));
-        boolean match = pathsMatch(path, requestURI);
+        log.trace("Attempting to match pattern '{}' with current requestUri '{}'...", path, Encode.forHtml(requestUri));
+        boolean match = pathsMatch(path, requestUri);
 
         if (!match) {
-            if (requestURI != null && !DEFAULT_PATH_SEPARATOR.equals(requestURI)
-                && requestURI.endsWith(DEFAULT_PATH_SEPARATOR)) {
-                requestURI = requestURI.substring(0, requestURI.length() - 1);
+            if (requestUri != null && !DEFAULT_PATH_SEPARATOR.equals(requestUri) && requestUri.endsWith(DEFAULT_PATH_SEPARATOR)) {
+                requestUri = requestUri.substring(0, requestUri.length() - 1);
             }
             if (path != null && !DEFAULT_PATH_SEPARATOR.equals(path)
                 && path.endsWith(DEFAULT_PATH_SEPARATOR)) {
                 path = path.substring(0, path.length() - 1);
             }
-            log.trace("Attempting to match pattern '{}' with current requestURI '{}'...", path, Encode.forHtml(requestURI));
-            match = pathsMatch(path, requestURI);
+            // 正在尝试将模式“{}”与当前 requestUri“{}”匹配...
+            log.trace("Attempting to match pattern '{}' with current requestUri '{}'...", path, Encode.forHtml(requestUri));
+            match = pathsMatch(path, requestUri);
         }
 
         return match;
     }
 
     /**
+     * 如果path与指定的pattern字符串匹配，则返回true ，否则返回false 。
+     *
+     * 简单地委托给this.pathMatcher. matches(pattern,path) this.pathMatcher.
+     * matches(pattern,path) ，但可以被子类覆盖以实现自定义匹配行为。
+     *
      * Returns <code>true</code> if the <code>path</code> matches the specified <code>pattern</code> string,
      * <code>false</code> otherwise.
      * <p/>
@@ -207,6 +212,7 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
 
         if (this.appliedPaths == null || this.appliedPaths.isEmpty()) {
             if (log.isTraceEnabled()) {
+                // AppliedPaths 属性为 null 或为空。此过滤器将立即通过。
                 log.trace("appliedPaths property is null or empty.  This Filter will passthrough immediately.");
             }
             return true;
@@ -214,9 +220,12 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
 
         // 路径是否过滤 对吧 !
         for (String path : this.appliedPaths.keySet()) {
+            // 如果路径匹配，则传递给子类实现以进行特定检查
+
             // If the path does match, then pass on to the subclass implementation for specific checks
             //(first match 'wins'):
-            //
+
+            // 路径匹配
             if ( pathsMatch(path, request)) {
                 log.trace("Current requestURI matches pattern '{}'.  Determining filter chain execution...", path);
                 Object config = this.appliedPaths.get(path);
@@ -231,7 +240,9 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
 
     /**
      * 从 preHandle 实现中抽象出逻辑的简单方法 - 它变得有点不守规矩。
+     *
      * Simple method to abstract out logic from the preHandle implementation - it was getting a bit unruly.
+     * 从 preHandle 实现中抽象出逻辑的简单方法 - 它变得有点不守规矩。
      *
      * @since 1.2
      */
@@ -241,9 +252,10 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
 
         if (isEnabled(request, response, path, pathConfig)) { //isEnabled check added in 1.2
             if (log.isTraceEnabled()) {
+                // 使用配置 [{}] 为路径“{}”下的当前请求启用过滤器“{}”。 " + "委托给子类实现以进行 'onPreHandle' 检查。
                 log.trace("Filter '{}' is enabled for the current request under path '{}' with config [{}].  " +
                         "Delegating to subclass implementation for 'onPreHandle' check.",
-                        new Object[]{getName(), path, pathConfig});
+                        getName(), path, pathConfig);
             }
 
             //对此特定请求启用了过滤器，因此可以委托子类实现，以便他们可以确定请求是否应继续通过链：
@@ -254,12 +266,15 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
         }
 
         if (log.isTraceEnabled()) {
+            // 使用配置 [{}] 对路径“{}”下的当前请求禁用过滤器“{}”。 " + "FilterChain 中的下一个元素将被立即调用。
             log.trace("Filter '{}' is disabled for the current request under path '{}' with config [{}].  " +
                     "The next element in the FilterChain will be called immediately.",
-                    new Object[]{getName(), path, pathConfig});
+                    getName(), path, pathConfig);
         }
 
         //该过滤器对此特定请求禁用，请立即返回“ true”以指示该过滤器将不处理该请求，并让requestresponse继续通过过滤器链：
+
+        // 对于此特定请求，此过滤器被禁用，立即返回 'true' 以指示过滤器将不处理该请求并让 requestresponse 继续通过过滤器链：
 
         //This filter is disabled for this specific request,
         //return 'true' immediately to indicate that the filter will not process the request

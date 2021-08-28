@@ -53,6 +53,9 @@ import java.util.List;
 public interface Authorizer {
 
     /**
+     * 如果允许相应的主题/用户执行操作或访问由指定权限字符串汇总的资源，则返回true 。
+     * 这是对应类型安全Permission变体的重载方法。 有关这些基于字符串的权限方法的更多信息，请参阅类级 JavaDoc。
+     *
      * Returns <tt>true</tt> if the corresponding subject/user is permitted to perform an action or access a resource
      * summarized by the specified permission string.
      *
@@ -68,6 +71,9 @@ public interface Authorizer {
     boolean isPermitted(PrincipalCollection principals, String permission);
 
     /**
+     * 如果允许相应的主题/用户执行操作或访问由指定权限汇总的资源，则返回true 。
+     * 更具体地说，此方法确定与主题关联的任何Permission是否imply指定的权限。
+     *
      * Returns <tt>true</tt> if the corresponding subject/user is permitted to perform an action or access a resource
      * summarized by the specified permission.
      *

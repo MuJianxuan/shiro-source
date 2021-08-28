@@ -29,6 +29,8 @@ import java.io.IOException;
 
 /**
  *
+ * 作用类： 每个请求过滤器一次
+ *
  *  过滤器基类，该基类保证每个请求在任何servlet容器上仅执行一次。
  *  它提供了带有HttpServletRequest和HttpServletResponse参数的doFilterInternal方法。
  *
@@ -65,7 +67,8 @@ public abstract class OncePerRequestFilter extends NameableFilter {
     public static final String ALREADY_FILTERED_SUFFIX = ".FILTERED";
 
     /**
-     *  通常确定此过滤器是应该执行还是让请求进入下一个链元素
+     *  通常确定此过滤器是应该执行还是让请求进入下一个链元素、
+     *   大多数过滤器希望在配置时执行，因此默认为 true
      *
      * Determines generally if this filter should execute or let requests fall through to the next chain element.
      *
@@ -104,6 +107,8 @@ public abstract class OncePerRequestFilter extends NameableFilter {
     }
 
     /**
+     * Filter 接口的功能实现，每一个过滤器都会执行。
+     *
      * This {@code doFilter} implementation stores a request attribute for
      * "already filtered", proceeding without filtering again if the
      * attribute is already there.
@@ -112,31 +117,37 @@ public abstract class OncePerRequestFilter extends NameableFilter {
      * @see #shouldNotFilter
      * @see #doFilterInternal
      */
-    public final void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+    public final void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         //获取已过滤的属性名称
         String alreadyFilteredAttributeName = getAlreadyFilteredAttributeName();
-        if ( request.getAttribute(alreadyFilteredAttributeName) != null ) {
-            log.trace("Filter '{}' already executed.  Proceeding without invoking this filter.", getName());
-            filterChain.doFilter(request, response);
-        } else //noinspection deprecation
 
-            if (/* added in 1.2: */ !isEnabled(request, response) ||
+        // 获取到 说明当前过滤器正在执行
+        if ( request.getAttribute(alreadyFilteredAttributeName) != null ) {
+            // 之前的描述有问题
+            log.trace("Filter '{}' now executing.  Proceeding without invoking this filter.", getName());
+            filterChain.doFilter(request, response);
+        }
+        //无检查弃用   //noinspection deprecation  当前过滤器没启用
+        else if (/* added in 1.2: */ !isEnabled(request, response) ||
                     //不应该过滤
                 /* retain backwards compatibility: */ shouldNotFilter(request) ) {
             log.debug("Filter '{}' is not enabled for the current request.  Proceeding without invoking this filter.",
                     getName());
 
             filterChain.doFilter(request, response);
-        } else {
+        }
+        // 最终肯定就是执行啦
+        else {
             // Do invoke this filter...
             log.trace("Filter '{}' not yet executed.  Executing now.", getName());
+            // 设置 当前过滤器已经执行过了
             request.setAttribute(alreadyFilteredAttributeName, Boolean.TRUE);
 
             try {
                 //子类执行  过滤器实例
                 doFilterInternal(request, response, filterChain);
+
             } finally {
 
                 //最后也要移除的！

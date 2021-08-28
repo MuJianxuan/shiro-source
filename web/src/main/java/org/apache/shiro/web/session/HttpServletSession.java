@@ -31,7 +31,6 @@ import java.util.Date;
 import java.util.Enumeration;
 
 /**
- *
  *  封装了 HttpSession对象
  *
  * {@link Session Session} implementation that is backed entirely by a standard servlet container
@@ -46,9 +45,14 @@ public class HttpServletSession implements Session {
     private static final String HOST_SESSION_KEY = HttpServletSession.class.getName() + ".HOST_SESSION_KEY";
     private static final String TOUCH_OBJECT_SESSION_KEY = HttpServletSession.class.getName() + ".TOUCH_OBJECT_SESSION_KEY";
 
-    //
+    // servlet的 HttpSession
     private HttpSession httpSession = null;
 
+    /**
+     * 需要关注
+     * @param httpSession
+     * @param host
+     */
     public HttpServletSession(HttpSession httpSession, String host) {
         if (httpSession == null) {
             String msg = "HttpSession constructor argument cannot be null.";
@@ -59,7 +63,9 @@ public class HttpServletSession implements Session {
                     "is enforced to prevent circular dependencies and infinite loops.";
             throw new IllegalArgumentException(msg);
         }
+
         this.httpSession = httpSession;
+
         if (StringUtils.hasText(host)) {
             setHost(host);
         }

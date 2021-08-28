@@ -29,6 +29,8 @@ import javax.servlet.ServletException;
 /**
  * 父类 设置得 上下文容器环境
  *
+ * 过滤器基类  执行器
+ *
  * 基本抽象Filter简化了Filter初始化和对init参数的access 。 子类初始化逻辑应通过重写onFilterConfigSet()模板方法来执行。
  * FilterChain执行逻辑（ doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)方法留给子类
  *
@@ -109,11 +111,14 @@ public abstract class AbstractFilter extends ServletContextSupport implements Fi
     public final void init(FilterConfig filterConfig) throws ServletException {
 
         // 设置 过滤器配置信息
-        setFilterConfig(filterConfig);
+        this.setFilterConfig(filterConfig);
+
         try {
             //  初始化 securityManager
-            onFilterConfigSet();
-        } catch (Exception e) {
+            this.onFilterConfigSet();
+        }
+        // 异常处理
+        catch (Exception e) {
             if (e instanceof ServletException) {
                 throw (ServletException) e;
             } else {

@@ -124,6 +124,13 @@ public class ServletContainerSessionManager implements WebSessionManager {
         return createSession(httpSession, host);
     }
 
+    /**
+     * 创建 属于 Shiro概念中的Session
+     *   在Web中Session 在访问时即已绑定  cookie -->> session
+     * @param httpSession
+     * @param host
+     * @return
+     */
     protected Session createSession(HttpSession httpSession, String host) {
         return new HttpServletSession(httpSession, host);
     }
