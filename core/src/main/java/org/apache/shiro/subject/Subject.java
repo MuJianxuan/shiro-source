@@ -677,8 +677,7 @@ public interface Subject {
 
             this.securityManager = securityManager;
 
-            // 为什么会有值呢？
-            // 初始化主题上下文  这个很重要，存放着  Cookie 记住我的 记录值
+            // 为空的值 一个存储的容器
             this.subjectContext = newSubjectContextInstance();
 
             if (this.subjectContext == null) {

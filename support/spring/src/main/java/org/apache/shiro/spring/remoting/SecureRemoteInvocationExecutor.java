@@ -33,7 +33,7 @@ import java.util.concurrent.Callable;
 
 
 /**
- *
+ *   SpringBoot 远程调用框架支持 ！
  *
  Spring org.springframework.remoting.support.RemoteInvocationExecutor的实现，
  该org.springframework.remoting.support.RemoteInvocationExecutor将sessionId绑定到传入线程，以使其在线程执行期间可用于SecurityManager实现。
@@ -82,8 +82,10 @@ public class SecureRemoteInvocationExecutor extends DefaultRemoteInvocationExecu
     |               M E T H O D S               |
     ============================================*/
     @SuppressWarnings({"unchecked"})
-    public Object invoke(final RemoteInvocation invocation, final Object targetObject)
-            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+    /**
+     * TODO 改方法很重要 ，需要梳理逻辑
+     */
+    public Object invoke(final RemoteInvocation invocation, final Object targetObject) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 
         try {
             SecurityManager securityManager =

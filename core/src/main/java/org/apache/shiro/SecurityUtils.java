@@ -57,7 +57,11 @@ public abstract class SecurityUtils {
     private static volatile SecurityManager securityManager;
 
     /**
-     * 获取主题
+     * 获取主题  >> 触发时机
+     * 1、Subject.login
+     * 2、用户访问程序，认证身份
+     * 3、权限认证是否需要呢？
+     *
      * Returns the currently accessible {@code Subject} available to the calling code depending on
      * runtime environment.
      * <p/>
@@ -74,13 +78,22 @@ public abstract class SecurityUtils {
     public static Subject getSubject() {
         // // 不等于null
         // SecurityUtils.getSubject() 调用时 此返回 为空
+
         Subject subject = ThreadContext.getSubject();
+
+        // 通常是不存在的
         if (subject == null) {
             // 创建一个新的主题
+            // 在 new builder 中 SubjectContext 容器是一个 空的容器
+            // 除非在 subject.login中 记录了认证的用户生成信息
+            // @See org.apache.shiro.mgt.DefaultSecurityManager.createSubject(...)
+
+            // 此外 buildSubject 肯定要绑定当前用户的身份信息和权限信息
             subject = (new Subject.Builder()).buildSubject();
 
             // 创建的与线程绑定！
             // 移除时机呢？  绑定咯
+            // 当次请求内 明确身份
             ThreadContext.bind( subject);
         }
         return subject;
@@ -180,7 +193,7 @@ public abstract class SecurityUtils {
             securityManager = SecurityUtils.securityManager;
         }
 
-        // 校验
+        // 不重要
         if (securityManager == null) {
             String msg = "No SecurityManager accessible to the calling code, either bound to the " +
                     ThreadContext.class.getName() + " or as a vm static singleton.  This is an invalid application " +

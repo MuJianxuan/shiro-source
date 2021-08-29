@@ -49,7 +49,8 @@ import java.io.IOException;
 public abstract class AccessControlFilter extends PathMatchingFilter {
 
     /**
-     * ???
+     * 简单的跳转 login.jsp 的方法
+     *
      * Simple default login URL equal to <code>/login.jsp</code>, which can be overridden by calling the
      * {@link #setLoginUrl(String) setLoginUrl} method.
      */
@@ -104,6 +105,10 @@ public abstract class AccessControlFilter extends PathMatchingFilter {
     }
 
     /**
+     * 获取与请求关联的主题的便捷方法。
+     *
+     * 默认实现只返回SecurityUtils.getSubject() 。
+     *
      * Convenience method that acquires the Subject associated with the request.
      * <p/>
      * The default implementation simply returns
@@ -114,7 +119,13 @@ public abstract class AccessControlFilter extends PathMatchingFilter {
      * @return the Subject associated with the request.
      */
     protected Subject getSubject(ServletRequest request, ServletResponse response) {
-        //？ 便于扩展？ 可能
+        // 很重要
+
+        /**
+         * 1、我 Subject.login 后 以后访问应用怎么关联起登录信息呢？
+         * 2、这里是否存有 用户的认证信息和权限信息
+         * 3、是否可以扩展 用户信息的编辑，然后在访问的时候即可判断到 用户账户信息已发生修改！
+         */
         return SecurityUtils.getSubject();
     }
 
@@ -187,6 +198,9 @@ public abstract class AccessControlFilter extends PathMatchingFilter {
     protected abstract boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception;
 
     /**
+     * 在 PathMatchingFilter 链中，表达的是 处于预处理链中
+     *    假设该方法表达的是 当前类只有在 匹配需要过滤中的 请求路径才会执行该方法， 那么就是表示当前方法是否可通过
+     *
      * 如果isAccessAllowed(Request,Response,Object)返回true ，否则返回onAccessDenied(Request,Response,Object) 。
      *
      * Returns <code>true</code> if
@@ -202,7 +216,10 @@ public abstract class AccessControlFilter extends PathMatchingFilter {
      */
     public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
 
-        //  执行模板  ：  前置位 为true 后置  isAccessAllowed 不执行  ；否则  执行  onAccessDenied 后置位  如果两个都是 false 那么都是false  ？ true
+        //  执行模板  ：  前置位 为true 后置  isAccessAllowed 不执行  ；否则  执行  onAccessDenied 后置位
+        //  false || false : false
+        // true || xxx : 不看后续结果
+        // false || true : true
         return isAccessAllowed(request, response, mappedValue) || onAccessDenied(request, response, mappedValue);
     }
 

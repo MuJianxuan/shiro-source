@@ -75,10 +75,10 @@ public class InvalidRequestFilter extends AccessControlFilter {
     @Override
     protected boolean isAccessAllowed(ServletRequest req, ServletResponse response, Object mappedValue) throws Exception {
         HttpServletRequest request = WebUtils.toHttp(req);
-        // check the original and decoded values
-        return isValid(request.getRequestURI())      // user request string (not decoded)
-                && isValid(request.getServletPath()) // decoded servlet part
-                && isValid(request.getPathInfo());   // decoded path info (may be null)
+        // check the original and decoded values  检查原始值和解码值
+        return isValid(request.getRequestURI())      // user request string (not decoded)  用户请求字符串（未解码）
+                && isValid(request.getServletPath()) // decoded servlet part   解码的 servlet 部分
+                && isValid(request.getPathInfo());   // decoded path info (may be null)   解码路径信息（可能为空）
     }
 
     private boolean isValid(String uri) {
@@ -89,7 +89,7 @@ public class InvalidRequestFilter extends AccessControlFilter {
     }
 
     /**
-     *   preHandle 后置位执行  一般都返回 false
+     *   preHandle 后置位执行  一般都返回 false  通常
      * @param request  the incoming <code>ServletRequest</code>
      * @param response the outgoing <code>ServletResponse</code>
      * @return
@@ -97,6 +97,7 @@ public class InvalidRequestFilter extends AccessControlFilter {
      */
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+        // 拒绝处理
         WebUtils.toHttp(response).sendError(400, "Invalid request");
         return false;
     }

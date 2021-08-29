@@ -70,6 +70,9 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
 
     private static final String HOST = DefaultSubjectContext.class.getName() + ".HOST";
 
+    /**
+     * 会话创建已启用
+     */
     public static final String SESSION_CREATION_ENABLED = DefaultSubjectContext.class.getName() + ".SESSION_CREATION_ENABLED";
 
     /**
@@ -130,6 +133,11 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
         return getTypedValue(SESSION_ID, Serializable.class);
     }
 
+    /**
+     * 触发时机
+     *    WebDefaultSubjectContext
+     * @param sessionId the session id of the session that should be associated with the constructed {@link Subject}
+     */
     public void setSessionId(Serializable sessionId) {
         nullSafePut(SESSION_ID, sessionId);
     }
@@ -157,7 +165,11 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
     }
 
     /**
-     * 标识信息
+     * 标识信息  登录的账号ID、唯一标识等
+     *
+     * 三重保证 一定获取到当前 Session中的 用户身份
+     * 最终是在 session 中获取
+     *
      * @return
      */
     public PrincipalCollection resolvePrincipals() {
@@ -167,6 +179,7 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
             //check to see if they were just authenticated:
             AuthenticationInfo info = getAuthenticationInfo();
             if (info != null) {
+                // 用户ID
                 principals = info.getPrincipals();
             }
         }
@@ -174,14 +187,17 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
         if (isEmpty(principals)) {
             Subject subject = getSubject();
             if (subject != null) {
+                // 从 subject 中
                 principals = subject.getPrincipals();
             }
         }
 
+        //
         if (isEmpty(principals)) {
             //try the session:
             Session session = resolveSession();
             if (session != null) {
+                // 这个值
                 principals = (PrincipalCollection) session.getAttribute(PRINCIPALS_SESSION_KEY);
             }
         }

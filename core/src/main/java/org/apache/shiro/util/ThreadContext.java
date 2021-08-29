@@ -310,6 +310,8 @@ public abstract class ThreadContext {
      */
     public static Subject getSubject() {
         // SUBJECT_KEY =   ThreadContext.class.getName() + "_SUBJECT_KEY"
+
+        // 从线程的绑定中获取 Subject
         return (Subject) get( SUBJECT_KEY);
     }
 

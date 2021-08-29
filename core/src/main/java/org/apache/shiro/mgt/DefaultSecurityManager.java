@@ -409,6 +409,11 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         //ensure that the context has a SecurityManager instance, and if not, add one:
         context = ensureSecurityManager(context);
 
+        // 解析关联的会话（通常基于引用的会话 ID），
+        // 并在发送到 SubjectFactory 之前将其放置在上下文中。
+        // SubjectFactory 不需要知道如何获取会话，因为该过程通常是特定于环境的
+        // - 最好使 SF 免受这些细节的影响：
+
         //Resolve an associated Session (usually based on a referenced session ID), and place it in the context before
         //sending to the SubjectFactory.  The SubjectFactory should not need to know how to acquire sessions as the
         //process is often environment specific - better to shield the SF from these details:
@@ -513,6 +518,11 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
      */
     @SuppressWarnings({"unchecked"})
     protected SubjectContext resolveSession(SubjectContext context) {
+        // 主要目的时绑定 session
+        /**
+         * 我们知道在Web中，session的重要性，cookie 与session 进行关联
+         *  但这里属于的是 Shiro的概念， Web的体系应该是 在 WebDefaultSecurityManger
+         */
         if (context.resolveSession() != null) {
             log.debug("Context already contains a session.  Returning.");
             return context;
@@ -542,6 +552,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     protected SessionKey getSessionKey(SubjectContext context) {
         Serializable sessionId = context.getSessionId();
         if (sessionId != null) {
+            // 创建 一个默认的 session Key
             return new DefaultSessionKey(sessionId);
         }
         return null;
@@ -569,6 +580,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     @SuppressWarnings({"unchecked"})
     protected SubjectContext resolvePrincipals(SubjectContext context) {
 
+        // 解析 认证的信息 权限等
         PrincipalCollection principals = context.resolvePrincipals();
 
         if (isEmpty(principals)) {

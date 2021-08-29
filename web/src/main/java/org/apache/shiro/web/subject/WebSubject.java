@@ -98,6 +98,7 @@ public interface WebSubject extends Subject, RequestPairSource {
             if (response == null) {
                 throw new IllegalArgumentException("ServletResponse argument cannot be null.");
             }
+            // 构建时  暴露了 请求和响应 在返回中
             setRequest(request);
             setResponse(response);
         }

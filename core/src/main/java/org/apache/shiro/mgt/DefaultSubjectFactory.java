@@ -55,7 +55,8 @@ public class DefaultSubjectFactory implements SubjectFactory {
         // 获取 安全管理器
         SecurityManager securityManager = context.resolveSecurityManager();
 
-        // session 对象  session 和 Subject 什么时候挂靠的
+        // session 对象
+        // session 和 Subject 什么时候挂靠的？ 在上下文 处理的时候挂靠的  主要是有个sessionKey
         Session session = context.resolveSession();
         //是否启用会话创建
         boolean sessionCreationEnabled = context.isSessionCreationEnabled();

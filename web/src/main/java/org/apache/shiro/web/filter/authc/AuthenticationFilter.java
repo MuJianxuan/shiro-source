@@ -83,7 +83,7 @@ public abstract class AuthenticationFilter extends AccessControlFilter {
      * @return true if the subject is authenticated; false if the subject is unauthenticated
      */
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        // 根据 Subject 来判断  如果 为空 则 不可
+        // 用户身份认证的核心  所有的过滤器都是根据这里过滤的
         Subject subject = getSubject(request, response);
 
         // 基本返回 false

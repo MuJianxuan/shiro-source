@@ -50,6 +50,7 @@ public class NoSessionCreationFilter extends PathMatchingFilter {
 
     @Override
     protected boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+        // 设置不启用会话创建
         request.setAttribute(DefaultSubjectContext.SESSION_CREATION_ENABLED, Boolean.FALSE);
         return true;
     }

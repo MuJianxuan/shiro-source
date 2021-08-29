@@ -134,26 +134,42 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
      * return {@link #pathsMatch(String, String) pathsMatch(path,requestURI)}</code>
      *
      * @param path    the configured url pattern to check the incoming request against.
+     *                配置的 url 模式来检查传入的请求。
      * @param request the incoming ServletRequest
+     *                当前请求
      * @return <code>true</code> if the incoming <code>request</code> matches the specified <code>path</code> pattern,
      *         <code>false</code> otherwise.
      */
     protected boolean pathsMatch(String path, ServletRequest request) {
+
+        // 可能是这个意思，可以留意具体的初始化  filter
+        // path 我认为啊，path实际就是配置的过滤拦截器，每一个请求是否需要被拦截，是否处于放行的路径中  比如我们登录的接口，肯定是不需要认证就可访问的。
+
+        // 获取请求路径
         String requestUri = getPathWithinApplication(request);
 
+        // 正在尝试将模式“{}”与当前 requestUri“{}”匹配...
         log.trace("Attempting to match pattern '{}' with current requestUri '{}'...", path, Encode.forHtml(requestUri));
+
+        // 匹配路径 当前请求的路径
         boolean match = pathsMatch(path, requestUri);
 
-        if (!match) {
-            if (requestUri != null && !DEFAULT_PATH_SEPARATOR.equals(requestUri) && requestUri.endsWith(DEFAULT_PATH_SEPARATOR)) {
+        if (! match) {
+            //   / != 请求路径  即根路径， and  请求路径尾 != /
+            if (requestUri != null && ! DEFAULT_PATH_SEPARATOR.equals(requestUri) && requestUri.endsWith(DEFAULT_PATH_SEPARATOR)) {
+                 // 则 长度减一
+                // http://localhost:8080/hello/
                 requestUri = requestUri.substring(0, requestUri.length() - 1);
             }
-            if (path != null && !DEFAULT_PATH_SEPARATOR.equals(path)
-                && path.endsWith(DEFAULT_PATH_SEPARATOR)) {
+            // 且 / != path  and path尾 = /
+            if (path != null && ! DEFAULT_PATH_SEPARATOR.equals(path) && path.endsWith(DEFAULT_PATH_SEPARATOR)) {
+                // 同理 目的是把 path尾的 / 干掉
                 path = path.substring(0, path.length() - 1);
             }
             // 正在尝试将模式“{}”与当前 requestUri“{}”匹配...
             log.trace("Attempting to match pattern '{}' with current requestUri '{}'...", path, Encode.forHtml(requestUri));
+
+            // 再次匹配
             match = pathsMatch(path, requestUri);
         }
 
@@ -179,6 +195,7 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
      *         <code>false</code> otherwise.
      */
     protected boolean pathsMatch(String pattern, String path) {
+        // 匹配性能会不会偏慢
         boolean matches = pathMatcher.matches(pattern, path);
         log.trace("Pattern [{}] matches path [{}] => [{}]", pattern, path, matches);
         return matches;
@@ -225,11 +242,12 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
             // If the path does match, then pass on to the subclass implementation for specific checks
             //(first match 'wins'):
 
-            // 路径匹配
+            // 路径匹配  为什么路径匹配要执行  难道是反过来的意思， 不属于放行的才需要执行下面的方法
             if ( pathsMatch(path, request)) {
                 log.trace("Current requestURI matches pattern '{}'.  Determining filter chain execution...", path);
                 Object config = this.appliedPaths.get(path);
-                //
+                // 匹配功能
+                // 是 继续过滤链
                 return isFilterChainContinued(request, response, path, config);
             }
         }
@@ -247,8 +265,7 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
      * @since 1.2
      */
     @SuppressWarnings({"JavaDoc"})
-    private boolean isFilterChainContinued(ServletRequest request, ServletResponse response,
-                                           String path, Object pathConfig) throws Exception {
+    private boolean isFilterChainContinued(ServletRequest request, ServletResponse response, String path, Object pathConfig) throws Exception {
 
         if (isEnabled(request, response, path, pathConfig)) { //isEnabled check added in 1.2
             if (log.isTraceEnabled()) {
@@ -260,6 +277,9 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
 
             //对此特定请求启用了过滤器，因此可以委托子类实现，以便他们可以确定请求是否应继续通过链：
 
+            // 预处理
+            //过滤器已为此特定请求启用，因此委托给子类实现
+            //所以他们可以决定请求是否应该继续通过链：
             //The filter is enabled for this specific request, so delegate to subclass implementations
             //so they can decide if the request should continue through the chain or not:
             return onPreHandle(request, response, pathConfig);
@@ -283,6 +303,8 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
     }
 
     /**
+     * 处于 预处理 流程中
+     *
      * 此默认实现始终返回true并且在必要时应被自定义逻辑的子类覆盖
      *
      * This default implementation always returns {@code true} and should be overridden by subclasses for custom
@@ -303,6 +325,12 @@ public abstract class PathMatchingFilter extends AdviceFilter implements PathCon
     }
 
     /**
+     * 父类的isEnabled(ServletRequest, ServletResponse)方法的路径匹配版本，但另外允许检查与指定请求对应的任何特定于路径的配置值。
+     * 子类可能希望检查这个附加的映射配置以确定是否启用了过滤器。
+     *
+     * 此方法的默认实现忽略path和mappedValue值参数，仅返回调用isEnabled(ServletRequest, ServletResponse) 。
+     * 如果子类需要根据过滤器实例的任何特定于路径的配置为特定请求执行启用/禁用逻辑，则期望子类覆盖此方法。
+     *
      * Path-matching version of the parent class's
      * {@link #isEnabled(javax.servlet.ServletRequest, javax.servlet.ServletResponse)} method, but additionally allows
      * for inspection of any path-specific configuration values corresponding to the specified request.  Subclasses
