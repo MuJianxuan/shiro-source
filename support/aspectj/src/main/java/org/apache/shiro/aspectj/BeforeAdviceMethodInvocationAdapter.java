@@ -34,8 +34,17 @@ import java.lang.reflect.Method;
  */
 public class BeforeAdviceMethodInvocationAdapter implements MethodInvocation {
 
+    /**
+     * 执行对象
+     */
     private Object _object;
+    /**
+     * 方法对象
+     */
     private Method _method;
+    /**
+     * 参数对象
+     */
     private Object[] _arguments;
 
     /**

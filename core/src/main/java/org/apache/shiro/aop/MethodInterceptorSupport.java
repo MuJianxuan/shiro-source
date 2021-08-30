@@ -25,6 +25,8 @@ import org.apache.shiro.subject.Subject;
 /**
  * 此类是Shiro特有的AOP方法拦截器行为的抽象，它使AOP实现的具体内容由子类实现处理
  *
+ *  方法拦截支持  切面支持
+ *
  * This class is an abstraction of AOP method interceptor behavior specific to Shiro that
  * leaves AOP implementation specifics to be handled by subclass implementations.  This implementation primarily
  * enables a <tt>Log</tt> and makes available the currently executing {@link Subject Subject}.
@@ -40,6 +42,9 @@ public abstract class MethodInterceptorSupport implements MethodInterceptor {
     }
 
     /**
+     * 返回与当前正在执行的代码关联的Subject 。
+     * 此默认实现仅调用SecurityUtils.getSubject() 。
+     *
      * Returns the {@link Subject Subject} associated with the currently-executing code.
      * <p/>
      * This default implementation merely calls <code>{@link org.apache.shiro.SecurityUtils#getSubject SecurityUtils.getSubject()}</code>.

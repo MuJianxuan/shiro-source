@@ -37,11 +37,9 @@ import java.util.List;
  *
  * @since 0.2
  */
-public class AopAllianceAnnotationsAuthorizingMethodInterceptor
-        extends AnnotationsAuthorizingMethodInterceptor implements MethodInterceptor {
+public class AopAllianceAnnotationsAuthorizingMethodInterceptor extends AnnotationsAuthorizingMethodInterceptor implements MethodInterceptor {
 
     public AopAllianceAnnotationsAuthorizingMethodInterceptor() {
-
 
         List<AuthorizingAnnotationMethodInterceptor> interceptors = new ArrayList<AuthorizingAnnotationMethodInterceptor>(5);
 

@@ -17,6 +17,7 @@
  * under the License.
  */
 /**
+ * Spring AOP 支持在 Spring 配置的应用程序中启用 Shiro 注解
  * Spring AOP support for enabling Shiro annotations in Spring-configured applications.
  */
 package org.apache.shiro.spring.security.interceptor;

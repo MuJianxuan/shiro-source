@@ -26,6 +26,8 @@ import java.lang.annotation.Annotation;
 import java.util.Arrays;
 
 /**
+ *
+ * 检查是否声明了RequiresRoles注解，如果是，则执行角色检查以查看是否允许调用Subject继续。
  * Checks to see if a @{@link org.apache.shiro.authz.annotation.RequiresRoles RequiresRoles} annotation is declared, and if so, performs
  * a role check to see if the calling <code>Subject</code> is allowed to proceed.
  *

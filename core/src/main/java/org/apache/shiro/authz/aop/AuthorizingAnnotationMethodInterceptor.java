@@ -36,7 +36,6 @@ public abstract class AuthorizingAnnotationMethodInterceptor extends AnnotationM
 {
     
     /**
-     *
      *  传入认证注解处理器 ？
      *    这里 处理器这么多 ，怎么传呢?
      * Constructor that ensures the internal <code>handler</code> is set which will be used to perform the
@@ -70,7 +69,7 @@ public abstract class AuthorizingAnnotationMethodInterceptor extends AnnotationM
      */
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
         // 前置校验 这与拦截器的类型有关
-        assertAuthorized(methodInvocation);
+        this.assertAuthorized(methodInvocation);
 
         return methodInvocation.proceed();
     }
@@ -91,13 +90,14 @@ public abstract class AuthorizingAnnotationMethodInterceptor extends AnnotationM
             // 调用父类初始化 后的 拦截器 进行 拦截     args : 通过 解析器 获取方法上的注解 然后 传入
             ((AuthorizingAnnotationHandler)super.getHandler()).assertAuthorized( getAnnotation(mi));
         }
+        // 认证失败异常
         catch(AuthorizationException ae) {
             // Annotation handler doesn't know why it was called, so add the information here if possible. 
             // Don't wrap the exception here since we don't want to mask the specific exception, such as 
             // UnauthenticatedException etc.
 
             if (ae.getCause() == null){
-                // 封装一个 基础的 错误 信息
+                // 封装一个 基础的 错误 信息  无权调用方法
                 ae.initCause( new AuthorizationException("Not authorized to invoke method: " + mi.getMethod()));
             }
             throw ae;

@@ -29,6 +29,11 @@ import java.lang.reflect.Method;
  * {@link org.aopalliance.intercept.MethodInvocation}.
  */
 class AopAllianceMethodInvocationAdapter implements org.apache.shiro.aop.MethodInvocation {
+
+    /**
+     * 代理对象
+     *
+     */
     private final MethodInvocation mi;
 
     public AopAllianceMethodInvocationAdapter(MethodInvocation mi) {

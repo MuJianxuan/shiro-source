@@ -50,14 +50,12 @@ public abstract class AnnotationMethodInterceptor extends MethodInterceptorSuppo
 
     /**
      * 注解拦截器   ：
-     *
      *    实际执行对象  委托给这个对象实际执行
      *
      */
     private AnnotationHandler handler;
 
     /**
-     *
      * 注解解析器  在 实例化的时候 会默认初始化 这个值
      *
      * The resolver to use to find annotations on intercepted methods.

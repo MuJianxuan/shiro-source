@@ -36,7 +36,8 @@ import java.util.concurrent.Callable;
  *   SpringBoot 远程调用框架支持 ！
  *
  Spring org.springframework.remoting.support.RemoteInvocationExecutor的实现，
- 该org.springframework.remoting.support.RemoteInvocationExecutor将sessionId绑定到传入线程，以使其在线程执行期间可用于SecurityManager实现。
+ 该org.springframework.remoting.support.RemoteInvocationExecutor将sessionId绑定到传入线程，
+ 以使其在线程执行期间可用于SecurityManager实现。
  SecurityManager实现可以使用此sessionId基于相应Session中的持久状态来重构Subject实例
  *
  * An implementation of the Spring {@link org.springframework.remoting.support.RemoteInvocationExecutor}
@@ -83,7 +84,7 @@ public class SecureRemoteInvocationExecutor extends DefaultRemoteInvocationExecu
     ============================================*/
     @SuppressWarnings({"unchecked"})
     /**
-     * TODO 改方法很重要 ，需要梳理逻辑
+     *  该方法很重要 ，需要梳理逻辑
      */
     public Object invoke(final RemoteInvocation invocation, final Object targetObject) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
 
@@ -110,12 +111,15 @@ public class SecureRemoteInvocationExecutor extends DefaultRemoteInvocationExecu
             }
 
             Subject subject = builder.buildSubject();
+
+            // 通过 Subject 来触发调用
             return subject.execute(new Callable() {
                 public Object call() throws Exception {
                     return SecureRemoteInvocationExecutor.super.invoke(invocation, targetObject);
                 }
             });
-        } catch (ExecutionException e) {
+        }
+        catch (ExecutionException e) {
             Throwable cause = e.getCause();
             if (cause instanceof NoSuchMethodException) {
                 throw (NoSuchMethodException) cause;
@@ -126,7 +130,8 @@ public class SecureRemoteInvocationExecutor extends DefaultRemoteInvocationExecu
             } else {
                 throw new InvocationTargetException(cause);
             }
-        } catch (Throwable t) {
+        }
+        catch (Throwable t) {
             throw new InvocationTargetException(t);
         }
     }

@@ -30,9 +30,8 @@ import java.lang.reflect.Method;
 
 
 /**
- * TODO - complete JavaDoc
  *
- *  StaticMethodMatcherPointcutAdvisor
+ *  StaticMethodMatcherPointcutAdvisor 静态方法匹配器切入点顾问
  *
  *  StaticMethodMatcherPointcutAdvisor代表一个静态方法匹配切面，它通过StaticMethodMatcherPointcut来定义切点，
  *  并通过类过滤和方法名来匹配所定义的切点.
@@ -68,7 +67,8 @@ public class AuthorizationAttributeSourceAdvisor extends StaticMethodMatcherPoin
 
         // 这个构造器添加了 所有 拦截器处理 ！
 
-        // 设置 Advice
+        // 设置 Advice  设置通知
+        // 在Aop 中，定义切面方法都是 通知的概念，eg 环绕通知、异常通知、前置通知， 等等
         super.setAdvice( new AopAllianceAnnotationsAuthorizingMethodInterceptor());
     }
 
@@ -97,6 +97,12 @@ public class AuthorizationAttributeSourceAdvisor extends StaticMethodMatcherPoin
      * @param targetClass the class potentially declaring Shiro annotations
      * @return <tt>true</tt> if the method has a Shiro annotation, false otherwise.
      * @see org.springframework.aop.MethodMatcher#matches(java.lang.reflect.Method, Class)
+     */
+    /**
+     * 匹配时机
+     * @param method
+     * @param targetClass
+     * @return
      */
     public boolean matches(Method method, Class targetClass) {
         Method m = method;

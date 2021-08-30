@@ -45,7 +45,7 @@ import org.apache.shiro.authz.AuthorizationException;
 public abstract class AnnotationsAuthorizingMethodInterceptor extends AuthorizingMethodInterceptor {
 
     /**
-     * 要为带注释的方法执行的方法拦截器
+     * 要为带注解的方法执行的方法拦截器
      *
      * The method interceptors to execute for the annotated method.
      */

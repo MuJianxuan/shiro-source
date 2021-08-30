@@ -34,6 +34,8 @@ import org.springframework.remoting.support.RemoteInvocationFactory;
 import java.io.Serializable;
 
 /**
+ * 远程调用 相关
+ *
  * A {@link RemoteInvocationFactory} that passes the session ID to the server via a
  * {@link RemoteInvocation} {@link RemoteInvocation#getAttribute(String) attribute}.
  * This factory is the client-side part of
@@ -63,6 +65,8 @@ public class SecureRemoteInvocationFactory extends DefaultRemoteInvocationFactor
     }
 
     /**
+     * 创建一个以当前会话 ID 作为attribute的RemoteInvocation 。
+     *
      * Creates a {@link RemoteInvocation} with the current session ID as an
      * {@link RemoteInvocation#getAttribute(String) attribute}.
      *
@@ -82,7 +86,7 @@ public class SecureRemoteInvocationFactory extends DefaultRemoteInvocationFactor
             sessionManagerMethodInvocation = true;
             //for SessionManager calls, all method calls except the 'start' methods require a SessionKey
             // as the first argument, so just get it from there:
-            if (!mi.getMethod().getName().equals("start")) {
+            if (!"start".equals(mi.getMethod().getName())) {
                 SessionKey key = (SessionKey) mi.getArguments()[0];
                 sessionId = key.getSessionId();
             }
@@ -116,6 +120,9 @@ public class SecureRemoteInvocationFactory extends DefaultRemoteInvocationFactor
                 log.trace("No Session found for the currently executing subject via subject.getSession(false).  " +
                         "Attempting to revert back to the 'shiro.session.id' system property...");
             }
+            // 获取全局的 属性参数
+
+            // 通常在启动项目的时候可以使用 -D参数指定
             sessionId = System.getProperty(SESSION_ID_SYSTEM_PROPERTY_NAME);
             if (sessionId == null && log.isTraceEnabled()) {
                 log.trace("No 'shiro.session.id' system property found.  Heuristics have been exhausted; " +

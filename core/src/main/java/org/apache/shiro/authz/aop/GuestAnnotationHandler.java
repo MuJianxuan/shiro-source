@@ -26,6 +26,8 @@ import org.apache.shiro.authz.annotation.RequiresGuest;
 
 
 /**
+ * 来宾注解处理器
+ *
  * Checks to see if a @{@link org.apache.shiro.authz.annotation.RequiresGuest RequiresGuest} annotation
  * is declared, and if so, ensures the calling <code>Subject</code> does <em>not</em>
  * have an {@link org.apache.shiro.subject.Subject#getPrincipal() identity} before invoking the method.

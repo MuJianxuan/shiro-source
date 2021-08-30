@@ -458,7 +458,7 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
      */
     private Cache<Object, AuthenticationInfo> getAvailableAuthenticationCache() {
         Cache<Object, AuthenticationInfo> cache = getAuthenticationCache();
-        //
+        // 是否启用身份验证缓存
         boolean authcCachingEnabled = isAuthenticationCachingEnabled();
         if (cache == null && authcCachingEnabled) {
             cache = getAuthenticationCacheLazy();
@@ -467,6 +467,9 @@ public abstract class AuthenticatingRealm extends CachingRealm implements Initia
     }
 
     /**
+     * 检查 authenticationCache 类属性是否为空，如果是，则尝试从任何配置的cacheManager获取一个。
+     * 如果获取了一个，则将其设置为类属性。 然后返回类属性。
+     *
      * Checks to see if the authenticationCache class attribute is null, and if so, attempts to acquire one from
      * any configured {@link #getCacheManager() cacheManager}.  If one is acquired, it is set as the class attribute.
      * The class attribute is then returned.

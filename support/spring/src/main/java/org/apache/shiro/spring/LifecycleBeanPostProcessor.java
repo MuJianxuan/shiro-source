@@ -32,6 +32,8 @@ import org.apache.shiro.lang.util.Initializable;
 
 /**
  *
+ * 目的是调用 shiro中bean的初始化方法
+ *
  * 用于Spring的Bean后处理器，该处理器自动对实现了Initializable或Destroyable接口的Shiro对象自动调用init（）和/或destroy（）方法。
  * 该后处理器使在Spring中配置Shiro bean变得更加容易，因为用户不必担心是否必须指定init-method和destroy-method bean属性。
  * 警告：此后处理器无法确定是否已调用init（）或destroy（） ，
@@ -82,6 +84,8 @@ public class LifecycleBeanPostProcessor implements DestructionAwareBeanPostProce
     }
 
     /**
+     *  初始化前的  后期处理
+     *
      * Calls the <tt>init()</tt> methods on the bean if it implements {@link org.apache.shiro.lang.util.Initializable}
      *
      * @param object the object being initialized.

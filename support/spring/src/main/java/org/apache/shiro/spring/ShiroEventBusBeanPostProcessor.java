@@ -32,7 +32,6 @@ import java.util.List;
  *
  * 查看Spring 源码的时候 需要留意这个值的问题
  *
- *
  * 借助Spring来获取 总线
  *
  * Spring BeanPostProcessor ，用于检测EventBusAware和包含@Subscribe方法的类。
@@ -65,19 +64,27 @@ public class ShiroEventBusBeanPostProcessor implements BeanPostProcessor {
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+
+        // 设置事件总线
         if (bean instanceof EventBusAware) {
             // 设置 属性
             ((EventBusAware) bean).setEventBus(eventBus);
         }
+        // 事件 订阅者
         else if (isEventSubscriber(bean)) {
 
             // 注册 发布者
-            eventBus.register(bean);
+            eventBus.register( bean);
         }
 
         return bean;
     }
 
+    /**
+     * 是事件订阅者
+     * @param bean
+     * @return
+     */
     private boolean isEventSubscriber(Object bean) {
         // 查询包含那个注解的方法
         List annotatedMethods = ClassUtils.getAnnotatedMethods( bean.getClass(), Subscribe.class);

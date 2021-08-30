@@ -27,7 +27,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 /**
- *
  *  Spring的 注解解析器
  *
  * {@code AnnotationResolver} implementation that uses Spring's more robust
@@ -39,6 +38,13 @@ import java.lang.reflect.Method;
  */
 public class SpringAnnotationResolver implements AnnotationResolver {
 
+    /**
+     *  要调用的拦截方法。
+     * @param mi the intercepted method to be invoked.
+     * @param clazz the annotation class of the annotation to find.
+     * @return
+     */
+    @Override
     public Annotation getAnnotation(MethodInvocation mi, Class<? extends Annotation> clazz) {
 
         // 获取方法对象

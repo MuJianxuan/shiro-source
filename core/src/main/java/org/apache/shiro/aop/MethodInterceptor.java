@@ -19,9 +19,9 @@
 package org.apache.shiro.aop;
 
 /**
- *
- *
  *   方法拦截器
+ * 主要还是这个 ，校验方法是否拦截权限等等，如控制台访问， controller 访问，等
+ *
  * A <tt>MethodInterceptor</tt> intercepts a <tt>MethodInvocation</tt> to perform before or after logic (aka 'advice').
  *
  * <p>Shiro's implementations of this interface mostly have to deal with ensuring a current Subject has the

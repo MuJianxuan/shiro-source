@@ -23,7 +23,7 @@ import org.apache.shiro.aop.MethodInvocation;
 import org.apache.shiro.authz.AuthorizationException;
 
 /**
- *
+ *  授权方法拦截器
  * 基本的抽象类，支持执行授权（访问控制）检查的拦截方法。
  *
  * Basic abstract class to support intercepting methods that perform authorization (access control) checks.
