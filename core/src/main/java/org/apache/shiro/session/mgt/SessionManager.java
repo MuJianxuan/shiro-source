@@ -33,8 +33,7 @@ import org.apache.shiro.session.SessionException;
 public interface SessionManager {
 
     /**
-     *
-     *  据指定的上下文初始化数据启动新会话，基础实现可使用该数据来确定如何精确创建内部Session实例。
+     * 据指定的上下文初始化数据启动新会话，基础实现可使用该数据来确定如何精确创建内部Session实例。
      *
      * Starts a new session based on the specified contextual initialization data, which can be used by the underlying
      * implementation to determine how exactly to create the internal Session instance.
@@ -47,7 +46,7 @@ public interface SessionManager {
      * @param context the contextual initialization data that can be used by the implementation or underlying
      *                {@link SessionFactory} when instantiating the internal {@code Session} instance.
      * @return the newly created session.
-     * @see SessionFactory#createSession(SessionContext)
+     * @see SessionFactory#createSession(SessionContext)  看这个
      * @since 1.0
      */
     Session start(SessionContext context);

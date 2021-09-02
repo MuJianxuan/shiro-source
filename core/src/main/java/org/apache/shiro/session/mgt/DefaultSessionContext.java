@@ -25,6 +25,8 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
+ * SessionContext接口的默认实现，它提供了包装与底层支持上下文映射的交互的 getter 和 setter。
+ *
  * Default implementation of the {@link SessionContext} interface which provides getters and setters that
  * wrap interaction with the underlying backing context map.
  *

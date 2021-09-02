@@ -18,6 +18,7 @@
  */
 package org.apache.shiro.samples.spring;
 
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,7 @@ public class SimpleService {
 
     private static Logger log = LoggerFactory.getLogger(SimpleService.class);
 
+    @RequiresAuthentication
     @RequiresPermissions("write")
     public void writeRestrictedCall() {
         log.info("executing method that requires the 'write' permission");

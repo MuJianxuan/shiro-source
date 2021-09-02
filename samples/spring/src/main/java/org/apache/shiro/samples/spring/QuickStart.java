@@ -49,7 +49,7 @@ public class QuickStart {
 
         // get the current subject
         // 与线程绑定 ！ 创建一个 Subject
-        Subject subject = SecurityUtils.getSubject();
+        Subject subject = SecurityUtils.getSubject(); // 这里的身份信息 加载 应该在默认的 Realm 加载了
 
         // Subject is not authenticated yet
         Assert.isTrue( !subject.isAuthenticated() );

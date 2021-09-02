@@ -41,6 +41,8 @@ import java.util.Map;
 /**
  *  过滤链解析工厂
  *
+ *      基于   Ini 配置的 过滤链解析器 工厂  本质是 获取 FilterChainResolver Bean
+ *
  * A {@link Factory} that creates {@link FilterChainResolver} instances based on {@link Ini} configuration.
  *
  * @since 1.0
@@ -96,8 +98,10 @@ public class IniFilterChainResolverFactory extends IniFactorySupport<FilterChain
     }
 
     protected FilterChainResolver createDefaultInstance() {
+        // 过滤器  servlet.filter 中 init 会有这个  FilterConfig
         FilterConfig filterConfig = getFilterConfig();
         if (filterConfig != null) {
+            // 路径匹配过滤器链解析器
             return new PathMatchingFilterChainResolver(filterConfig);
         } else {
             return new PathMatchingFilterChainResolver();

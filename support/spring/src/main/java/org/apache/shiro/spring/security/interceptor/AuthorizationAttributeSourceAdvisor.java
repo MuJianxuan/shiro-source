@@ -36,7 +36,7 @@ import java.lang.reflect.Method;
  *  StaticMethodMatcherPointcutAdvisor代表一个静态方法匹配切面，它通过StaticMethodMatcherPointcut来定义切点，
  *  并通过类过滤和方法名来匹配所定义的切点.
  *
- *  Advisor的便捷基类，它们也是静态切入点。 如果建议和子类是可序列化的；
+ *  Advisor的便捷基类，它们也是  静态切入点  。 如果建议和子类是可序列化的；
  *
  *  创建一个新的 StaticMethodMatcherPointcutAdvisor，期待 bean 风格的配置
  *

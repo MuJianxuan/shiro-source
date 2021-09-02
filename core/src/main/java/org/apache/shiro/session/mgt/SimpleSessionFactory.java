@@ -21,6 +21,8 @@ package org.apache.shiro.session.mgt;
 import org.apache.shiro.session.Session;
 
 /**
+ * 生成SimpleSession实例的SessionFactory实现。
+ *
  * {@code SessionFactory} implementation that generates {@link SimpleSession} instances.
  *
  * @since 1.0

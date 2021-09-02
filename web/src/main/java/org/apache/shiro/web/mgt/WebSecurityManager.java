@@ -28,6 +28,10 @@ import org.apache.shiro.mgt.SecurityManager;
 public interface WebSecurityManager extends SecurityManager {
 
     /**
+     * 从请求到请求都需要保留安全信息，因此 Shiro 为此使用了会话。
+     * 通常，安全管理器将使用 servlet 容器的 HTTP 会话，但也可以使用自定义会话实现，例如基于 EhCache。
+     * 此方法指示安全管理器是否正在使用 HTTP 会话。
+     *
      * Security information needs to be retained from request to request, so Shiro makes use of a
      * session for this. Typically, a security manager will use the servlet container's HTTP session
      * but custom session implementations, for example based on EhCache, may also be used. This

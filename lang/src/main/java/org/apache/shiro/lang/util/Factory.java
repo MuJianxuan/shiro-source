@@ -19,8 +19,9 @@
 package org.apache.shiro.lang.util;
 
 /**
- *
  * 支持工厂方法 设计模式的泛型接口
+ *
+ *  抄袭Spring的实现？
  *
  * Generics-aware interface supporting the
  * <a href="http://en.wikipedia.org/wiki/Factory_method_pattern">Factory Method</a> design pattern.

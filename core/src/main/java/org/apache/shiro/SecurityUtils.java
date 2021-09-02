@@ -77,7 +77,7 @@ public abstract class SecurityUtils {
      */
     public static Subject getSubject() {
         // // 不等于null
-        // SecurityUtils.getSubject() 调用时 此返回 为空
+        // SecurityUtils.getSubject() 调用时 此返回  默认为空
 
         Subject subject = ThreadContext.getSubject();
 
@@ -186,7 +186,7 @@ public abstract class SecurityUtils {
      *          calling code, which typically indicates an invalid application configuration.
      */
     public static SecurityManager getSecurityManager() throws UnavailableSecurityManagerException {
-        // 先从线程中获取
+        // 先从线程中获取  默认为空
         SecurityManager securityManager = ThreadContext.getSecurityManager();
         if (securityManager == null) {
             // SecurityUtils.getSubject()调用时 肯定 不能获取到 ；因此  会走这个 赋值

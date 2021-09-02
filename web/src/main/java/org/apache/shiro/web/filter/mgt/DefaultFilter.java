@@ -33,6 +33,8 @@ import java.util.Map;
 /**
  * 枚举，表示可用于Web应用程序的所有默认Shiro Filter实例。每个过滤器实例通常都可以在配置中使用枚举常量的{@link name（）name}进行访问。
  *
+ *  默认的 过滤器
+ *
  * Enum representing all of the default Shiro Filter instances available to web applications.  Each filter instance is
  * typically accessible in configuration the {@link #name() name} of the enum constant.
  *

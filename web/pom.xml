@@ -31,6 +31,7 @@
     <artifactId>shiro-web</artifactId>
     <name>Apache Shiro :: Web</name>
     <packaging>bundle</packaging>
+    <description> Web 模块与Spring 无关</description>
 
     <dependencies>
         <dependency>

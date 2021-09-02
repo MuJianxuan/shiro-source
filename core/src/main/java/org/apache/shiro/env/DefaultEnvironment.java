@@ -44,7 +44,7 @@ public class DefaultEnvironment implements NamedObjectEnvironment, Destroyable {
      */
     public static final String DEFAULT_SECURITY_MANAGER_KEY = "securityManager";
 
-    // 存放的是什么呢？
+    // 存放的是什么呢？   容器
     protected final Map<String, Object> objects;
 
 
@@ -145,13 +145,18 @@ public class DefaultEnvironment implements NamedObjectEnvironment, Destroyable {
 
     @SuppressWarnings({"unchecked"})
     public <T> T getObject(String name, Class<T> requiredType) throws RequiredTypeException {
+
         if (name == null) {
             throw new NullPointerException("name parameter cannot be null.");
         }
         if (requiredType == null) {
             throw new NullPointerException("requiredType parameter cannot be null.");
         }
+
+        // 获取
         Object o = this.objects.get(name);
+
+
         if (o == null) {
             return null;
         }

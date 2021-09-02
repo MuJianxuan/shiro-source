@@ -25,8 +25,8 @@ import javax.servlet.ServletResponse;
 import java.util.Map;
 
 /**
+ * 默认的 WebSession创建的上下文
  *
- *   默认的 session 上下文 扩展
  * Default implementation of the {@link WebSessionContext} interface which provides getters and setters that
  * wrap interaction with the underlying backing context map.
  *

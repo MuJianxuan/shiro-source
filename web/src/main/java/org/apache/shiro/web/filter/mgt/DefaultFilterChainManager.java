@@ -306,6 +306,7 @@ public class DefaultFilterChainManager implements FilterChainManager {
                 ((Nameable) filter).setName(name);
             }
             if (init) {
+                // 调用 自定义的 过滤器的 init 方法
                 initFilter(filter);
             }
             this.filters.put(name, filter);
@@ -432,6 +433,7 @@ public class DefaultFilterChainManager implements FilterChainManager {
 
     protected void addDefaultFilters(boolean init) {
         for (DefaultFilter defaultFilter : DefaultFilter.values()) {
+            // 过滤器 名称是 枚举的名称
             addFilter(defaultFilter.name(), defaultFilter.newInstance(), init, false);
         }
     }

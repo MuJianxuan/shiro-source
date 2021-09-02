@@ -33,6 +33,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 /**
+ * 默认的WebSubject实现，额外确保能够在请求执行期间根据需要保留由内部 shiro 组件使用的 servlet 请求/响应对。
+ *
  * Default {@link WebSubject WebSubject} implementation that additional ensures the ability to retain a
  * servlet request/response pair to be used by internal shiro components as necessary during the request execution.
  *

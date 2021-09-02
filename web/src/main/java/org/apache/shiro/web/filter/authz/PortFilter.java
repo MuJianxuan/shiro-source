@@ -61,6 +61,9 @@ public class PortFilter extends AuthorizationFilter {
     public static final int DEFAULT_HTTP_PORT = 80;
     public static final String HTTP_SCHEME = "http";
 
+    /**
+     * 默认的 Http 端口
+     */
     private int port = DEFAULT_HTTP_PORT;
 
     public int getPort() {
@@ -83,6 +86,15 @@ public class PortFilter extends AuthorizationFilter {
         return Integer.parseInt(ports[0]);
     }
 
+    /**
+     * 端口不一致 访问踢掉？
+     *   端口不一致为什么能请求进来 
+     * @param request     the incoming <code>ServletRequest</code>
+     * @param response    the outgoing <code>ServletResponse</code>
+     * @param mappedValue the filter-specific config value mapped to this filter in the URL rules mappings.
+     * @return
+     * @throws Exception
+     */
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
         int requiredPort = toPort(mappedValue);
         int requestPort = request.getServerPort();

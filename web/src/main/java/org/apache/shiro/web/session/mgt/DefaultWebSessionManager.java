@@ -243,6 +243,8 @@ public class DefaultWebSessionManager extends DefaultSessionManager implements W
     }
 
     /**
+     * 存储会话的 ID，通常作为 Cookie，以与未来的请求相关联。
+     *
      * Stores the Session's ID, usually as a Cookie, to associate with future requests.
      *
      * @param session the session that was just {@link #createSession created}.

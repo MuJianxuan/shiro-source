@@ -103,9 +103,17 @@ public abstract class AbstractNativeSessionManager extends AbstractSessionManage
         }
     }
 
+    /**
+     * 什么时候触发呢？
+     * @param context the contextual initialization data that can be used by the implementation or underlying
+     *                {@link SessionFactory} when instantiating the internal {@code Session} instance.
+     * @return
+     */
     public Session start(SessionContext context) {
+
         Session session = createSession(context);
         applyGlobalSessionTimeout(session);
+        //
         onStart(session, context);
         notifyStart(session);
         //Don't expose the EIS-tier Session object to the client-tier:
@@ -128,12 +136,16 @@ public abstract class AbstractNativeSessionManager extends AbstractSessionManage
      */
     protected abstract Session createSession(SessionContext context) throws AuthorizationException;
 
+    // 应用全局会话超时
     protected void applyGlobalSessionTimeout(Session session) {
         session.setTimeout(getGlobalSessionTimeout());
         onChange(session);
     }
 
     /**
+     * 允许子类对正在创建的新会话做出反应的模板方法。
+     * 在通知任何会话侦听器之前调用此方法。
+     *
      * Template method that allows subclasses to react to a new session being created.
      * <p/>
      * This method is invoked <em>before</em> any session listeners are notified.

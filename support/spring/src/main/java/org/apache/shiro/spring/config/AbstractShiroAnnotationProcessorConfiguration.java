@@ -30,6 +30,9 @@ public class AbstractShiroAnnotationProcessorConfiguration {
 
     /**
      *  AuthorizationAttributeSourceAdvisor 的触发需要该 Bean
+     *
+     *  StaticMethodMatcherPointcutAdvisor
+     *
      * @return
      */
     protected DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {

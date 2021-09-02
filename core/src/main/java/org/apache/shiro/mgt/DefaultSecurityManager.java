@@ -187,7 +187,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     protected Subject createSubject(AuthenticationToken token, AuthenticationInfo info, Subject existing) {
         // 创建容器
         // 创建 Subject 的上下文
-        SubjectContext context = createSubjectContext();
+        SubjectContext context = createSubjectContext(); // 空的集合
         // 设置认证成功
         context.setAuthenticated(  true);
         // 传入需要认证的信息
@@ -202,7 +202,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
             /**
              * 怎么理解？ 我们的 用户登录是调用
              */
-            // 设置 当前需要处理 Subject
+            // 设置 当前需要处理 Subject  上下文存入
             context.setSubject(existing);
         }
 
@@ -331,7 +331,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
         // 创建当前主题信息的时候，会尝试获取当前 请求中的cookie是否存在 remember me记录的值
         // 如果存在 则会返回一个  存有  已验证的账户身份
         // 8-26 对当前未认证的subject 绑定认证关系
-        // 需要弄明白的是  subject 为什么要对
+        // 需要弄明白的是  subject 为什么要对   生成登录的 Subject
         Subject loggedIn = createSubject(token, info, subject);
 
         // 成功登录
@@ -402,7 +402,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
      * @since 1.0
      */
     public Subject createSubject(SubjectContext subjectContext) {
-        //create a copy so we don't modify the argument's backing map:
+        //create a copy so we don't modify the argument's backing map:   默认会有 org.apache.shiro.subject.support.DefaultSubjectContext.SECURITY_MANAGER
         SubjectContext context = copy(subjectContext);
 
         //确保上下文有一个 SecurityManager 实例，如果没有，添加一个：
@@ -542,7 +542,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     }
 
     protected Session resolveContextSession(SubjectContext context) throws InvalidSessionException {
-        SessionKey key = getSessionKey(context);
+        SessionKey key = getSessionKey(context); // key 为null
         if (key != null) {
             return getSession(key);
         }
@@ -550,7 +550,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     }
 
     protected SessionKey getSessionKey(SubjectContext context) {
-        Serializable sessionId = context.getSessionId();
+        Serializable sessionId = context.getSessionId(); //sessionId 为null
         if (sessionId != null) {
             // 创建 一个默认的 session Key
             return new DefaultSessionKey(sessionId);
@@ -581,7 +581,7 @@ public class DefaultSecurityManager extends SessionsSecurityManager {
     protected SubjectContext resolvePrincipals(SubjectContext context) {
 
         // 解析 认证的信息 权限等
-        PrincipalCollection principals = context.resolvePrincipals();
+        PrincipalCollection principals = context.resolvePrincipals();  // 默认为null
 
         if (isEmpty(principals)) {
             log.trace("No identity (PrincipalCollection) found in the context.  Looking for a remembered identity.");

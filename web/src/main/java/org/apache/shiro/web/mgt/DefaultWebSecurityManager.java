@@ -45,6 +45,8 @@ import java.util.Collection;
 
 
 /**
+ * 默认的 WebSecurityManager 实现
+ *
  * 在基于Web的应用程序或任何需要HTTP连接（SOAP，http远程处理等）的应用程序中使用的默认WebSecurityManager实现。
  * Default {@link WebSecurityManager WebSecurityManager} implementation used in web-based applications or any
  * application that requires HTTP connectivity (SOAP, http remoting, etc).
@@ -81,22 +83,22 @@ public class DefaultWebSecurityManager extends DefaultSecurityManager implements
         DefaultWebSessionStorageEvaluator webEvalutator = new DefaultWebSessionStorageEvaluator();
 
         // 主题设置这样一个东东  很明显我们很多东西都是散的需要呗初始化，那么 是哪里初始化呢？大概就是 在 一个 整合的地方
-        ((DefaultSubjectDAO) this.subjectDAO).setSessionStorageEvaluator(webEvalutator);
+        ((DefaultSubjectDAO) super.subjectDAO).setSessionStorageEvaluator(webEvalutator);
 
         // session 模式 为 http
         this.sessionMode = HTTP_SESSION_MODE;
 
         // 创建一个 默认的 主题工厂
-        setSubjectFactory(new DefaultWebSubjectFactory());
+        super.setSubjectFactory(new DefaultWebSubjectFactory());
 
         // 创建一个 记得我 功能的管理器
-        setRememberMeManager(new CookieRememberMeManager());
+        super.setRememberMeManager(new CookieRememberMeManager());
 
         //  Servlet 容器 session 管理器
-        setSessionManager(new ServletContainerSessionManager());
+        super.setSessionManager(new ServletContainerSessionManager());
 
-        //
-        webEvalutator.setSessionManager(getSessionManager());
+        // 持久器 还关联  session 管理人
+        webEvalutator.setSessionManager( getSessionManager());
     }
 
     @SuppressWarnings({"UnusedDeclaration"})

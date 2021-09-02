@@ -50,6 +50,12 @@ public class DefaultWebSubjectFactory extends DefaultSubjectFactory {
         super();
     }
 
+    /**
+     * Web环境下  创建 Subject 对象
+     * @param context the contextual data to be used by the implementation to construct an appropriate {@code Subject}
+     *                instance.
+     * @return
+     */
     public Subject createSubject(SubjectContext context) {
         //SHIRO-646Check if the existing subject is NOT a WebSubject. If it isn't, then call super.createSubject instead.
         //
@@ -58,12 +64,16 @@ public class DefaultWebSubjectFactory extends DefaultSubjectFactory {
         // 检查现有主题是否不是WebSubject。如果不是，则调用super.createSubject。
         boolean isNotBasedOnWebSubject = context.getSubject() != null && !(context.getSubject() instanceof WebSubject);
 
+        /**
+         * 如果不是 WebSubjectContext 的上下文 则交给父类创建
+         */
         if (!(context instanceof WebSubjectContext) || isNotBasedOnWebSubject) {
 
             // 调用默认的 构建
             return super.createSubject(context);
         }
 
+        // 我觉得主要关注session 的创建 ，其他都是 把一些值设置到  Subject 中去
         WebSubjectContext wsc = (WebSubjectContext) context;
 
         SecurityManager securityManager = wsc.resolveSecurityManager();
@@ -89,6 +99,7 @@ public class DefaultWebSubjectFactory extends DefaultSubjectFactory {
     }
 
     /**
+     *  新建 Subject 实例
      * @deprecated since 1.2 - override {@link #createSubject(org.apache.shiro.subject.SubjectContext)} directly if you
      *             need to instantiate a custom {@link Subject} class.
      */

@@ -87,6 +87,9 @@ public class DelegatingSubject implements Subject {
 
     private static final Logger log = LoggerFactory.getLogger(DelegatingSubject.class);
 
+    /**
+     * 运行时  principals_session_key
+     */
     private static final String RUN_AS_PRINCIPALS_SESSION_KEY =
             DelegatingSubject.class.getName() + ".RUN_AS_PRINCIPALS_SESSION_KEY";
 
@@ -133,7 +136,7 @@ public class DelegatingSubject implements Subject {
         this.principals = principals;
         this.authenticated = authenticated;
         this.host = host;
-        if (session != null) {
+        if (session != null) {  // 默认为 null
             this.session = decorate(session);
         }
         this.sessionCreationEnabled = sessionCreationEnabled;
@@ -371,7 +374,7 @@ public class DelegatingSubject implements Subject {
     }
 
     public Session getSession() {
-        return getSession(true);
+        return getSession(true); // 创建 session 逻辑
     }
 
     /**
@@ -402,7 +405,7 @@ public class DelegatingSubject implements Subject {
 
             log.trace("Starting session for host {}", getHost());
             SessionContext sessionContext = createSessionContext();
-            //  主题中保存了这个安全管理器
+            //  根据 sessionContext 上下文 返回 session
             Session session = this.securityManager.start(sessionContext);
             this.session = decorate(session);
         }
@@ -516,7 +519,7 @@ public class DelegatingSubject implements Subject {
     }
 
     public boolean isRunAs() {
-        List<PrincipalCollection> stack = getRunAsPrincipalsStack();
+        List<PrincipalCollection> stack = getRunAsPrincipalsStack(); // null
         return !CollectionUtils.isEmpty(stack);
     }
 

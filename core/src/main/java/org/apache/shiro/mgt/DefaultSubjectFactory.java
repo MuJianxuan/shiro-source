@@ -57,12 +57,12 @@ public class DefaultSubjectFactory implements SubjectFactory {
 
         // session 对象
         // session 和 Subject 什么时候挂靠的？ 在上下文 处理的时候挂靠的  主要是有个sessionKey
-        Session session = context.resolveSession();
+        Session session = context.resolveSession(); //Subject.getSubject 时为 null
         //是否启用会话创建
-        boolean sessionCreationEnabled = context.isSessionCreationEnabled();
+        boolean sessionCreationEnabled = context.isSessionCreationEnabled(); // true
 
         // 认证信息转换  AuthenticationInfo
-        PrincipalCollection principals = context.resolvePrincipals();
+        PrincipalCollection principals = context.resolvePrincipals();  // 认证的 SubjectContext 会有值
 
         // 认证状态  认证成功 or 失败  默认认证成功 即已设置认证成功
         boolean authenticated = context.resolveAuthenticated();
@@ -70,7 +70,7 @@ public class DefaultSubjectFactory implements SubjectFactory {
         // host
         String host = context.resolveHost();
 
-        //   创建一个 委托主题
+        //   创建一个 委托主题   Subject.getSubject() 根据传入参数可知，身份ID为空，false，null，null,true,securityManager // Subject.login() 方法 ，host、session 为空
         return new DelegatingSubject( principals, authenticated, host, session, sessionCreationEnabled, securityManager);
     }
 

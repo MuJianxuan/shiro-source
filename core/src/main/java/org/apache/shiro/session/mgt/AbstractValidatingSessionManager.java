@@ -136,7 +136,7 @@ public abstract class AbstractValidatingSessionManager extends AbstractNativeSes
 
     protected Session createSession(SessionContext context) throws AuthorizationException {
         enableSessionValidationIfNecessary();
-        return doCreateSession(context);
+        return doCreateSession(context); // 创建 session
     }
 
     protected abstract Session doCreateSession(SessionContext initData) throws AuthorizationException;

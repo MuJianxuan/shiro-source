@@ -48,7 +48,7 @@ public class MapContext implements Map<String, Object>, Serializable {
 
     public MapContext(Map<String, Object> map) {
         this();
-        if (!CollectionUtils.isEmpty(map)) {
+        if (!CollectionUtils.isEmpty(map)) { // 用于上下文的 传递
             this.backingMap.putAll(map);
         }
     }

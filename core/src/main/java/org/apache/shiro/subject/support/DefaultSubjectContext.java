@@ -173,11 +173,11 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
      * @return
      */
     public PrincipalCollection resolvePrincipals() {
-        PrincipalCollection principals = getPrincipals();
+        PrincipalCollection principals = getPrincipals(); // null
 
         if (isEmpty(principals)) {
             //check to see if they were just authenticated:
-            AuthenticationInfo info = getAuthenticationInfo();
+            AuthenticationInfo info = getAuthenticationInfo(); // null
             if (info != null) {
                 // 用户ID
                 principals = info.getPrincipals();
@@ -185,7 +185,7 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
         }
 
         if (isEmpty(principals)) {
-            Subject subject = getSubject();
+            Subject subject = getSubject(); // null
             if (subject != null) {
                 // 从 subject 中
                 principals = subject.getPrincipals();
@@ -195,9 +195,9 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
         //
         if (isEmpty(principals)) {
             //try the session:
-            Session session = resolveSession();
+            Session session = resolveSession(); //null
             if (session != null) {
-                // 这个值
+                // 这个值  所以 最终登录的用户信息都是在这里获取的
                 principals = (PrincipalCollection) session.getAttribute(PRINCIPALS_SESSION_KEY);
             }
         }
@@ -215,15 +215,15 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
     }
 
     public Session resolveSession() {
-        Session session = getSession();
+        Session session = getSession();  // 默认是 null
         if (session == null) {
             //try the Subject if it exists:
-            Subject existingSubject = getSubject();
+            Subject existingSubject = getSubject(); // 默认为 null
             if (existingSubject != null) {
-                session = existingSubject.getSession(false);
+                session = existingSubject.getSession(false); // DefaultSession  终究 是 null
             }
         }
-        return session;
+        return session;  //当 existingSubject 为 null 时 返回 null
     }
 
     public boolean isSessionCreationEnabled() {
@@ -245,7 +245,7 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
     }
 
     public boolean resolveAuthenticated() {
-        Boolean authc = getTypedValue(AUTHENTICATED, Boolean.class);
+        Boolean authc = getTypedValue(AUTHENTICATED, Boolean.class);  // 身份认证
         if (authc == null) {
             //see if there is an AuthenticationInfo object.  If so, the very presence of one indicates a successful
             //authentication attempt:
@@ -256,10 +256,10 @@ public class DefaultSubjectContext extends MapContext implements SubjectContext 
         // 认证失败
         if (! authc) {
             //fall back to a session check:
-            Session session = resolveSession();
+            Session session = resolveSession(); // null
             // session 不为空
             if (session != null) {
-                //
+                // 设置 认证信息 到session 中 ，前提是 session 不为null
                 Boolean sessionAuthc = (Boolean) session.getAttribute(AUTHENTICATED_SESSION_KEY);
                 authc = sessionAuthc != null && sessionAuthc;
             }

@@ -304,6 +304,8 @@ public interface Subject {
     boolean hasAllRoles(Collection<String> roleIdentifiers);
 
     /**
+     * 最终是交给 Realm 来校验的，有点奇怪
+     *
      * Asserts this Subject has the specified role by returning quietly if they do or throwing an
      * {@link org.apache.shiro.authz.AuthorizationException} if they do not.
      *

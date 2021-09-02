@@ -59,7 +59,7 @@ public class SimpleAccountRealm extends AuthorizingRealm {
     public SimpleAccountRealm() {
         this.users = new LinkedHashMap<String, SimpleAccount>();
         this.roles = new LinkedHashMap<String, SimpleRole>();
-        USERS_LOCK = new ReentrantReadWriteLock();
+        USERS_LOCK = new ReentrantReadWriteLock(); // 读写锁
         ROLES_LOCK = new ReentrantReadWriteLock();
         //SimpleAccountRealms are memory-only realms - no need for an additional cache mechanism since we're
         //already as memory-efficient as we can be:

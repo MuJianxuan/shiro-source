@@ -29,6 +29,8 @@ import org.slf4j.LoggerFactory;
 import java.util.Map;
 
 /**
+ * 基于Ini配置生成实例的Factory实现的基本支持类。
+ *
  * Base support class for {@link Factory} implementations that generate their instance(s) based on
  * {@link Ini} configuration.
  *

@@ -62,7 +62,10 @@ public class PathMatchingFilterChainResolver implements FilterChainResolver {
     }
 
     public PathMatchingFilterChainResolver(FilterConfig filterConfig) {
+        // 定义 默认的 路径匹配器
         this.pathMatcher = new AntPathMatcher();
+
+        // 定义 默认的过滤链 管理器
         this.filterChainManager = new DefaultFilterChainManager(filterConfig);
     }
 

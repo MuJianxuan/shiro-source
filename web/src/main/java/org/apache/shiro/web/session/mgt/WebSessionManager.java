@@ -21,6 +21,9 @@ package org.apache.shiro.web.session.mgt;
 import org.apache.shiro.session.mgt.SessionManager;
 
 /**
+ * Web session 管理人
+ *    提供 是否是Servlet 容器Session 的功能
+ *
  * {@link SessionManager} specific to web-enabled applications.
  *
  * @since 1.2
