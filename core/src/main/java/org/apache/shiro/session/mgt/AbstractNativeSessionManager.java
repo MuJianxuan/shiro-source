@@ -111,7 +111,7 @@ public abstract class AbstractNativeSessionManager extends AbstractSessionManage
      */
     public Session start(SessionContext context) {
 
-        Session session = createSession(context);
+        Session session = createSession(context); //SimpleSession
         applyGlobalSessionTimeout(session);
         //
         onStart(session, context);

@@ -409,7 +409,7 @@ public abstract class AbstractShiroFilter extends OncePerRequestFilter {
 
             /**
              * 创建一个 访问主体
-             *    管理  请求和返回
+             *    管理  请求和返回  此时返回一个 于载体环境相关的一个 Subject 对象
              */
             final Subject subject = createSubject(request, response);
 

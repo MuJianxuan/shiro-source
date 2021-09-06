@@ -275,7 +275,7 @@ public class DefaultWebSessionManager extends DefaultSessionManager implements W
 
     @Override
     public Serializable getSessionId(SessionKey key) {
-        Serializable id = super.getSessionId(key);
+        Serializable id = super.getSessionId(key); // 通常情况下是为空
         if (id == null && WebUtils.isWeb(key)) {
             ServletRequest request = WebUtils.getRequest(key);
             ServletResponse response = WebUtils.getResponse(key);
@@ -283,7 +283,7 @@ public class DefaultWebSessionManager extends DefaultSessionManager implements W
         }
         return id;
     }
-
+    // 从 Web 请求中 获取 sessionId 所以一切都已经明了了
     protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
         return getReferencedSessionId(request, response);
     }

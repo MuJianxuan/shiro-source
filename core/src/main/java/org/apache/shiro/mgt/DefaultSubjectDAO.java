@@ -169,8 +169,8 @@ public class DefaultSubjectDAO implements SubjectDAO {
         //执行合并逻辑，仅在主题的会话与当前状态不匹配时才更新：
         //performs merge logic, only updating the Subject's session if it does not match the current state:
 
-        // 认证信息  会不会包含 权限信息呢？ 对不对？    这里会保存的时候会创建 session对象
-        mergePrincipals(subject);
+        // 认证信息  会不会包含 权限信息呢？ 对不对？    这里会保存的时候会创建 session对象  需要留意的是： web中的sessionId 与该对象的问题
+        mergePrincipals(subject);  // Shiro 的一切都于 Session 有关，会话最终 此方法会记录 会话的信息绑定关联 在 session 设置了 登录的用户信息
 
         // 认证状态
         mergeAuthenticationState(subject);

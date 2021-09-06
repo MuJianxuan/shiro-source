@@ -36,6 +36,10 @@ import java.util.*;
 /**
  *  简单的 session
  *
+ *     需要留意的是 : 可序列化的，也就是要把  web请求中的 session 区分出来
+ *     我记得的是 Web的session 是不可序列化的 所以最终的目的是 把 session的key和存储拆分，cookie的id可以关联上 session；
+ *     那么我们仅需要将 id 与 我们存储的 session 的id值对象即可知道 登录的用户信息是啥
+ *
  *  旨在用于业务/服务器层
  * Simple {@link org.apache.shiro.session.Session} JavaBeans-compatible POJO implementation, intended to be used on the
  * business/server tier.

@@ -161,6 +161,7 @@ public interface WebSubject extends Subject, RequestPairSource {
                         "has been configured and made available to this builder.";
                 throw new IllegalStateException(msg);
             }
+            // 返回 WebSubject 下的 Subject
             return (WebSubject) subject;
         }
     }

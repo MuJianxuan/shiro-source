@@ -173,8 +173,8 @@ public abstract class AbstractSessionDAO implements SessionDAO {
         Session s = doReadSession(sessionId);
         if (s == null) {
             throw new UnknownSessionException("There is no session with id [" + sessionId + "]");
-        }
-        return s;
+        } // 这里只保存了 当前session是否登录和登录的ID
+        return s; // 这里的session 并没有保存当前登录用户的权限信息  权限信息是走缓存的，并没有将其保存在这个地方
     }
 
     /**

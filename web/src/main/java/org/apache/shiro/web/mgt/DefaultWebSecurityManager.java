@@ -253,7 +253,7 @@ public class DefaultWebSecurityManager extends DefaultSecurityManager implements
             Serializable sessionId = context.getSessionId();
             ServletRequest request = WebUtils.getRequest(context);
             ServletResponse response = WebUtils.getResponse(context);
-            return new WebSessionKey(sessionId, request, response);
+            return new WebSessionKey(sessionId, request, response); // 登录后第一次访问 sessionId = null 需要留意sessionId赋值的时机
         } else {
             return super.getSessionKey(context);
 

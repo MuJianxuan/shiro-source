@@ -82,7 +82,7 @@ public class DefaultWebSubjectFactory extends DefaultSubjectFactory {
 
         boolean sessionEnabled = wsc.isSessionCreationEnabled();
 
-        PrincipalCollection principals = wsc.resolvePrincipals();
+        PrincipalCollection principals = wsc.resolvePrincipals(); // 主要思路是
         boolean authenticated = wsc.resolveAuthenticated();
         String host = wsc.resolveHost();
 
